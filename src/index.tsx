@@ -4,12 +4,15 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './store/Store'
+import { injectStore } from './common/axios/Interceptors'
 import App from './scenes/App'
 import './sass/main.scss'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 )
+
+injectStore(store)
 
 root.render(
   <React.StrictMode>

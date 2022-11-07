@@ -2,11 +2,22 @@ import axios from 'axios'
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
 import { ErrorMsgResponse } from '../models/interfaces/Common'
 import { apiUrl } from "../config/Environments"
+import { AppStore } from '../../store/Store'
 
 const defaultErrorMessage = `Lo sentimos! Tenemos un error inesperado. Por favor intentelo más tarde.`
 
+let store: AppStore
+export const injectStore = (_store: AppStore) => {
+  store = _store
+}
+
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   config.baseURL = apiUrl
+  config.headers = {
+    'Authorization': `Bearer ${store.getState().auth.accessToken}`,
+    'Accept': 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
   return config
 }
 

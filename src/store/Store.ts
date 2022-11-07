@@ -18,6 +18,7 @@ const store = configureStore({
 const persistor = persistStore(store)
 
 export type AppDispatch = typeof store.dispatch
+export type AppStore = typeof store
 export const useAppDispatch: () => AppDispatch = useDispatch
 
 export { store, persistor }
