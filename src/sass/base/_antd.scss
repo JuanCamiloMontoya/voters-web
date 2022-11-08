@@ -21,3 +21,14 @@
 .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: $primary-dark;
 }
+
+.ant-btn-primary {
+  background: $primary;
+  border-color: $primary;
+
+  &:focus,
+  &:hover {
+    background: $primary-dark;
+    border-color: $primary-dark;
+  }
+}

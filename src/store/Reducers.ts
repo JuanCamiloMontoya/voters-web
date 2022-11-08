@@ -3,9 +3,11 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { authReducer } from "../services/Auth/AuthSlice"
+import { votersReducer } from "../services/Voters/VotersSlice"
 
 const reducers = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  voters: votersReducer
 })
 
 const rootReducer = (state: RootState | undefined, action: PayloadAction) => {
