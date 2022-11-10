@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { createSelector } from "@reduxjs/toolkit"
-import { RootState } from "../../store/Reducers"
+import { RootState } from "../../store/reducers"
 
 export const useVotersSelectors = () => {
 

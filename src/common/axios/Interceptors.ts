@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
-import { ErrorMsgResponse } from '../models/interfaces/Common'
-import { apiUrl } from "../config/Environments"
-import { AppStore } from '../../store/Store'
+import { ErrorMsgResponse } from '../models/interfaces/common.interface'
+import { apiUrl } from "../config/environments"
+import { AppStore } from '../../store/store'
 
 const defaultErrorMessage = `Lo sentimos! Tenemos un error inesperado. Por favor intentelo más tarde.`
 

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { apiInstence } from "../../common/axios/Interceptors"
-import { ErrorMsgResponse } from "../../common/models/interfaces/Common"
-import { GetAllPayload, GetAllResponse } from "./VotersModels"
+import { apiInstence } from "../../common/axios/interceptors"
+import { ErrorMsgResponse } from "../../common/models/interfaces/common.interface"
+import { GetAllPayload, GetAllResponse } from "./voters.models"
 
 export const votersThunks = () => {
 

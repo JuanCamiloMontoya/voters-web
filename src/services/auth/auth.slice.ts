@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { authThunks } from './AuthThunks'
-import { authInitialState } from './AuthInitialState'
-import { AuthModulesTypes, AuthStateTypes } from './AuthModels'
+import { authThunks } from './auth.thunks'
+import { authInitialState } from './auth.initial-state'
+import { AuthModulesTypes, AuthStateTypes } from './auth.models'
 
 const initialState = authInitialState()
 const thunks = authThunks()

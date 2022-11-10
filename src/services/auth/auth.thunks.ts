@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { apiInstence } from "../../common/axios/Interceptors"
-import { ErrorMsgResponse } from "../../common/models/interfaces/Common"
-import { RootState } from '../../store/Reducers'
+import { apiInstence } from "../../common/axios/interceptors"
+import { ErrorMsgResponse } from "../../common/models/interfaces/common.interface"
+import { RootState } from '../../store/reducers'
 import {
   LoginPayload,
   LoginResponse,
@@ -11,7 +11,7 @@ import {
   ResetPasswordResponse,
   VerifyEmailPayload,
   VerifyEmailResponse
-} from "./AuthModels"
+} from "./auth.models"
 
 export const authThunks = () => {
 

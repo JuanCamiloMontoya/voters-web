@@ -1,6 +1,6 @@
-import { useAuthSelectors } from "../services/Auth/AuthSelectors"
-import Private from "./Private/Private"
-import Public from "./Public/Public"
+import { useAuthSelectors } from "../services/auth/auth.selectors"
+import Private from "./private/private"
+import Public from "./public/public"
 
 const App = () => {
 

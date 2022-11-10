@@ -1,7 +1,7 @@
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons"
 import { useNavigate } from "react-router-dom"
 import { Avatar, Button, Divider, Dropdown, Layout, Menu, Typography } from "antd"
-import { useAppDispatch } from "../../../../store/Store"
+import { useAppDispatch } from "../../../../store/store"
 
 const { Header: AntdHeader } = Layout
 const { Text } = Typography

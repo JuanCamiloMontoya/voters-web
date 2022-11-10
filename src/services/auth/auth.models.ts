@@ -1,5 +1,5 @@
-import { OnSuccessCallback } from "../../common/models/interfaces/Common"
-import { StatusTypes } from "../../common/models/types/Common"
+import { OnSuccessCallback } from "../../common/models/interfaces/common.interface"
+import { StatusTypes } from "../../common/models/types/common.type"
 
 export type AuthModulesTypes = 'login' | 'passwordResetRequest' | 'verifyEmail' | 'resetPassword'
 

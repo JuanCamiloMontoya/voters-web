@@ -2,8 +2,8 @@ import { combineReducers } from "@reduxjs/toolkit"
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { authReducer } from "../services/Auth/AuthSlice"
-import { votersReducer } from "../services/Voters/VotersSlice"
+import { authReducer } from "../services/auth/auth.slice"
+import { votersReducer } from "../services/voters/voters.slice"
 
 const reducers = combineReducers({
   auth: authReducer,

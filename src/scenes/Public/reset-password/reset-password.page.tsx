@@ -1,9 +1,9 @@
 import { Button, Typography, Form, Alert, Input } from 'antd'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuthSelectors } from '../../../services/Auth/AuthSelectors'
-import { authActions } from '../../../services/Auth/AuthSlice'
-import { useAppDispatch } from '../../../store/Store'
+import { useAuthSelectors } from '../../../services/auth/auth.selectors'
+import { authActions } from '../../../services/auth/auth.slice'
+import { useAppDispatch } from '../../../store/store'
 
 const { Item } = Form
 const { Password } = Input

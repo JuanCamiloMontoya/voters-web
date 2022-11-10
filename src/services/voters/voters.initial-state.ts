@@ -1,4 +1,4 @@
-import { VotersStateTypes } from "./VotersModels"
+import { VotersStateTypes } from "./voters.models"
 
 export const votersInitialState = (): VotersStateTypes => ({
   voters: {

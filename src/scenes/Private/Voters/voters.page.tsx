@@ -2,9 +2,9 @@ import { DeleteOutlined, EyeFilled, EyeOutlined, HomeOutlined, PlusOutlined } fr
 import { Breadcrumb, Button, Divider, Row, Spin, Table, Tooltip, Typography } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useEffect } from 'react'
-import { useVotersSelectors } from '../../../services/Voters/VotersSelectors'
-import { votersActions } from '../../../services/Voters/VotersSlice'
-import { useAppDispatch } from '../../../store/Store'
+import { useVotersSelectors } from '../../../services/voters/voters.selectors'
+import { votersActions } from '../../../services/voters/voters.slice'
+import { useAppDispatch } from '../../../store/store'
 
 const { Title } = Typography
 

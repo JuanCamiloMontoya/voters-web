@@ -1,5 +1,5 @@
-import { Page } from "../../common/models/interfaces/Common"
-import { StatusTypes } from "../../common/models/types/Common"
+import { Page } from "../../common/models/interfaces/common.interface"
+import { StatusTypes } from "../../common/models/types/common.type"
 
 export type VotersModulesTypes = 'getAll'
 

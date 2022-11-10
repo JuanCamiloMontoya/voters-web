@@ -1,10 +1,10 @@
 import { Button, Typography, Form, Input, Alert } from 'antd'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LoginPayload } from '../../../services/Auth/AuthModels'
-import { useAuthSelectors } from '../../../services/Auth/AuthSelectors'
-import { authActions } from '../../../services/Auth/AuthSlice'
-import { useAppDispatch } from '../../../store/Store'
+import { LoginPayload } from '../../../services/auth/auth.models'
+import { useAuthSelectors } from '../../../services/auth/auth.selectors'
+import { authActions } from '../../../services/auth/auth.slice'
+import { useAppDispatch } from '../../../store/store'
 
 const { Item } = Form
 const { Password } = Input
