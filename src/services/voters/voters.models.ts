@@ -1,4 +1,4 @@
-import { Page } from "../../common/models/interfaces/common.interface"
+import { Page } from "../../common/models/interfaces/page.interface"
 import { StatusTypes } from "../../common/models/types/common.type"
 
 export type VotersModulesTypes = 'getAll'

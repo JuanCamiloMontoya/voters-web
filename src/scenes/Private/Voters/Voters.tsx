@@ -1,41 +1,23 @@
 import { DeleteOutlined, EyeFilled, HomeOutlined, PlusOutlined } from '@ant-design/icons'
 import { Breadcrumb, Button, Divider, Row, Spin, Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
-import React, { useEffect } from 'react'
-import { useVotersSelectors } from '../../../services/voters/voters.selectors'
-import { votersActions } from '../../../services/voters/voters.slice'
-import { useAppDispatch } from '../../../store/store'
+import { Voter } from '../../../services/voters/voters.models'
+import useVoters from './useVoters'
 
-const { Title } = Typography
+const { Title, Text } = Typography
 
-interface DataType {
-  key: string
-  firstname: string
-  lastname: string
-  document: string
-  phone: string
-  email: string
-}
+const Voters = () => {
 
-const Voters: React.FC = () => {
+  const { status, voters } = useVoters()
 
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(votersActions.getAll({}))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const { voters, status } = useVotersSelectors()
-
-  const columns: ColumnsType<DataType> = [
-    { title: <h2>Nombre</h2>, dataIndex: 'firstname', key: 'firstname' },
-    { title: <h2>Apellido</h2>, dataIndex: 'lastname', key: 'lastname' },
-    { title: <h2>N° Documento</h2>, dataIndex: 'document', key: 'document' },
-    { title: <h2>N° Telefono</h2>, dataIndex: 'phone', key: 'phone' },
-    { title: <h2>Correo</h2>, dataIndex: 'email', key: 'email' },
+  const columns: ColumnsType<Voter> = [
+    { title: <Text strong>Nombre</Text>, dataIndex: 'firstname', key: 'firstname' },
+    { title: <Text strong>Apellido</Text>, dataIndex: 'lastname', key: 'lastname' },
+    { title: <Text strong>N° Documento</Text>, dataIndex: 'document', key: 'document' },
+    { title: <Text strong>N° Telefono</Text>, dataIndex: 'phone', key: 'phone' },
+    { title: <Text strong>Correo</Text>, dataIndex: 'email', key: 'email' },
     {
-      title: <h2>Acción</h2>,
+      title: <Text strong>Acción</Text>,
       key: 'action',
       render: (_, record) => (
         <div style={{ width: 81 }}>
@@ -43,8 +25,8 @@ const Voters: React.FC = () => {
           <Divider type='vertical' />
           <Button type="primary" danger shape="circle" icon={<DeleteOutlined />} />
         </div>
-      ),
-    },
+      )
+    }
   ]
 
   return (

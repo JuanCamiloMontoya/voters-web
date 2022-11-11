@@ -1,7 +1,11 @@
-// Pages
+//Public
 @import "../../scenes/public/Login/Login";
 @import "../../scenes/public/PasswordResetRequest/PasswordResetRequest";
 @import "../../scenes/public/ResetPassword/ResetPassword";
 @import "../../scenes/public/Public";
+
+//Private
 @import "../../scenes/private/Private";
 @import "../../scenes/private/Voters/Voters";
+@import "../../scenes/private/_layout/Header/Header";
+@import "../../scenes/private/_layout/Sider/Sider";

@@ -1,52 +1,38 @@
 import { Layout, Menu, } from "antd"
-import { useNavigate } from 'react-router-dom'
+import useSider from "./useSider"
+
 const { Sider: AntdSider } = Layout
 
 const Sider = () => {
+
   const icons = require(`@ant-design/icons`)
 
-  const navigate = useNavigate()
+  const {
+    handleMenu,
+    menuOptions
+  } = useSider()
 
-  const menuOptions = [
-    {
-      key: '/',
-      name: 'Inicio',
-      icon: 'HomeOutlined',
-      route: 'home'
-    },
-    {
-      key: '/leaders',
-      name: 'Líderes',
-      icon: 'UsergroupAddOutlined',
-      route: 'leaders'
-    },
-    {
-      key: '/voters',
-      name: 'Votantes',
-      icon: 'FormOutlined',
-      route: 'voters'
-    }
-  ]
+  const menuItems = menuOptions.map(({ key, name, icon }) => {
+    const Component = icons[icon]
+    return ({
+      key,
+      icon: <Component />,
+      label: name
+    })
+  })
 
   return (
     <AntdSider
       breakpoint="lg"
       collapsedWidth="0"
-      style={{ minHeight: '100vh' }}
+      className="private-sider"
     >
       <Menu
         theme="dark"
         mode="inline"
         defaultSelectedKeys={['1']}
-        onClick={({ key }) => navigate(key)}
-        items={menuOptions.map(({ key, name, icon }) => {
-          const Component = icons[icon]
-          return ({
-            key,
-            icon: <Component />,
-            label: name
-          })
-        })}
+        onClick={handleMenu}
+        items={menuItems}
       />
     </AntdSider>
   )

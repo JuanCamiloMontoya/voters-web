@@ -1,10 +1,10 @@
-import { useAuthSelectors } from "../services/auth/auth.selectors"
 import Private from "./private/Private"
 import Public from "./public/Public"
+import useApp from "./useApp"
 
 const App = () => {
 
-  const { isAuthenticated } = useAuthSelectors()
+  const { isAuthenticated } = useApp()
 
   return isAuthenticated ? <Private /> : <Public />
 

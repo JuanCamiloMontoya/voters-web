@@ -1,9 +1,5 @@
 import { Button, Typography, Form, Alert, Input } from 'antd'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuthSelectors } from '../../../services/auth/auth.selectors'
-import { authActions } from '../../../services/auth/auth.slice'
-import { useAppDispatch } from '../../../store/store'
+import useResetPassword from './useResetPassword'
 
 const { Item } = Form
 const { Password } = Input
@@ -11,32 +7,15 @@ const { Title, Text } = Typography
 
 const ResetPassword = () => {
 
-  const dispatch = useAppDispatch()
-  const { status, error, passwordReset } = useAuthSelectors()
-  const { resetPassword } = authActions
-
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (!passwordReset.email || !passwordReset.code)
-      navigate('/')
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const onFinish = ({ password }: { password: string }) => {
-    const onSuccess = () => {
-      navigate('/')
-    }
-    dispatch(resetPassword({ password, onSuccess }))
-  }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
-
-  const onLogin = () => {
-    navigate('/')
-  }
+  const {
+    error,
+    status,
+    passwordReset,
+    onCloseErrorAlert,
+    onFinish,
+    onFinishFailed,
+    onLogin
+  } = useResetPassword()
 
   return (
     <Form
@@ -55,7 +34,7 @@ const ResetPassword = () => {
             type="error"
             showIcon
             closable
-            onClose={() => dispatch(authActions.resetStatus('resetPassword'))}
+            onClose={onCloseErrorAlert}
           />
         </Item>
       )}

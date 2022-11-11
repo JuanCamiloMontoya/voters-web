@@ -1,49 +1,41 @@
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons"
-import { useNavigate } from "react-router-dom"
 import { Avatar, Button, Divider, Dropdown, Layout, Menu, Typography } from "antd"
-import { useAppDispatch } from "../../../../store/store"
+import useHeader from "./useHeader"
 
 const { Header: AntdHeader } = Layout
 const { Text } = Typography
 
 const Header = () => {
 
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-
-  const logout = () => {
-    dispatch({ type: 'auth/logout' })
-    navigate('/')
-  }
-
-  const onProfileClick = () => {
-    navigate('/profile')
-  }
+  const {
+    onLogout,
+    onProfile
+  } = useHeader()
 
   const menu = (
     <Menu
       items={[
         {
           key: '1',
-          label: (<span>Perfil</span>),
+          label: "Perfil",
           icon: <UserOutlined />,
-          onClick: onProfileClick
+          onClick: onProfile
         },
         {
           key: '2',
-          label: (<span>Cerrar sesión</span>),
+          label: 'Cerrar sesión',
           icon: <LogoutOutlined />,
-          onClick: logout
+          onClick: onLogout
         }
       ]}
     />
   )
 
   return (
-    <AntdHeader style={{ textAlign: 'right', padding: '0 5px' }}>
+    <AntdHeader className="private-header">
       <Dropdown overlay={menu}>
         <Button type="text">
-          <Text style={{ color: '#FFF' }}>Juan</Text>
+          <Text className="font-white">Juan</Text>
           <Divider type="vertical" />
           <Avatar icon={<UserOutlined />} />
         </Button>

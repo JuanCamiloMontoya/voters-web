@@ -1,42 +1,21 @@
 import { Button, Typography, Form, Alert } from 'antd'
-import { useEffect } from 'react'
 import ReactCodeInput from 'react-code-input'
-import { useNavigate } from 'react-router-dom'
-import { useAuthSelectors } from '../../../services/auth/auth.selectors'
-import { authActions } from '../../../services/auth/auth.slice'
-import { useAppDispatch } from '../../../store/store'
+import useVerifyEmail from './useVerifyEmail'
 
 const { Item } = Form
 const { Title, Text } = Typography
 
 const VerifyEmail = () => {
 
-  const dispatch = useAppDispatch()
-  const { status, error, passwordReset } = useAuthSelectors()
-  const { verifyEmail } = authActions
-
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (!passwordReset.email)
-      navigate('/')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const onFinish = (data: { code: string }) => {
-    const onSuccess = () => navigate('/reset-password')
-
-    const endData = { ...data, email: passwordReset.email || '' }
-    dispatch(verifyEmail({ data: endData, onSuccess }))
-  }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
-
-  const onLogin = () => {
-    navigate('/')
-  }
+  const {
+    error,
+    passwordReset,
+    status,
+    onFinish,
+    onFinishFailed,
+    onLogin,
+    onCloseErrorAlert
+  } = useVerifyEmail()
 
   return (
     <Form
@@ -55,7 +34,7 @@ const VerifyEmail = () => {
             type="error"
             showIcon
             closable
-            onClose={() => dispatch(authActions.resetStatus('verifyEmail'))}
+            onClose={onCloseErrorAlert}
           />
         </Item>
       )}
