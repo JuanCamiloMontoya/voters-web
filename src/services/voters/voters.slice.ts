@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { votersThunks } from './voters.thunks'
-import { votersInitialState } from './voters.initial-state'
+import { votersInitialState } from './voters.initialState'
 import { VotersModulesTypes, VotersStateTypes } from './voters.models'
 
 const initialState = votersInitialState()

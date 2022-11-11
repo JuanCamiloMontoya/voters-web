@@ -1,10 +1,5 @@
 import { Button, Typography, Form, Input, Alert } from 'antd'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { LoginPayload } from '../../../services/auth/auth.models'
-import { useAuthSelectors } from '../../../services/auth/auth.selectors'
-import { authActions } from '../../../services/auth/auth.slice'
-import { useAppDispatch } from '../../../store/store'
+import useLogin from './useLogin'
 
 const { Item } = Form
 const { Password } = Input
@@ -12,27 +7,14 @@ const { Title } = Typography
 
 const Login = () => {
 
-  const dispatch = useAppDispatch()
-  const { status, error } = useAuthSelectors()
-
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    status.login === 'error' && dispatch(authActions.resetStatus('login'))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const onFinish = (values: LoginPayload) => {
-    dispatch(authActions.login(values))
-  }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
-
-  const onResetPassword = () => {
-    navigate('/password-reset-request')
-  }
+  const {
+    error,
+    status,
+    onFinish,
+    onFinishFailed,
+    onResetPassword,
+    onCloseErrorAlert
+  } = useLogin()
 
   return (
     <Form
@@ -50,7 +32,7 @@ const Login = () => {
           type="error"
           showIcon
           closable
-          onClose={() => dispatch(authActions.resetStatus('login'))}
+          onClose={onCloseErrorAlert}
         />
       )}
       <Item

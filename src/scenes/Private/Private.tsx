@@ -1,11 +1,11 @@
 import { Layout } from "antd"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Sider from './_layout/sider/sider.comp'
-import Header from './_layout/header/header.comp'
-import Home from "./home/home.page"
-import Leaders from "./leaders/leaders.page"
-import Voters from "./voters/voters.page"
-import Profile from './profile/profile.page'
+import Sider from './_layout/Sider/Sider'
+import Header from './_layout/Header/Header'
+import Home from "./Home/Home"
+import Leaders from "./Leaders/Leaders"
+import Voters from "./Voters/Voters"
+import Profile from './Profile/Profile'
 
 const { Content } = Layout
 

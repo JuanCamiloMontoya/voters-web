@@ -1,5 +1,5 @@
-import { DeleteOutlined, EyeFilled, EyeOutlined, HomeOutlined, PlusOutlined } from '@ant-design/icons'
-import { Breadcrumb, Button, Divider, Row, Spin, Table, Tooltip, Typography } from 'antd'
+import { DeleteOutlined, EyeFilled, HomeOutlined, PlusOutlined } from '@ant-design/icons'
+import { Breadcrumb, Button, Divider, Row, Spin, Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useEffect } from 'react'
 import { useVotersSelectors } from '../../../services/voters/voters.selectors'

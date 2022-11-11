@@ -9,7 +9,7 @@ const { Item } = Form
 const { Password } = Input
 const { Title, Text } = Typography
 
-const PasswordReset = () => {
+const ResetPassword = () => {
 
   const dispatch = useAppDispatch()
   const { status, error, passwordReset } = useAuthSelectors()
@@ -111,4 +111,4 @@ const PasswordReset = () => {
   )
 }
 
-export default PasswordReset
+export default ResetPassword
