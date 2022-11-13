@@ -1,27 +1,30 @@
-import { Button, Typography, Form, Input, Alert } from 'antd'
+import { Button, Typography, Form, Alert } from 'antd'
+import { FunctionComponent } from 'react'
+import TextInput from '../../_components/TextInput/TextInput'
 import useLogin from './useLogin'
 
-const { Item } = Form
-const { Password } = Input
 const { Title } = Typography
 
-const Login = () => {
+const Login: FunctionComponent = () => {
 
   const {
     error,
     status,
+    control,
+    errors,
+    isValid,
     onFinish,
     onFinishFailed,
     onResetPassword,
-    onCloseErrorAlert
+    onCloseErrorAlert,
+    handleSubmit
   } = useLogin()
 
   return (
     <Form
-      name='login'
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
-      onFinish={onFinish}
+      onFinish={handleSubmit(onFinish)}
       onFinishFailed={onFinishFailed}
       className='public-form'
     >
@@ -35,33 +38,41 @@ const Login = () => {
           onClose={onCloseErrorAlert}
         />
       )}
-      <Item
-        label='Correo'
+      <TextInput
         name='email'
-        rules={[
-          { required: true, message: 'Ingrese su correo electrónico!' },
-          { type: 'email', message: 'Debe ser un correo electrónico válido!' }
-        ]}
-      >
-        <Input placeholder='Dirección de correo' maxLength={50} />
-      </Item>
-      <Item
-        label='Contraseña'
+        control={control}
+        label='Correo'
+        placeholder='Dirección de correo'
+        maxLength={50}
+        error={errors.email}
+        required
+      />
+      <TextInput
         name='password'
-        rules={[
-          { required: true, message: 'Ingrese su contraseña!' },
-          { min: 8, message: 'Ingrese mínimo 8 carácteres!' }
-        ]}
-      >
-        <Password placeholder='Contraseña' maxLength={30} />
-      </Item>
-      <Item className='text-center'>
-        <Button htmlType='submit' className='primary-button ' loading={status.login === 'loading'}>
+        control={control}
+        label='Contraseña'
+        placeholder='Contraseña'
+        maxLength={50}
+        error={errors.password}
+        required
+        isPassword
+      />
+      <div className='text-center'>
+        <Button
+          htmlType='submit'
+          className='primary-button'
+          loading={status.login === 'loading'}
+          disabled={!isValid}
+        >
           Iniciar sesión
         </Button>
-      </Item>
+      </div>
       <div className='text-center'>
-        <Button onClick={onResetPassword} type="link" className='primary-link-button'>
+        <Button
+          onClick={onResetPassword}
+          type="link"
+          className='primary-link-button'
+        >
           ¿Olvidaste tu contraseña?
         </Button>
       </div>
