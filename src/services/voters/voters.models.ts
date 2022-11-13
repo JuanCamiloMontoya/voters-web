@@ -12,7 +12,7 @@ export interface Voter {
   id: string
 }
 
-export interface VotersStateTypes {
+export interface VotersState {
   voters: Page<Voter[]>,
   error: {
     getAll: string | null | undefined,

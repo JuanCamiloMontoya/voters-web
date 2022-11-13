@@ -3,7 +3,7 @@ import { StatusTypes } from "../../common/models/types/common.type"
 
 export type AuthModulesTypes = 'login' | 'passwordResetRequest' | 'verifyEmail' | 'resetPassword'
 
-export interface AuthStateTypes {
+export interface AuthState {
   isAuthenticated: boolean,
   accessToken: string | null,
   passwordReset: {

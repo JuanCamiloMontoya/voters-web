@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { votersThunks } from './voters.thunks'
 import { votersInitialState } from './voters.initialState'
-import { VotersModulesTypes, VotersStateTypes } from './voters.models'
+import { VotersModulesTypes, VotersState } from './voters.models'
 
 const initialState = votersInitialState()
 const thunks = votersThunks()
@@ -11,7 +11,7 @@ const voterSlice = createSlice({
   name: "voter",
   initialState,
   reducers: {
-    resetStatus(state: VotersStateTypes, { payload }: PayloadAction<VotersModulesTypes>) {
+    resetStatus(state: VotersState, { payload }: PayloadAction<VotersModulesTypes>) {
       state.error[payload] = initialState.error[payload]
       state.status[payload] = initialState.status[payload]
     }

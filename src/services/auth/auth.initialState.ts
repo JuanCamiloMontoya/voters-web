@@ -1,6 +1,6 @@
-import { AuthStateTypes } from "./auth.models"
+import { AuthState } from "./auth.models"
 
-export const authInitialState = (): AuthStateTypes => ({
+export const authInitialState = (): AuthState => ({
   isAuthenticated: false,
   accessToken: null,
   passwordReset: {
