@@ -6,7 +6,7 @@ import type { LoginPayload } from '../../../services/auth/auth.models'
 import { useAuthSelectors } from '../../../services/auth/auth.selectors'
 import { useAppDispatch } from '../../../store/store'
 import { authActions } from '../../../services/auth/auth.slice'
-import useLoginValidators from './useLoginValidators'
+import useLoginValidators from './validators'
 
 const useLogin = () => {
 
@@ -14,12 +14,14 @@ const useLogin = () => {
 
   const navigate = useNavigate()
 
-  const { loginValidator } = useLoginValidators()
-
   const { status, error } = useAuthSelectors()
 
+  const { resetStatus } = authActions
+
+  const { loginValidator } = useLoginValidators()
+
   useEffect(() => {
-    status.login === 'error' && dispatch(authActions.resetStatus('login'))
+    status.login === 'error' && dispatch(resetStatus('login'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

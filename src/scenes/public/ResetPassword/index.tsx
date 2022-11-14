@@ -1,5 +1,5 @@
 import { Button, Typography, Form, Alert, Input } from 'antd'
-import useResetPassword from './useResetPassword'
+import useResetPassword from './controllers'
 
 const { Item } = Form
 const { Password } = Input

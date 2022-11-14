@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Row } from "antd"
-import Login from "./Login/Login"
-import PasswordResetRequest from "./PasswordResetRequest/PasswordResetRequest"
-import ResetPassword from "./ResetPassword/ResetPassword"
-import VerifyEmail from "./VerifyEmail/VerifyEmail"
+import Login from "./Login"
+import PasswordResetRequest from "./PasswordResetRequest"
+import ResetPassword from "./ResetPassword"
+import VerifyEmail from "./VerifyEmail"
 
 const Public = () => {
 

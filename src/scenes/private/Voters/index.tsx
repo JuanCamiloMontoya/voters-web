@@ -2,7 +2,7 @@ import { DeleteOutlined, EyeFilled, HomeOutlined, PlusOutlined } from '@ant-desi
 import { Breadcrumb, Button, Divider, Row, Spin, Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { Voter } from '../../../services/voters/voters.models'
-import useVoters from './useVoters'
+import useVoters from './controllers'
 
 const { Title, Text } = Typography
 

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './store/store'
 import { injectStore } from './common/axios/interceptors'
-import App from './scenes/App'
+import App from './scenes'
 import './sass/main.scss'
 
 const root = ReactDOM.createRoot(

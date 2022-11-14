@@ -1,11 +1,11 @@
 //Public
-@import "../../scenes/public/Login/Login";
-@import "../../scenes/public/PasswordResetRequest/PasswordResetRequest";
-@import "../../scenes/public/ResetPassword/ResetPassword";
-@import "../../scenes/public/Public";
+@import "../../scenes/public/Login/styles";
+@import "../../scenes/public/PasswordResetRequest/styles";
+@import "../../scenes/public/ResetPassword/styles";
+@import "../../scenes/public/styles";
 
 //Private
-@import "../../scenes/private/Private";
-@import "../../scenes/private/Voters/Voters";
-@import "../../scenes/private/_layout/Header/Header";
-@import "../../scenes/private/_layout/Sider/Sider";
+@import "../../scenes/private/styles";
+@import "../../scenes/private/Voters/styles";
+@import "../../scenes/private/_layout/Header/styles";
+@import "../../scenes/private/_layout/Sider/styles";

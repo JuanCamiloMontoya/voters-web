@@ -1,7 +1,7 @@
 import { Button, Typography, Form, Alert } from 'antd'
 import { FunctionComponent } from 'react'
-import TextInput from '../../_components/TextInput/TextInput'
-import useLogin from './useLogin'
+import TextInput from '../../_components/TextInput'
+import useLogin from './controllers'
 
 const { Title } = Typography
 

@@ -1,6 +1,6 @@
-import Private from "./private/Private"
-import Public from "./public/Public"
-import useApp from "./useApp"
+import Private from "./private"
+import Public from "./public"
+import useApp from "./controllers"
 
 const App = () => {
 

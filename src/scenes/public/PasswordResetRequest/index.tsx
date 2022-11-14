@@ -1,5 +1,6 @@
 import { Button, Typography, Form, Input, Alert } from 'antd'
-import usePasswordResetRequest from './usePasswordResetRequest'
+import TextInput from '../../_components/TextInput'
+import usePasswordResetRequest from './controllers'
 
 const { Item } = Form
 const { Title, Text } = Typography
@@ -9,6 +10,8 @@ const PasswordResetRequest = () => {
   const {
     error,
     status,
+    control,
+    errors,
     onCloseErrorAlert,
     onFinish,
     onFinishFailed,
@@ -26,35 +29,29 @@ const PasswordResetRequest = () => {
     >
       <Title level={3}>Recuperar contraseña</Title>
       {status.passwordResetRequest === 'error' && (
-        <Item>
-          <Alert
-            message={error.passwordResetRequest}
-            type="error"
-            showIcon
-            closable
-            onClose={onCloseErrorAlert}
-          />
-        </Item>
+        <Alert
+          message={error.passwordResetRequest}
+          type="error"
+          showIcon
+          closable
+          onClose={onCloseErrorAlert}
+        />
       )}
       <Item>
         <Text>
           Ingresa tu correo y te enviaremos un código para que puedas restablecer tu contraseña.
         </Text>
       </Item>
-      <Item
+      <TextInput
         name='email'
-        rules={[
-          { required: true, message: 'Ingrese su correo electrónico!' },
-          { type: 'email', message: 'Debe ser un correo electrónico válido!' }
-        ]}
-      >
-        <Input
-          className='password-reset-request-input'
-          maxLength={50}
-          placeholder='Dirección de correo'
-        />
-      </Item>
-      <Item className='text-center'>
+        control={control}
+        label='Correo'
+        placeholder='Dirección de correo'
+        maxLength={50}
+        error={errors.email}
+        required
+      />
+      <div className='text-center'>
         <Button
           htmlType='submit'
           className='primary-button'
@@ -62,7 +59,7 @@ const PasswordResetRequest = () => {
         >
           Enviar código
         </Button>
-      </Item>
+      </div>
       <div className='text-center'>
         <Button onClick={onLogin} type="link" className='primary-link-button'>
           Iniciar sesión

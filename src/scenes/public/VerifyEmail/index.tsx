@@ -1,6 +1,6 @@
 import { Button, Typography, Form, Alert } from 'antd'
 import ReactCodeInput from 'react-code-input'
-import useVerifyEmail from './useVerifyEmail'
+import useVerifyEmail from './controllers'
 
 const { Item } = Form
 const { Title, Text } = Typography
