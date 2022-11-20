@@ -1,34 +1,33 @@
-import { Form, Input as InputAnd, Typography } from "antd"
+import { Form, Typography } from "antd"
+import ReactCodeInput, { InputModeTypes } from "react-code-input"
 import { Controller, Control, FieldError } from "react-hook-form"
 
 const { Item } = Form
 const { Text } = Typography
 
-interface TextInputProps {
+interface CodeInputProps {
   name: string
   control: Control<any>
   error: FieldError | undefined,
   label: string
-  placeholder: string
-  maxLength: number,
-  required?: boolean,
-  isPassword?: boolean
+  fields: number,
+  inputMode: InputModeTypes
+  type?: 'text' | 'number' | 'password' | 'tel',
+  required?: boolean
 }
 
-const TextInput = (props: TextInputProps) => {
+const CodeInput = (props: CodeInputProps) => {
 
   const {
     name,
     control,
     error,
     label,
-    placeholder,
-    maxLength,
-    required = true,
-    isPassword = false
+    fields,
+    inputMode,
+    type = 'text',
+    required = true
   } = props
-
-  const Input = isPassword ? InputAnd.Password : InputAnd
 
   return (
     <Item label={label} required={required}>
@@ -36,9 +35,11 @@ const TextInput = (props: TextInputProps) => {
         name={name}
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input
-            placeholder={placeholder}
-            maxLength={maxLength}
+          <ReactCodeInput
+            type={type}
+            fields={fields}
+            name={name}
+            inputMode={inputMode}
             onChange={onChange}
             value={value}
           />
@@ -49,4 +50,4 @@ const TextInput = (props: TextInputProps) => {
   )
 }
 
-export default TextInput
+export default CodeInput

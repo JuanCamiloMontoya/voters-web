@@ -1,8 +1,9 @@
 import Joi from "joi"
-import { Email } from "../../../common/models/interfaces/common.interface"
+import { IEmail } from "../../../common/models/interfaces/common.interface"
 
 const usePasswordResetRequestValidator = () => {
-  const passwordResetRequestalidator = Joi.object<Email>({
+
+  const passwordResetRequestalidator = Joi.object<IEmail>({
     email: Joi.string()
       .required()
       .email({ tlds: { allow: false } })

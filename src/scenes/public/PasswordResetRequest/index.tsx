@@ -1,8 +1,7 @@
-import { Button, Typography, Form, Input, Alert } from 'antd'
+import { Button, Typography, Form, Alert } from 'antd'
 import TextInput from '../../_components/TextInput'
 import usePasswordResetRequest from './controllers'
 
-const { Item } = Form
 const { Title, Text } = Typography
 
 const PasswordResetRequest = () => {
@@ -12,9 +11,10 @@ const PasswordResetRequest = () => {
     status,
     control,
     errors,
+    isValid,
+    handleSubmit,
     onCloseErrorAlert,
     onFinish,
-    onFinishFailed,
     onLogin
   } = usePasswordResetRequest()
 
@@ -23,8 +23,7 @@ const PasswordResetRequest = () => {
       name='password-reset-request'
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={handleSubmit(onFinish)}
       className='public-form'
     >
       <Title level={3}>Recuperar contraseña</Title>
@@ -37,11 +36,9 @@ const PasswordResetRequest = () => {
           onClose={onCloseErrorAlert}
         />
       )}
-      <Item>
-        <Text>
-          Ingresa tu correo y te enviaremos un código para que puedas restablecer tu contraseña.
-        </Text>
-      </Item>
+      <Text>
+        Ingresa tu correo y te enviaremos un código para que puedas restablecer tu contraseña.
+      </Text>
       <TextInput
         name='email'
         control={control}
@@ -56,6 +53,7 @@ const PasswordResetRequest = () => {
           htmlType='submit'
           className='primary-button'
           loading={status.passwordResetRequest === 'loading'}
+          disabled={!isValid}
         >
           Enviar código
         </Button>

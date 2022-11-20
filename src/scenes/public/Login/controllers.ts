@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
-import type { LoginPayload } from '../../../services/auth/auth.models'
+import { LoginPayload } from '../../../services/auth/auth.models'
 import { useAuthSelectors } from '../../../services/auth/auth.selectors'
 import { useAppDispatch } from '../../../store/store'
 import { authActions } from '../../../services/auth/auth.slice'
@@ -16,12 +16,12 @@ const useLogin = () => {
 
   const { status, error } = useAuthSelectors()
 
-  const { resetStatus } = authActions
+  const { login, resetStatus } = authActions
 
   const { loginValidator } = useLoginValidators()
 
   useEffect(() => {
-    status.login === 'error' && dispatch(resetStatus('login'))
+    status.login === 'error' && onCloseErrorAlert()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -35,12 +35,7 @@ const useLogin = () => {
   })
 
   const onFinish = (values: LoginPayload) => {
-    console.log("-----", values)
-    dispatch(authActions.login(values))
-  }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
+    dispatch(login(values))
   }
 
   const onResetPassword = () => {
@@ -48,7 +43,7 @@ const useLogin = () => {
   }
 
   const onCloseErrorAlert = () => {
-    dispatch(authActions.resetStatus('login'))
+    dispatch(resetStatus('login'))
   }
 
   return {
@@ -58,7 +53,6 @@ const useLogin = () => {
     errors,
     isValid,
     onFinish,
-    onFinishFailed,
     onResetPassword,
     onCloseErrorAlert,
     handleSubmit

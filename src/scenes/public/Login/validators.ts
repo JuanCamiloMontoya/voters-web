@@ -18,7 +18,7 @@ const useLoginValidators = () => {
       .messages({
         'any.required': 'Ingrese su contraseña!',
         'string.empty': 'Ingrese su contraseña!',
-        'string.min': 'La contraseña debe tener mínimo 8 carácteres!',
+        'string.min': 'La contraseña debe tener mínimo 8 carácteres!'
       })
   })
 

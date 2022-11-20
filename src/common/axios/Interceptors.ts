@@ -1,12 +1,16 @@
 import axios from 'axios'
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
-import { ErrorMsgResponse } from '../models/interfaces/common.interface'
 import { apiUrl } from "../config/environments"
 import { AppStore } from '../../store/store'
 
 const defaultErrorMessage = `Lo sentimos! Tenemos un error inesperado. Por favor intentelo más tarde.`
 
+interface ErrorMsgResponse {
+  message: string | []
+}
+
 let store: AppStore
+
 export const injectStore = (_store: AppStore) => {
   store = _store
 }
@@ -32,6 +36,10 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
 
 const onResponseError = (error: AxiosError<ErrorMsgResponse>): Promise<string> => {
   const errorMsg = error.response?.data?.message || defaultErrorMessage
+
+  if (Array.isArray(errorMsg))
+    return Promise.reject(errorMsg.join('\n'))
+
   return Promise.reject(errorMsg)
 }
 

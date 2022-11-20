@@ -1,6 +1,8 @@
 import { joiResolver } from "@hookform/resolvers/joi"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { IEmail } from "../../../common/models/interfaces/common.interface"
 import { useAuthSelectors } from "../../../services/auth/auth.selectors"
 import { authActions } from "../../../services/auth/auth.slice"
 import { useAppDispatch } from "../../../store/store"
@@ -13,28 +15,29 @@ const usePasswordResetRequest = () => {
   const navigate = useNavigate()
 
   const { status, error } = useAuthSelectors()
-  const { passwordResetRequest } = authActions
+
+  const { passwordResetRequest, resetStatus } = authActions
 
   const { passwordResetRequestalidator } = usePasswordResetRequestValidator()
 
+  useEffect(() => {
+    status.passwordResetRequest === 'error' && onCloseErrorAlert()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const {
     control,
     handleSubmit,
     formState: { errors, isValid }
-  } = useForm<{ email: string }>({
+  } = useForm<IEmail>({
     resolver: joiResolver(passwordResetRequestalidator),
     mode: 'all'
   })
 
-  const onFinish = (data: { email: string }) => {
+  const onFinish = (data: IEmail) => {
     const onSuccess = () => navigate('/verify-email')
 
     dispatch(passwordResetRequest({ data, onSuccess }))
-  }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
   }
 
   const onLogin = () => {
@@ -42,7 +45,7 @@ const usePasswordResetRequest = () => {
   }
 
   const onCloseErrorAlert = () => {
-    dispatch(authActions.resetStatus('passwordResetRequest'))
+    dispatch(resetStatus('passwordResetRequest'))
   }
 
   return {
@@ -53,7 +56,6 @@ const usePasswordResetRequest = () => {
     isValid,
     handleSubmit,
     onFinish,
-    onFinishFailed,
     onLogin,
     onCloseErrorAlert
   }

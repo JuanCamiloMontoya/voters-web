@@ -1,8 +1,7 @@
-import { Button, Typography, Form, Alert, Input } from 'antd'
+import { Button, Typography, Form, Alert } from 'antd'
+import TextInput from '../../_components/TextInput'
 import useResetPassword from './controllers'
 
-const { Item } = Form
-const { Password } = Input
 const { Title, Text } = Typography
 
 const ResetPassword = () => {
@@ -11,9 +10,12 @@ const ResetPassword = () => {
     error,
     status,
     passwordReset,
+    control,
+    errors,
+    isValid,
+    handleSubmit,
     onCloseErrorAlert,
     onFinish,
-    onFinishFailed,
     onLogin
   } = useResetPassword()
 
@@ -22,65 +24,51 @@ const ResetPassword = () => {
       name='password-reset'
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={handleSubmit(onFinish)}
       className='public-form'
     >
       <Title level={3}>Actualizar contraseña</Title>
       {status.resetPassword === 'error' && (
-        <Item>
-          <Alert
-            message={error.resetPassword}
-            type="error"
-            showIcon
-            closable
-            onClose={onCloseErrorAlert}
-          />
-        </Item>
+        <Alert
+          message={error.resetPassword}
+          type="error"
+          showIcon
+          closable
+          onClose={onCloseErrorAlert}
+        />
       )}
-      <Item>
-        <Text>
-          Crea una nueva contraseña para tu correo {passwordReset.email}
-        </Text>
-      </Item>
-      <Item
+      <Text>
+        Crea una nueva contraseña para tu correo {passwordReset.email}
+      </Text>
+      <TextInput
+        name='password'
+        control={control}
         label='Contraseña'
-        name="password"
-        hasFeedback
-        rules={[
-          { required: true, message: 'Ingrese la contraseña!' },
-          { min: 8, message: 'Ingrese mínimo 8 carácteres!' }
-        ]}
-      >
-        <Password placeholder='Contraseña' maxLength={30} />
-      </Item>
-      <Item
+        placeholder='Contraseña'
+        maxLength={50}
+        error={errors.password}
+        isPassword
+      />
+      <TextInput
+        name='passwordConfirm'
+        control={control}
         label='Verificar contraseña'
-        name="confirm"
-        dependencies={['password']}
-        hasFeedback
-        rules={[
-          { required: true, message: 'Verifique la contraseña!' },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value)
-                return Promise.resolve()
-              return Promise.reject(new Error('Las contraseñas no coinciden!'))
-            }
-          })
-        ]}
-      >
-        <Password placeholder='Contraseña' maxLength={30} />
-      </Item>
-      <Item className='text-center'>
+        placeholder='Contraseña'
+        maxLength={50}
+        error={errors.passwordConfirm}
+        isPassword
+      />
+
+      <div className='text-center'>
         <Button
           htmlType='submit'
           className='primary-button'
           loading={status.resetPassword === 'loading'}
+          disabled={!isValid}
         >
           Guardar cambios e inciar sesión
         </Button>
-      </Item>
+      </div>
       <div className='text-center'>
         <Button onClick={onLogin} type="link" className='primary-link-button'>
           Iniciar sesión

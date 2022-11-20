@@ -7,8 +7,10 @@ const useVoters = () => {
 
   const dispatch = useAppDispatch()
 
+  const { getAll } = votersActions
+
   useEffect(() => {
-    dispatch(votersActions.getAll({}))
+    dispatch(getAll({}))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

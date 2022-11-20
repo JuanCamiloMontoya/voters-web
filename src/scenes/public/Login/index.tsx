@@ -1,11 +1,10 @@
 import { Button, Typography, Form, Alert } from 'antd'
-import { FunctionComponent } from 'react'
 import TextInput from '../../_components/TextInput'
 import useLogin from './controllers'
 
 const { Title } = Typography
 
-const Login: FunctionComponent = () => {
+const Login = () => {
 
   const {
     error,
@@ -14,7 +13,6 @@ const Login: FunctionComponent = () => {
     errors,
     isValid,
     onFinish,
-    onFinishFailed,
     onResetPassword,
     onCloseErrorAlert,
     handleSubmit
@@ -25,7 +23,6 @@ const Login: FunctionComponent = () => {
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
       onFinish={handleSubmit(onFinish)}
-      onFinishFailed={onFinishFailed}
       className='public-form'
     >
       <Title>Voters App</Title>
@@ -45,7 +42,6 @@ const Login: FunctionComponent = () => {
         placeholder='Dirección de correo'
         maxLength={50}
         error={errors.email}
-        required
       />
       <TextInput
         name='password'
@@ -54,7 +50,6 @@ const Login: FunctionComponent = () => {
         placeholder='Contraseña'
         maxLength={50}
         error={errors.password}
-        required
         isPassword
       />
       <div className='text-center'>

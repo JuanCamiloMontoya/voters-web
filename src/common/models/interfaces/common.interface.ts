@@ -1,10 +1,10 @@
 export interface ErrorMsgResponse {
   message: string
 }
-export interface Email {
+export interface IEmail {
   email: string
 }
 
-export interface OnSuccessCallback {
+export interface ISuccessCallback {
   onSuccess: () => void
 }
