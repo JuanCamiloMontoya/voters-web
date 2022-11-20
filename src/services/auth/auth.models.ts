@@ -1,9 +1,9 @@
-import { OnSuccessCallback } from "../../common/models/interfaces/common.interface"
+import { IEmail, ISuccessCallback } from "../../common/models/interfaces/common.interface"
 import { StatusTypes } from "../../common/models/types/common.type"
 
 export type AuthModulesTypes = 'login' | 'passwordResetRequest' | 'verifyEmail' | 'resetPassword'
 
-export interface AuthStateTypes {
+export interface AuthState {
   isAuthenticated: boolean,
   accessToken: string | null,
   passwordReset: {
@@ -33,24 +33,33 @@ export interface LoginResponse {
   accessToken: string
 }
 
-export interface PasswordResetRequestPayload extends OnSuccessCallback {
-  data: { email: string }
+export interface PasswordResetRequestPayload extends ISuccessCallback {
+  data: IEmail
 }
 
 export interface PasswordResetRequestResponse {
   email: string
 }
 
-export interface VerifyEmailPayload extends OnSuccessCallback {
-  data: { email: string, code: string }
+export interface ICode {
+  code: string
+}
+
+export interface VerifyEmailPayload extends ISuccessCallback {
+  data: IEmail & ICode
 }
 
 export interface VerifyEmailResponse {
   code: string
 }
 
-export interface ResetPasswordPayload extends OnSuccessCallback {
+export interface ResetPasswordData {
   password: string
+  passwordConfirm: string
+}
+
+export interface ResetPasswordPayload extends ISuccessCallback {
+  data: ResetPasswordData
 }
 
 export interface ResetPasswordResponse extends LoginResponse { }

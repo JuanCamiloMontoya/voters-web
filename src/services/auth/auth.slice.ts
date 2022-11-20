@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authThunks } from './auth.thunks'
 import { authInitialState } from './auth.initialState'
-import { AuthModulesTypes, AuthStateTypes } from './auth.models'
+import { AuthModulesTypes, AuthState } from './auth.models'
 
 const initialState = authInitialState()
 const thunks = authThunks()
@@ -11,7 +11,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    resetStatus(state: AuthStateTypes, { payload }: PayloadAction<AuthModulesTypes>) {
+    resetStatus(state: AuthState, { payload }: PayloadAction<AuthModulesTypes>) {
       state.error[payload] = initialState.error[payload]
       state.status[payload] = initialState.status[payload]
     }

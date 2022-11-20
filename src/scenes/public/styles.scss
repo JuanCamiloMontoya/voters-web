@@ -1,0 +1,21 @@
+.public {
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: url("../../assets/images/login-bg.png"),
+    linear-gradient(163deg, $secondary 0%, $primary 100%);
+  background-attachment: scroll;
+  background-repeat: repeat-y;
+
+  &-form {
+    background-color: #FFF;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 10px;
+    max-width: 350px;
+
+    @media (max-width: $mobile) {
+      min-width: 90%;
+    }
+  }
+}
