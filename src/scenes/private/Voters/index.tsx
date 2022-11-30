@@ -1,6 +1,6 @@
 import { DeleteOutlined, EyeFilled, HomeOutlined, PlusOutlined } from '@ant-design/icons'
 import { Breadcrumb, Button, Divider, Row, Spin, Table, Typography } from 'antd'
-import { ColumnsType } from 'antd/lib/table'
+import type { ColumnsType } from 'antd/es/table'
 import { Voter } from '../../../services/voters/voters.models'
 import useVoters from './controllers'
 
@@ -43,7 +43,7 @@ const Voters = () => {
           icon={<PlusOutlined />}
         />
       </Row>
-      {status.getAll === "loading" && <Spin />}
+      {status.getAll === "loading" && <Row className='center-element'><Spin /></Row>}
       <Table
         dataSource={voters.data.map(voter => ({ ...voter, key: voter.id }))}
         columns={columns}
