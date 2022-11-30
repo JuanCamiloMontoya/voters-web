@@ -1,47 +1,8 @@
-.text-center {
+.center-element {
   text-align: center;
+  justify-content: center;
 }
 
-.primary-button {
-  background-color: $primary;
-  border-radius: 15px;
+.font-white {
   color: $white;
-  height: 2.5em;
-  font-weight: 700;
-}
-
-.primary-link-button,
-.primary-link-button span {
-  color: $primary-dark;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-.font-white{
-  color: $white;
-}
-
-.ant {
-  /* &-table-thead &-table-cell {
-    font-weight: bold;
-  }
-
-  &-collapse {
-    background-color: #fff;
-
-    &-header {
-      font-weight: bold;
-    }
-  }
-
-  &-table-title,
-  &-divider-inner-text {
-    font-weight: bold;
-  } */
-
-  &-input-affix-wrapper,
-  &-input-number {
-    border-radius: 5px;
-    width: 100%;
-  }
 }

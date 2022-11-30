@@ -15,7 +15,7 @@ const useResetPasswordValidator = () => {
       .regex(/[0-9]{1,}/, { name: 'number' })
       .message('La contraseña debe tener mínimo un número!')
       .regex(/[!@#$%\-+&_*]{1,}/, { name: 'special-charaacter' })
-      .message('La contraseña debe tener mínimo caracter especial (!@#$%-+&_*)!')
+      .message('La contraseña debe tener mínimo caracter especial! Ej: !@#$%-+&_*')
       .messages({
         'any.required': 'Ingrese su contraseña!',
         'string.empty': 'Ingrese su contraseña!',

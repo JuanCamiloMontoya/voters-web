@@ -52,22 +52,18 @@ const Login = () => {
         error={errors.password}
         isPassword
       />
-      <div className='text-center'>
+      <div className='center-element'>
         <Button
           htmlType='submit'
-          className='primary-button'
           loading={status.login === 'loading'}
           disabled={!isValid}
+          type="primary"
         >
           Iniciar sesión
         </Button>
       </div>
-      <div className='text-center'>
-        <Button
-          onClick={onResetPassword}
-          type="link"
-          className='primary-link-button'
-        >
+      <div className='center-element'>
+        <Button onClick={onResetPassword} type="link">
           ¿Olvidaste tu contraseña?
         </Button>
       </div>

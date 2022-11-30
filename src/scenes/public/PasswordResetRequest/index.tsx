@@ -48,18 +48,18 @@ const PasswordResetRequest = () => {
         error={errors.email}
         required
       />
-      <div className='text-center'>
+      <div className='center-element'>
         <Button
           htmlType='submit'
-          className='primary-button'
+          type="primary"
           loading={status.passwordResetRequest === 'loading'}
           disabled={!isValid}
         >
           Enviar código
         </Button>
       </div>
-      <div className='text-center'>
-        <Button onClick={onLogin} type="link" className='primary-link-button'>
+      <div className='center-element'>
+        <Button onClick={onLogin} type="link">
           Iniciar sesión
         </Button>
       </div>

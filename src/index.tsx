@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { ConfigProvider } from 'antd'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './store/store'
 import { injectStore } from './common/axios/interceptors'
+import { theme } from './common/antd/theme'
 import App from './scenes'
 import './sass/main.scss'
 
@@ -18,7 +20,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <ConfigProvider theme={theme}>
+          <App />
+        </ConfigProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>

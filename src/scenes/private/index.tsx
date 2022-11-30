@@ -12,8 +12,8 @@ const { Content } = Layout
 const Private = () => {
 
   return (
-    <Layout>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Layout>
         <Sider />
         <Layout>
           <Header />
@@ -26,8 +26,8 @@ const Private = () => {
             </Routes>
           </Content>
         </Layout>
-      </BrowserRouter>
-    </Layout>
+      </Layout>
+    </BrowserRouter>
   )
 }
 

@@ -50,18 +50,18 @@ const VerifyEmail = () => {
         type='number'
         inputMode='numeric'
       />
-      <div className='text-center'>
+      <div className='center-element'>
         <Button
           htmlType='submit'
-          className='primary-button'
+          type="primary"
           loading={status.verifyEmail === 'loading'}
           disabled={!isValid}
         >
           Verificar
         </Button>
       </div>
-      <div className='text-center'>
-        <Button onClick={onLogin} type="link" className='primary-link-button'>
+      <div className='center-element'>
+        <Button onClick={onLogin} type="link">
           Iniciar sesión
         </Button>
       </div>
