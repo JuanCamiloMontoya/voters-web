@@ -1,36 +1,37 @@
-import { useNavigate } from "react-router-dom"
-import { MenuInfo } from 'rc-menu/lib/interface'
+import { useNavigate, useLocation } from "react-router-dom"
+import { MenuProps } from "antd"
+
+const menuOptions = [
+  {
+    key: '/',
+    label: 'Inicio',
+    icon: 'HomeOutlined'
+  },
+  {
+    key: '/leaders',
+    label: 'Líderes',
+    icon: 'UsergroupAddOutlined'
+  },
+  {
+    key: '/voters',
+    label: 'Votantes',
+    icon: 'FormOutlined'
+  }
+]
 
 const useSider = () => {
 
+  const { pathname } = useLocation()
   const navigate = useNavigate()
 
-  const handleMenu = ({ key }: MenuInfo) => navigate(key)
-
-  const menuOptions = [
-    {
-      key: '/',
-      name: 'Inicio',
-      icon: 'HomeOutlined',
-      route: 'home'
-    },
-    {
-      key: '/leaders',
-      name: 'Líderes',
-      icon: 'UsergroupAddOutlined',
-      route: 'leaders'
-    },
-    {
-      key: '/voters',
-      name: 'Votantes',
-      icon: 'FormOutlined',
-      route: 'voters'
-    }
-  ]
+  const handleMenu: MenuProps['onClick'] = ({ key }) => {
+    navigate(key)
+  }
 
   return {
     handleMenu,
-    menuOptions
+    menuOptions,
+    pathname
   }
 }
 

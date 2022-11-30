@@ -1,4 +1,5 @@
 import { Layout, Menu, } from "antd"
+import type { ItemType } from "antd/es/menu/hooks/useItems"
 import useSider from "./controllers"
 
 const { Sider: AntdSider } = Layout
@@ -9,15 +10,16 @@ const Sider = () => {
 
   const {
     handleMenu,
-    menuOptions
+    menuOptions,
+    pathname
   } = useSider()
 
-  const menuItems = menuOptions.map(({ key, name, icon }) => {
+  const menuItems: ItemType[] = menuOptions.map(({ key, label, icon }) => {
     const Component = icons[icon]
     return ({
       key,
       icon: <Component />,
-      label: name
+      label
     })
   })
 
@@ -29,8 +31,8 @@ const Sider = () => {
     >
       <Menu
         theme="dark"
-        mode="inline"
-        defaultSelectedKeys={['1']}
+        defaultSelectedKeys={[pathname]}
+        selectedKeys={[pathname]}
         onClick={handleMenu}
         items={menuItems}
       />
