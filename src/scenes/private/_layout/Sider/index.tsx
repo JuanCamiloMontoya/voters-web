@@ -31,7 +31,6 @@ const Sider = () => {
     >
       <Menu
         theme="dark"
-        defaultSelectedKeys={[pathname]}
         selectedKeys={[pathname]}
         onClick={handleMenu}
         items={menuItems}
