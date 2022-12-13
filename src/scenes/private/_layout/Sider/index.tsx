@@ -31,7 +31,7 @@ const Sider = () => {
     >
       <Menu
         theme="dark"
-        selectedKeys={[pathname]}
+        selectedKeys={[`/${pathname.split('/')[1]}`]}
         onClick={handleMenu}
         items={menuItems}
       />
