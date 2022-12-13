@@ -4,28 +4,28 @@ import { StatusTypes } from "../../common/models/types/common.type"
 export type AuthModulesTypes = 'login' | 'passwordResetRequest' | 'verifyEmail' | 'resetPassword'
 
 export interface AuthState {
-  isAuthenticated: boolean,
-  accessToken: string | null,
+  isAuthenticated: boolean
+  accessToken: string | null
   passwordReset: {
-    email: string | null,
-    code: string | null,
-  },
+    email: string | null
+    code: string | null
+  }
   error: {
-    login: string | null | undefined,
-    passwordResetRequest: string | null | undefined,
-    verifyEmail: string | null | undefined,
+    login: string | null | undefined
+    passwordResetRequest: string | null | undefined
+    verifyEmail: string | null | undefined
     resetPassword: string | null | undefined
-  },
+  }
   status: {
-    login: StatusTypes,
-    passwordResetRequest: StatusTypes,
-    verifyEmail: StatusTypes,
+    login: StatusTypes
+    passwordResetRequest: StatusTypes
+    verifyEmail: StatusTypes
     resetPassword: StatusTypes
   }
 }
 
 export interface LoginPayload {
-  email: string,
+  email: string
   password: string
 }
 
