@@ -1,4 +1,3 @@
-import { joiResolver } from '@hookform/resolvers/joi'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -6,7 +5,7 @@ import { ResetPasswordData } from '../../../services/auth/auth.models'
 import { useAuthSelectors } from '../../../services/auth/auth.selectors'
 import { authActions } from '../../../services/auth/auth.slice'
 import { useAppDispatch } from '../../../store/store'
-import useResetPasswordValidator from './validators'
+import { useResetPasswordValidator } from './validators'
 
 const useResetPassword = () => {
 
@@ -14,11 +13,11 @@ const useResetPassword = () => {
 
   const { status, error, passwordReset } = useAuthSelectors()
 
-  const { resetPassword, resetStatus } = authActions
+  const { resetPassword, resetStatus: resetStatus } = authActions
 
   const navigate = useNavigate()
 
-  const { resetPasswordValidator } = useResetPasswordValidator()
+  const { resetPasswordResolver } = useResetPasswordValidator()
 
   useEffect(() => {
     status.resetPassword === 'error' && onCloseErrorAlert()
@@ -33,7 +32,7 @@ const useResetPassword = () => {
     handleSubmit,
     formState: { errors, isValid }
   } = useForm<ResetPasswordData>({
-    resolver: joiResolver(resetPasswordValidator),
+    resolver: resetPasswordResolver,
     mode: 'all'
   })
 

@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { joiResolver } from '@hookform/resolvers/joi'
 import { LoginPayload } from '../../../services/auth/auth.models'
 import { useAuthSelectors } from '../../../services/auth/auth.selectors'
 import { useAppDispatch } from '../../../store/store'
@@ -16,9 +15,9 @@ const useLogin = () => {
 
   const { status, error } = useAuthSelectors()
 
-  const { login, resetStatus } = authActions
+  const { login, resetStatus: resetStatus } = authActions
 
-  const { loginValidator } = useLoginValidators()
+  const { loginResolver } = useLoginValidators()
 
   useEffect(() => {
     status.login === 'error' && onCloseErrorAlert()
@@ -30,7 +29,7 @@ const useLogin = () => {
     handleSubmit,
     formState: { errors, isValid }
   } = useForm<LoginPayload>({
-    resolver: joiResolver(loginValidator),
+    resolver: loginResolver,
     mode: 'all'
   })
 

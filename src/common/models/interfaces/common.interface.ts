@@ -8,3 +8,8 @@ export interface IEmail {
 export interface ISuccessCallback {
   onSuccess: () => void
 }
+
+export interface GeneralData {
+  id: number
+  name: string
+}

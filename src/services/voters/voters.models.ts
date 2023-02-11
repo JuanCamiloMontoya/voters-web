@@ -1,27 +1,48 @@
+import { ISuccessCallback } from "../../common/models/interfaces/common.interface"
 import { Page } from "../../common/models/interfaces/page.interface"
-import { StatusTypes } from "../../common/models/types/common.type"
+import { StatusTypes } from "../../common/models/types/status.type"
 
-export type VotersModulesTypes = 'getAll'
+export type VotersTypes = 'getAllVoters' | 'createVoter'
 
 export interface Voter {
-  firstname: string,
-  lastname: string,
+  firstname: string
+  lastname: string
   phone: string
   document: string
-  email: string
+  email?: string
   id: string
 }
 
 export interface VotersState {
-  voters: Page<Voter[]>,
+  voters: Page<Voter[]>
   error: {
-    getAll: string | null | undefined,
-  },
+    getAllVoters: string | null | undefined
+    createVoter: string | null | undefined
+  }
   status: {
-    getAll: StatusTypes,
+    getAllVoters: StatusTypes
+    createVoter: StatusTypes
   }
 }
 
 export interface GetAllPayload { }
 
 export interface GetAllResponse extends Page<Voter[]> { }
+
+export interface CreateVoterData {
+  firstname: string
+  lastname: string
+  phone: string
+  document: string
+  birthdate?: Date
+  email?: string
+  subdivisionId?: number
+  occupations?: number[]
+  hobbies?: number[]
+}
+
+export interface CreateVoterPayload extends ISuccessCallback {
+  data: CreateVoterData
+}
+
+export interface CreateVoterResponse extends Voter { }

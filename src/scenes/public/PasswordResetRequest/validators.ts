@@ -1,22 +1,17 @@
-import Joi from "joi"
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { IEmail } from "../../../common/models/interfaces/common.interface"
 
-const usePasswordResetRequestValidator = () => {
+export const usePasswordResetRequestValidator = () => {
 
-  const passwordResetRequestalidator = Joi.object<IEmail>({
-    email: Joi.string()
-      .required()
-      .email({ tlds: { allow: false } })
-      .messages({
-        'any.required': 'Ingrese su correo electrónico!',
-        'string.empty': 'Ingrese su correo electrónico!',
-        'string.email': 'Debe ser un correo electrónico válido!'
-      })
+  const passwordResetRequestValidator: yup.SchemaOf<IEmail> = yup.object({
+    email: yup.string()
+      .required('Ingrese su correo!')
+      .max(50, 'Deben ser máximo 50 carácteres!')
+      .email('Debe ser un correo electrónico válido!')
   })
 
   return {
-    passwordResetRequestalidator
+    passwordResetRequestResolver: yupResolver(passwordResetRequestValidator)
   }
 }
-
-export default usePasswordResetRequestValidator

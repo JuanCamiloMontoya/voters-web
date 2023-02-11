@@ -1,22 +1,16 @@
-import Joi from "joi"
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { ICode } from "../../../services/auth/auth.models"
 
-const useVerifyEmailValidators = () => {
+export const useVerifyEmailValidators = () => {
 
-  const verifyEmailValidator = Joi.object<ICode>({
-    code: Joi.string()
-      .required()
-      .min(6)
-      .messages({
-        'any.required': 'Ingrese el código!',
-        'string.empty': 'Ingrese el código!',
-        'string.min': 'Complete todos los números!'
-      })
+  const verifyEmailValidator: yup.SchemaOf<ICode> = yup.object({
+    code: yup.string()
+      .required('Ingrese el código!')
+      .min(6, 'Complete todos los números!')
   })
 
   return {
-    verifyEmailValidator
+    verifyEmailResolver: yupResolver(verifyEmailValidator)
   }
 }
-
-export default useVerifyEmailValidators

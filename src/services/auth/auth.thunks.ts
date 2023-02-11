@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { apiInstence } from "../../common/axios/interceptors"
 import { ErrorMsgResponse } from "../../common/models/interfaces/common.interface"
 import { RootState } from '../../store/reducers'
-import type {
+import {
   LoginPayload,
   LoginResponse,
   PasswordResetRequestPayload,
@@ -83,7 +83,7 @@ export const authThunks = () => {
     async ({ data, onSuccess }, { rejectWithValue, getState }) => {
       try {
         const { auth: { passwordReset } } = getState()
-        const { data: response } = await apiInstence.post(
+        const { data: response } = await apiInstence.post<ResetPasswordResponse>(
           '/auth/reset-password',
           { ...passwordReset, ...data }
         )

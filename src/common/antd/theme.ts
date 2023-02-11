@@ -1,24 +1,35 @@
 import { ThemeConfig } from "antd/es/config-provider/context"
 
-const primaryColor = '#017c5b'
-const secondaryColor = '#003a2a'
+export const colors = {
+  primaryColor: '#012e7c',
+  secondaryColor: '#70bcff',
+  succesIconColor: '#52c41a'
+}
 
 export const theme: ThemeConfig = {
   token: {
-    colorPrimary: primaryColor,
+    colorPrimary: colors.primaryColor,
     borderRadius: 5,
-    colorLink: primaryColor,
-    colorLinkHover: secondaryColor,
-    colorLinkActive: secondaryColor
+    colorLink: colors.primaryColor,
+    colorLinkHover: colors.secondaryColor,
+    colorLinkActive: colors.secondaryColor
   },
   components: {
     Layout: {
-      colorBgHeader: primaryColor,
-      colorBgContainer: primaryColor,
+      colorBgHeader: colors.primaryColor,
+      colorBgContainer: colors.primaryColor,
     },
     Menu: {
-      colorItemBg: primaryColor,
-      colorItemBgSelected: secondaryColor
+      colorItemBg: colors.primaryColor,
+      colorItemBgSelected: colors.secondaryColor
     }
   }
+}
+
+export const columnSizes = {
+  xs: 24,
+  sm: 12,
+  md: 8,
+  xl: 6,
+  xxl: 4
 }

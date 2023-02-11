@@ -1,5 +1,10 @@
 import axios from 'axios'
-import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
+import {
+  AxiosError,
+  AxiosInstance,
+  InternalAxiosRequestConfig,
+  AxiosResponse
+} from "axios"
 import { apiUrl } from "../config/environments"
 import { AppStore } from '../../store/store'
 
@@ -15,13 +20,13 @@ export const injectStore = (_store: AppStore) => {
   store = _store
 }
 
-const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
+const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
   config.baseURL = apiUrl
-  config.headers = {
+  config.headers.set({
     'Authorization': `Bearer ${store.getState().auth.accessToken}`,
     'Accept': 'application/json',
     'Content-Type': 'application/x-www-form-urlencoded'
-  }
+  })
   return config
 }
 

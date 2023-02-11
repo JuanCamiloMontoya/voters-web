@@ -13,9 +13,11 @@ export const votersInitialState = (): VotersState => ({
     }
   },
   error: {
-    getAll: null,
+    getAllVoters: null,
+    createVoter: null
   },
   status: {
-    getAll: 'idle'
+    getAllVoters: 'idle',
+    createVoter: 'idle'
   }
 })

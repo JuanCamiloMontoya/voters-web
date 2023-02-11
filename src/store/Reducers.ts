@@ -4,10 +4,12 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { authReducer } from "../services/auth/auth.slice"
 import { votersReducer } from "../services/voters/voters.slice"
+import { generalReducer } from "../services/general/general.slice"
 
 const reducers = combineReducers({
   auth: authReducer,
-  voters: votersReducer
+  voters: votersReducer,
+  general: generalReducer
 })
 
 const rootReducer = (state: RootState | undefined, action: PayloadAction) => {

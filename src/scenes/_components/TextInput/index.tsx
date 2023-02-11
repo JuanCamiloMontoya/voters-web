@@ -1,19 +1,10 @@
-import { Form, Input as InputAnd, Typography } from "antd"
-import { Controller, Control, FieldError } from "react-hook-form"
+import { Form, Input as InputAntd, Typography } from "antd"
+import { Controller } from "react-hook-form"
+import useTextInput from "./controller"
+import { TextInputProps } from "./models"
 
 const { Item } = Form
 const { Text } = Typography
-
-interface TextInputProps {
-  name: string
-  control: Control<any>
-  error: FieldError | undefined,
-  label: string
-  placeholder: string
-  maxLength: number,
-  required?: boolean,
-  isPassword?: boolean
-}
 
 const TextInput = (props: TextInputProps) => {
 
@@ -23,12 +14,15 @@ const TextInput = (props: TextInputProps) => {
     error,
     label,
     placeholder,
-    maxLength,
+    maxLength = 255,
     required = true,
-    isPassword = false
+    isPassword = false,
+    type = 'text'
   } = props
 
-  const Input = isPassword ? InputAnd.Password : InputAnd
+  const Input = isPassword ? InputAntd.Password : InputAntd
+
+  const { validateLength } = useTextInput()
 
   return (
     <Item label={label} required={required}>
@@ -41,6 +35,8 @@ const TextInput = (props: TextInputProps) => {
             maxLength={maxLength}
             onChange={onChange}
             value={value}
+            type={type}
+            onKeyDown={(e) => value && validateLength(e, value, maxLength)}
           />
         )}
       />

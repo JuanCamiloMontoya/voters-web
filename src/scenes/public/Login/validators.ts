@@ -1,29 +1,22 @@
-import Joi from "joi"
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { LoginPayload } from "../../../services/auth/auth.models"
 
 const useLoginValidators = () => {
 
-  const loginValidator = Joi.object<LoginPayload>({
-    email: Joi.string()
-      .required()
-      .email({ tlds: { allow: false } })
-      .messages({
-        'any.required': 'Ingrese su correo electrónico!',
-        'string.empty': 'Ingrese su correo electrónico!',
-        'string.email': 'Debe ser un correo electrónico válido!'
-      }),
-    password: Joi.string()
-      .required()
-      .min(8)
-      .messages({
-        'any.required': 'Ingrese su contraseña!',
-        'string.empty': 'Ingrese su contraseña!',
-        'string.min': 'La contraseña debe tener mínimo 8 carácteres!'
-      })
+  const loginValidator: yup.SchemaOf<LoginPayload> = yup.object({
+    email: yup.string()
+      .required('Ingrese su correo!')
+      .max(50, 'Deben ser máximo 50 carácteres!')
+      .email('Debe ser un correo electrónico válido!'),
+    password: yup.string()
+      .required('Ingrese su contraseña!')
+      .min(8, 'Deben mínimo 8 carácteres!')
+      .max(50, 'Deben ser máximo 50 carácteres!')
   })
 
   return {
-    loginValidator
+    loginResolver: yupResolver(loginValidator)
   }
 }
 

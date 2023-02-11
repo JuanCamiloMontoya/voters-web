@@ -1,5 +1,5 @@
 import { Breadcrumb, Layout } from "antd"
-import { Route, Routes, useLocation } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import { HomeOutlined } from "@ant-design/icons"
 import Sider from './_layout/Sider'
 import Header from './_layout/Header'
@@ -8,12 +8,13 @@ import Leaders from "./Leaders"
 import Voters from "./Voters"
 import Profile from './Profile'
 import CreateVoters from "./Voters/Create"
+import usePrivate from "./controllers"
 
 const { Content } = Layout
 
 const Private = () => {
 
-  const { pathname } = useLocation()
+  const { pathname } = usePrivate()
 
   const routes = [
     {
@@ -29,12 +30,12 @@ const Private = () => {
     {
       path: '/voters',
       element: <Voters />,
-      breadcrumb: ['Votantes']
+      breadcrumb: ['Personas']
     },
     {
       path: '/voters/create',
       element: <CreateVoters />,
-      breadcrumb: ['Votantes', 'Crear votante']
+      breadcrumb: ['Personas', 'Crear votante']
     },
     {
       path: '/profile',

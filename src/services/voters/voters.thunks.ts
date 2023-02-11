@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { apiInstence } from "../../common/axios/interceptors"
 import { ErrorMsgResponse } from "../../common/models/interfaces/common.interface"
-import { GetAllPayload, GetAllResponse } from "./voters.models"
+import { CreateVoterPayload, CreateVoterResponse, GetAllPayload, GetAllResponse } from "./voters.models"
 
 export const votersThunks = () => {
 
-  const getAll = createAsyncThunk<
+  const getAllVoters = createAsyncThunk<
     GetAllResponse,
     GetAllPayload,
     { rejectValue: ErrorMsgResponse }
@@ -21,7 +21,24 @@ export const votersThunks = () => {
     }
   )
 
+  const createVoter = createAsyncThunk<
+    CreateVoterResponse,
+    CreateVoterPayload,
+    { rejectValue: ErrorMsgResponse }
+  >('voters/create',
+    async ({ data, onSuccess }, { rejectWithValue }) => {
+      try {
+        const { data: response } = await apiInstence.post<CreateVoterResponse>('/voters', data)
+        onSuccess()
+        return response
+      } catch (error: any) {
+        return rejectWithValue({ message: error.toString() })
+      }
+    }
+  )
+
   return {
-    getAll
+    getAllVoters,
+    createVoter
   }
 }

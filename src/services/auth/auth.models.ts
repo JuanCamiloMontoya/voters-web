@@ -1,7 +1,7 @@
 import { IEmail, ISuccessCallback } from "../../common/models/interfaces/common.interface"
-import { StatusTypes } from "../../common/models/types/common.type"
+import { StatusTypes } from "../../common/models/types/status.type"
 
-export type AuthModulesTypes = 'login' | 'passwordResetRequest' | 'verifyEmail' | 'resetPassword'
+export type AuthTypes = 'login' | 'passwordResetRequest' | 'verifyEmail' | 'resetPassword'
 
 export interface AuthState {
   isAuthenticated: boolean

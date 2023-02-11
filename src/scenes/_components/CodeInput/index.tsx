@@ -1,20 +1,10 @@
 import { Form, Typography } from "antd"
-import ReactCodeInput, { InputModeTypes } from "react-code-input"
-import { Controller, Control, FieldError } from "react-hook-form"
+import ReactCodeInput from "react-code-input"
+import { Controller } from "react-hook-form"
+import { CodeInputProps } from "./models"
 
 const { Item } = Form
 const { Text } = Typography
-
-interface CodeInputProps {
-  name: string
-  control: Control<any>
-  error: FieldError | undefined,
-  label: string
-  fields: number,
-  inputMode: InputModeTypes
-  type?: 'text' | 'number' | 'password' | 'tel',
-  required?: boolean
-}
 
 const CodeInput = (props: CodeInputProps) => {
 
@@ -34,14 +24,13 @@ const CodeInput = (props: CodeInputProps) => {
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange } }) => (
           <ReactCodeInput
             type={type}
             fields={fields}
             name={name}
             inputMode={inputMode}
             onChange={onChange}
-            value={value}
           />
         )}
       />

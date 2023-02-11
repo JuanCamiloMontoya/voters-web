@@ -1,4 +1,3 @@
-import { joiResolver } from "@hookform/resolvers/joi"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -6,7 +5,7 @@ import { IEmail } from "../../../common/models/interfaces/common.interface"
 import { useAuthSelectors } from "../../../services/auth/auth.selectors"
 import { authActions } from "../../../services/auth/auth.slice"
 import { useAppDispatch } from "../../../store/store"
-import usePasswordResetRequestValidator from "./validators"
+import { usePasswordResetRequestValidator } from "./validators"
 
 const usePasswordResetRequest = () => {
 
@@ -16,9 +15,9 @@ const usePasswordResetRequest = () => {
 
   const { status, error } = useAuthSelectors()
 
-  const { passwordResetRequest, resetStatus } = authActions
+  const { passwordResetRequest, resetStatus: resetStatus } = authActions
 
-  const { passwordResetRequestalidator } = usePasswordResetRequestValidator()
+  const { passwordResetRequestResolver } = usePasswordResetRequestValidator()
 
   useEffect(() => {
     status.passwordResetRequest === 'error' && onCloseErrorAlert()
@@ -30,7 +29,7 @@ const usePasswordResetRequest = () => {
     handleSubmit,
     formState: { errors, isValid }
   } = useForm<IEmail>({
-    resolver: joiResolver(passwordResetRequestalidator),
+    resolver: passwordResetRequestResolver,
     mode: 'all'
   })
 

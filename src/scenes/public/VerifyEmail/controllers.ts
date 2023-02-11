@@ -1,4 +1,3 @@
-import { joiResolver } from '@hookform/resolvers/joi'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -6,7 +5,7 @@ import { ICode } from '../../../services/auth/auth.models'
 import { useAuthSelectors } from '../../../services/auth/auth.selectors'
 import { authActions } from '../../../services/auth/auth.slice'
 import { useAppDispatch } from '../../../store/store'
-import useVerifyEmailValidators from './validators'
+import { useVerifyEmailValidators } from './validators'
 
 const useVerifyEmail = () => {
 
@@ -14,11 +13,11 @@ const useVerifyEmail = () => {
 
   const { status, error, passwordReset } = useAuthSelectors()
 
-  const { verifyEmail, resetStatus } = authActions
+  const { verifyEmail, resetStatus: resetStatus } = authActions
 
   const navigate = useNavigate()
 
-  const { verifyEmailValidator } = useVerifyEmailValidators()
+  const { verifyEmailResolver } = useVerifyEmailValidators()
 
   useEffect(() => {
     status.verifyEmail === 'error' && onCloseErrorAlert()
@@ -33,7 +32,7 @@ const useVerifyEmail = () => {
     handleSubmit,
     formState: { errors, isValid }
   } = useForm<ICode>({
-    resolver: joiResolver(verifyEmailValidator),
+    resolver: verifyEmailResolver,
     mode: 'all'
   })
 
