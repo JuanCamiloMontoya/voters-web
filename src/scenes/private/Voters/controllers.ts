@@ -22,10 +22,20 @@ const useVoters = () => {
     navigate('/voters/create')
   }
 
+  const onShowVoter = (id: string) => {
+    navigate(`/voters/${id}`)
+  }
+
+  const onDeleteVoter = (id: string) => {
+
+  }
+
   return {
     voters,
     status,
-    onCreateVoter
+    onCreateVoter,
+    onShowVoter,
+    onDeleteVoter
   }
 }
 

@@ -2,6 +2,7 @@ import { ThemeConfig } from "antd/es/config-provider/context"
 
 export const colors = {
   primaryColor: '#012e7c',
+  primaryDark: '#00143a',
   secondaryColor: '#70bcff',
   succesIconColor: '#52c41a'
 }
@@ -21,7 +22,7 @@ export const theme: ThemeConfig = {
     },
     Menu: {
       colorItemBg: colors.primaryColor,
-      colorItemBgSelected: colors.secondaryColor
+      colorItemBgSelected: colors.primaryDark
     }
   }
 }

@@ -12,12 +12,15 @@ export const votersInitialState = (): VotersState => ({
       hasNextPage: false
     }
   },
+  voter: null,
   error: {
     getAllVoters: null,
-    createVoter: null
+    createVoter: null,
+    getVoterDetail: null
   },
   status: {
     getAllVoters: 'idle',
-    createVoter: 'idle'
+    createVoter: 'idle',
+    getVoterDetail: 'idle'
   }
 })

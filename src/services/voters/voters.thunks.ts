@@ -1,19 +1,42 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { apiInstence } from "../../common/axios/interceptors"
 import { ErrorMsgResponse } from "../../common/models/interfaces/common.interface"
-import { CreateVoterPayload, CreateVoterResponse, GetAllPayload, GetAllResponse } from "./voters.models"
+import {
+  CreateVoterPayload,
+  CreateVoterResponse,
+  GetVoterDetailPayload,
+  GetVoterDetailResponse,
+  GetVotersAllPayload,
+  GetVotersAllResponse
+} from "./voters.models"
 
 export const votersThunks = () => {
 
   const getAllVoters = createAsyncThunk<
-    GetAllResponse,
-    GetAllPayload,
+    GetVotersAllResponse,
+    GetVotersAllPayload,
     { rejectValue: ErrorMsgResponse }
   >(
     'voters/all',
     async (payload, { rejectWithValue }) => {
       try {
-        const { data } = await apiInstence.get<GetAllResponse>('/voters', payload)
+        const { data } = await apiInstence.get<GetVotersAllResponse>('/voters', payload)
+        return data
+      } catch (error: any) {
+        return rejectWithValue({ message: error.toString() })
+      }
+    }
+  )
+
+  const getVoterDetail = createAsyncThunk<
+    GetVoterDetailResponse,
+    GetVoterDetailPayload,
+    { rejectValue: ErrorMsgResponse }
+  >(
+    'voters/detail',
+    async ({ id }, { rejectWithValue }) => {
+      try {
+        const { data } = await apiInstence.get<GetVoterDetailResponse>(`/voters/${id}`)
         return data
       } catch (error: any) {
         return rejectWithValue({ message: error.toString() })
@@ -39,6 +62,7 @@ export const votersThunks = () => {
 
   return {
     getAllVoters,
-    createVoter
+    createVoter,
+    getVoterDetail
   }
 }

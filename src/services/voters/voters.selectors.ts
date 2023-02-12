@@ -19,9 +19,16 @@ export const useVotersSelectors = () => {
     voters => voters
   ))
 
+  const voter = useSelector(createSelector(
+    (state: RootState) => state.voters.voter,
+    voter => voter
+  ))
+
+
   return {
     status,
     error,
-    voters
+    voters,
+    voter
   }
 }

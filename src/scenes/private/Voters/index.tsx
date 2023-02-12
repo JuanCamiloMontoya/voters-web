@@ -11,7 +11,9 @@ const Voters = () => {
   const {
     status,
     voters,
-    onCreateVoter
+    onCreateVoter,
+    onShowVoter,
+    onDeleteVoter
   } = useVoters()
 
   const columns: ColumnsType<Voter> = [
@@ -25,9 +27,19 @@ const Voters = () => {
       key: 'action',
       render: (_, record) => (
         <div style={{ width: 81 }}>
-          <Button type="primary" shape="circle" icon={<EyeFilled />} />
+          <Button
+            type="primary"
+            shape="circle"
+            icon={<EyeFilled />}
+            onClick={() => onShowVoter(record.id)}
+          />
           <Divider type='vertical' />
-          <Button type="primary" danger shape="circle" icon={<DeleteOutlined />} />
+          <Button
+            type="primary"
+            danger shape="circle"
+            icon={<DeleteOutlined />}
+            onClick={() => onDeleteVoter(record.id)}
+          />
         </div>
       )
     }

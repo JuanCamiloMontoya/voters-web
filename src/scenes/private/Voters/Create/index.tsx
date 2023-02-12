@@ -10,7 +10,7 @@ import useCreateVoters from "./controllers"
 const { Title } = Typography
 const today = dayjs()
 
-const CreateVoters = () => {
+const CreateVoter = () => {
 
   const {
     votersStatus,
@@ -183,4 +183,4 @@ const CreateVoters = () => {
   )
 }
 
-export default CreateVoters
+export default CreateVoter

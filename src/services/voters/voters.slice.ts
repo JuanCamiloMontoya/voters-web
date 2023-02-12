@@ -5,7 +5,11 @@ import { VotersTypes, VotersState } from './voters.models'
 
 const initialState = votersInitialState()
 const thunks = votersThunks()
-const { getAllVoters, createVoter } = thunks
+const {
+  getAllVoters,
+  createVoter,
+  getVoterDetail
+} = thunks
 
 const voterSlice = createSlice({
   name: "voters",
@@ -40,6 +44,18 @@ const voterSlice = createSlice({
       .addCase(createVoter.rejected, (state, { payload }) => {
         state.status.createVoter = 'error'
         state.error.createVoter = payload?.message
+      })
+      .addCase(getVoterDetail.pending, (state) => {
+        state.status.getVoterDetail = 'loading'
+        state.error.getVoterDetail = null
+      })
+      .addCase(getVoterDetail.fulfilled, (state, { payload }) => {
+        state.status.getVoterDetail = 'idle'
+        state.voter = payload
+      })
+      .addCase(getVoterDetail.rejected, (state, { payload }) => {
+        state.status.getVoterDetail = 'error'
+        state.error.getVoterDetail = payload?.message
       })
   }
 })
