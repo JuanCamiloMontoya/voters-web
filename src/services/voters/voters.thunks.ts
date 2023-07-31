@@ -48,7 +48,8 @@ export const votersThunks = () => {
     CreateVoterResponse,
     CreateVoterPayload,
     { rejectValue: ErrorMsgResponse }
-  >('voters/create',
+  >(
+    'voters/create',
     async ({ data, onSuccess }, { rejectWithValue }) => {
       try {
         const { data: response } = await apiInstence.post<CreateVoterResponse>('/voters', data)

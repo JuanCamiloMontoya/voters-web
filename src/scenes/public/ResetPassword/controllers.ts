@@ -13,7 +13,7 @@ const useResetPassword = () => {
 
   const { status, error, passwordReset } = useAuthSelectors()
 
-  const { resetPassword, resetStatus: resetStatus } = authActions
+  const { resetPassword, resetStatus } = authActions
 
   const navigate = useNavigate()
 

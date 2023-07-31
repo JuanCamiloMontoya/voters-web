@@ -1,5 +1,3 @@
-import { CheckCircleTwoTone } from '@ant-design/icons'
-import { Modal } from "antd"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -26,7 +24,7 @@ const useCreateVoters = () => {
     error: generalError
   } = useGeneralSelectors()
 
-  const { createVoter, resetStatus: resetStatus } = votersActions
+  const { createVoter, resetStatus } = votersActions
   const { getFullSubdivisions, getHobbies, getOccupations } = generalActions
 
   const { createVoterResolver } = useCreateVotersValidators()

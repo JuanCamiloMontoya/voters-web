@@ -15,7 +15,7 @@ const useLogin = () => {
 
   const { status, error } = useAuthSelectors()
 
-  const { login, resetStatus: resetStatus } = authActions
+  const { login, resetStatus } = authActions
 
   const { loginResolver } = useLoginValidators()
 

@@ -13,7 +13,7 @@ const useVerifyEmail = () => {
 
   const { status, error, passwordReset } = useAuthSelectors()
 
-  const { verifyEmail, resetStatus: resetStatus } = authActions
+  const { verifyEmail, resetStatus } = authActions
 
   const navigate = useNavigate()
 

@@ -52,7 +52,7 @@ const VoterDetail = () => {
             <List
               size="small"
               dataSource={voter?.hobbies}
-              renderItem={({ name }) => <List.Item >{name}</List.Item>}
+              renderItem={({ name }) => <List.Item>{name}</List.Item>}
             />
           </Item>
         </Descriptions>

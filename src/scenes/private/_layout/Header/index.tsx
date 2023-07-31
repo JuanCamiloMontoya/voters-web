@@ -29,7 +29,7 @@ const Header = () => {
   ]
 
   return (
-    <AntdHeader className="private-header" >
+    <AntdHeader className="private-header">
       <Dropdown menu={{ items }}>
         <Button type="text">
           <Text className="font-white">Juan</Text>
@@ -37,7 +37,7 @@ const Header = () => {
           <Avatar icon={<UserOutlined />} />
         </Button>
       </Dropdown>
-    </AntdHeader >
+    </AntdHeader>
   )
 }
 
