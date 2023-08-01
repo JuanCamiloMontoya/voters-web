@@ -15,7 +15,7 @@ const usePasswordResetRequest = () => {
 
   const { status, error } = useAuthSelectors()
 
-  const { passwordResetRequest, resetStatus: resetStatus } = authActions
+  const { passwordResetRequest, resetStatus } = authActions
 
   const { passwordResetRequestResolver } = usePasswordResetRequestValidator()
 
