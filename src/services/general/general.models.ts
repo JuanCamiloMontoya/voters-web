@@ -1,5 +1,5 @@
 import { GeneralData } from "../../common/models/interfaces/common.interface"
-import { StatusTypes } from "../../common/models/types/status.type"
+import { StatusTypes } from "../../common/models/types/common.type"
 
 export type GeneralTypes = 'getDivisions' |
   'getSubdivisions' |

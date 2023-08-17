@@ -4,9 +4,9 @@ export const votersInitialState = (): VotersState => ({
   voters: {
     data: [],
     meta: {
-      page: 0,
-      take: 0,
-      itemCount: 0,
+      current: 1,
+      pageSize: 10,
+      total: 10,
       pageCount: 0,
       hasPreviousPage: false,
       hasNextPage: false
@@ -16,11 +16,13 @@ export const votersInitialState = (): VotersState => ({
   error: {
     getAllVoters: null,
     createVoter: null,
-    getVoterDetail: null
+    getVoterDetail: null,
+    deleteVoter: null
   },
   status: {
     getAllVoters: 'idle',
     createVoter: 'idle',
-    getVoterDetail: 'idle'
+    getVoterDetail: 'idle',
+    deleteVoter: 'idle'
   }
 })

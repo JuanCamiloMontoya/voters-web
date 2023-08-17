@@ -8,7 +8,8 @@ const thunks = votersThunks()
 const {
   getAllVoters,
   createVoter,
-  getVoterDetail
+  getVoterDetail,
+  deleteVoter
 } = thunks
 
 const voterSlice = createSlice({
@@ -56,6 +57,17 @@ const voterSlice = createSlice({
       .addCase(getVoterDetail.rejected, (state, { payload }) => {
         state.status.getVoterDetail = 'error'
         state.error.getVoterDetail = payload?.message
+      })
+      .addCase(deleteVoter.pending, (state) => {
+        state.status.deleteVoter = 'loading'
+        state.error.deleteVoter = null
+      })
+      .addCase(deleteVoter.fulfilled, (state, { payload }) => {
+        state.status.deleteVoter = 'idle'
+      })
+      .addCase(deleteVoter.rejected, (state, { payload }) => {
+        state.status.deleteVoter = 'error'
+        state.error.deleteVoter = payload?.message
       })
   }
 })

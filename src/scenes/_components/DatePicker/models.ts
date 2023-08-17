@@ -9,5 +9,6 @@ export interface DatePickerProps {
   placeholder: string
   required?: boolean
   defaultValue?: Dayjs
+  defaultPickerValue?: Dayjs
   disabledDate?: (date: Dayjs) => boolean
 }

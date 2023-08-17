@@ -1,6 +1,6 @@
-import { ISuccessCallback, GeneralData } from "../../common/models/interfaces/common.interface"
+import { ISuccessCallback, GeneralData, SuccessResponse } from "../../common/models/interfaces/common.interface"
 import { Page } from "../../common/models/interfaces/page.interface"
-import { StatusTypes } from "../../common/models/types/status.type"
+import { OrderTypes, StatusTypes } from "../../common/models/types/common.type"
 
 export type VotersTypes = 'getAllVoters' | 'createVoter' | 'getVoterDetail'
 
@@ -32,15 +32,21 @@ export interface VotersState {
     getAllVoters: string | null | undefined
     createVoter: string | null | undefined
     getVoterDetail: string | null | undefined
+    deleteVoter: string | null | undefined
   }
   status: {
     getAllVoters: StatusTypes
     createVoter: StatusTypes
     getVoterDetail: StatusTypes
+    deleteVoter: StatusTypes
   }
 }
 
-export interface GetVotersAllPayload { }
+export interface GetVotersAllPayload {
+  order?: OrderTypes
+  current: number
+  pageSize: number
+}
 
 export interface GetVotersAllResponse extends Page<Voter[]> { }
 
@@ -67,3 +73,9 @@ export interface GetVoterDetailPayload {
 }
 
 export interface GetVoterDetailResponse extends VoterDetail { }
+
+export interface DeleteVoterPayload {
+  id: number | string
+}
+
+export interface DeleteVoterResponse extends SuccessResponse { }

@@ -4,11 +4,14 @@ import { ErrorMsgResponse } from "../../common/models/interfaces/common.interfac
 import {
   CreateVoterPayload,
   CreateVoterResponse,
+  DeleteVoterPayload,
+  DeleteVoterResponse,
   GetVoterDetailPayload,
   GetVoterDetailResponse,
   GetVotersAllPayload,
   GetVotersAllResponse
 } from "./voters.models"
+import { RootState } from "../../store/reducers"
 
 export const votersThunks = () => {
 
@@ -20,7 +23,7 @@ export const votersThunks = () => {
     'voters/all',
     async (payload, { rejectWithValue }) => {
       try {
-        const { data } = await apiInstence.get<GetVotersAllResponse>('/voters', payload)
+        const { data } = await apiInstence.get<GetVotersAllResponse>('/voters', { params: payload })
         return data
       } catch (error: any) {
         return rejectWithValue({ message: error.toString() })
@@ -61,9 +64,29 @@ export const votersThunks = () => {
     }
   )
 
+  const deleteVoter = createAsyncThunk<
+    DeleteVoterResponse,
+    DeleteVoterPayload,
+    { rejectValue: ErrorMsgResponse, state: RootState }
+  >(
+    'voters/delete',
+    async ({ id }, { rejectWithValue, dispatch, getState }) => {
+      try {
+        const { data: response } = await apiInstence.delete<DeleteVoterResponse>(`/voters/${id}`)
+
+        const { voters: { voters: { meta: { current, pageSize } } } } = getState()
+        dispatch(getAllVoters({ current, pageSize }))
+        return response
+      } catch (error: any) {
+        return rejectWithValue({ message: error.toString() })
+      }
+    }
+  )
+
   return {
     getAllVoters,
     createVoter,
-    getVoterDetail
+    getVoterDetail,
+    deleteVoter
   }
 }

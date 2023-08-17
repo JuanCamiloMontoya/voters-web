@@ -6,7 +6,6 @@ const { Item } = Form
 const { Text } = Typography
 
 const DatePicker = (props: DatePickerProps) => {
-
   const {
     name,
     control,
@@ -15,7 +14,8 @@ const DatePicker = (props: DatePickerProps) => {
     required = true,
     placeholder,
     defaultValue,
-    disabledDate
+    defaultPickerValue,
+    disabledDate,
   } = props
 
   return (
@@ -30,10 +30,11 @@ const DatePicker = (props: DatePickerProps) => {
             placeholder={placeholder}
             disabledDate={disabledDate}
             defaultValue={defaultValue}
+            defaultPickerValue={defaultPickerValue}
           />
         )}
       />
-      {error && <Text type="danger">{error.message}</Text>}
+      {error && <Text type='danger'>{error.message}</Text>}
     </Item>
   )
 }

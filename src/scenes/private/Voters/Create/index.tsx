@@ -1,17 +1,16 @@
-import { CheckCircleTwoTone } from "@ant-design/icons"
-import { Alert, Button, Col, Form, Modal, Row, Typography } from "antd"
-import dayjs from "dayjs"
-import { colors, columnSizes } from "../../../../common/antd/theme"
-import DatePicker from "../../../_components/DatePicker"
-import Select from "../../../_components/Select"
-import TextInput from "../../../_components/TextInput"
-import useCreateVoters from "./controllers"
+import { CheckCircleTwoTone } from '@ant-design/icons'
+import { Alert, Button, Col, Form, Modal, Row, Typography } from 'antd'
+import dayjs from 'dayjs'
+import { colors, columnSizes } from '../../../../common/antd/theme'
+import DatePicker from '../../../_components/DatePicker'
+import Select from '../../../_components/Select'
+import TextInput from '../../../_components/TextInput'
+import useCreateVoters from './controllers'
 
 const { Title } = Typography
 const today = dayjs()
 
 const CreateVoter = () => {
-
   const {
     votersStatus,
     votersError,
@@ -27,7 +26,7 @@ const CreateVoter = () => {
     onSearchSubdivision,
     onCloseErrorAlert,
     reset,
-    goToVoters
+    goToVoters,
   } = useCreateVoters()
 
   const onSuccess = () => {
@@ -53,7 +52,7 @@ const CreateVoter = () => {
         {votersStatus.createVoter === 'error' && (
           <Alert
             message={votersError.createVoter}
-            type="error"
+            type='error'
             showIcon
             closable
             onClose={onCloseErrorAlert}
@@ -120,9 +119,10 @@ const CreateVoter = () => {
               control={control}
               label='Fecha de nacimiento'
               error={errors.birthdate}
-              placeholder="Fecha de nacimiento"
+              placeholder='Fecha de nacimiento'
               disabledDate={(date) => date.isAfter(today.subtract(18, 'years'))}
               required={false}
+              defaultPickerValue={dayjs().subtract(18, 'year')}
             />
           </Col>
           <Col {...columnSizes}>
@@ -150,7 +150,7 @@ const CreateVoter = () => {
               required={false}
               options={occupations}
               showSearch={false}
-              mode="multiple"
+              mode='multiple'
               allowClear
             />
           </Col>
@@ -163,7 +163,7 @@ const CreateVoter = () => {
               error={errors.hobbies}
               required={false}
               options={hobbies}
-              mode="multiple"
+              mode='multiple'
               allowClear
             />
           </Col>
@@ -173,7 +173,7 @@ const CreateVoter = () => {
             htmlType='submit'
             loading={votersStatus.createVoter === 'loading'}
             disabled={!isValid}
-            type="primary"
+            type='primary'
           >
             Registrar persona
           </Button>

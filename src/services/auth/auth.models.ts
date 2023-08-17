@@ -1,5 +1,5 @@
 import { IEmail, ISuccessCallback } from "../../common/models/interfaces/common.interface"
-import { StatusTypes } from "../../common/models/types/status.type"
+import { StatusTypes } from "../../common/models/types/common.type"
 
 export type AuthTypes = 'login' | 'passwordResetRequest' | 'verifyEmail' | 'resetPassword'
 

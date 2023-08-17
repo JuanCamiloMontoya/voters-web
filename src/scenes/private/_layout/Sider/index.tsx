@@ -9,7 +9,7 @@ const Sider = () => {
   const icons = require(`@ant-design/icons`)
 
   const {
-    handleMenu,
+    onOptionClick,
     menuOptions,
     pathname
   } = useSider()
@@ -32,7 +32,7 @@ const Sider = () => {
       <Menu
         theme="dark"
         selectedKeys={[`/${pathname.split('/')[1]}`]}
-        onClick={handleMenu}
+        onClick={onOptionClick}
         items={menuItems}
       />
     </AntdSider>

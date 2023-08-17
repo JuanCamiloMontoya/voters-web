@@ -24,12 +24,12 @@ const useSider = () => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
-  const handleMenu: MenuProps['onClick'] = ({ key }) => {
+  const onOptionClick: MenuProps['onClick'] = ({ key }) => {
     navigate(key)
   }
 
   return {
-    handleMenu,
+    onOptionClick,
     menuOptions,
     pathname
   }

@@ -1,7 +1,7 @@
 interface PageMeta {
-  page: number
-  take: number
-  itemCount: number
+  current: number
+  pageSize: number
+  total: number
   pageCount: number
   hasPreviousPage: boolean
   hasNextPage: boolean

@@ -1,6 +1,7 @@
 export interface ErrorMsgResponse {
   message: string
 }
+
 export interface IEmail {
   email: string
 }
@@ -12,4 +13,8 @@ export interface ISuccessCallback {
 export interface GeneralData {
   id: number
   name: string
+}
+
+export interface SuccessResponse {
+  success: boolean
 }
