@@ -14,7 +14,7 @@ const menuOptions = [
   },
   {
     key: '/voters',
-    label: 'Personas',
+    label: 'Votantes',
     icon: 'FormOutlined'
   }
 ]

@@ -1,5 +1,5 @@
-import { CheckCircleTwoTone } from '@ant-design/icons'
-import { Alert, Button, Col, Form, Modal, Row, Typography } from 'antd'
+import { ArrowLeftOutlined, CheckCircleTwoTone } from '@ant-design/icons'
+import { Alert, Button, Col, Divider, Form, Modal, Row, Typography } from 'antd'
 import dayjs from 'dayjs'
 import { colors, columnSizes } from '../../../../common/antd/theme'
 import DatePicker from '../../../_components/DatePicker'
@@ -26,16 +26,16 @@ const CreateVoter = () => {
     onSearchSubdivision,
     onCloseErrorAlert,
     reset,
-    goToVoters,
+    goToVoters
   } = useCreateVoters()
 
   const onSuccess = () => {
     Modal.confirm({
       title: 'Registro exitoso!',
-      content: 'La persona a sido registrada correctamente',
+      content: 'El votante a sido registrada correctamente',
       okText: 'Realizar nuevo registro',
       onOk: reset,
-      cancelText: 'Ver lista de personas',
+      cancelText: 'Ver lista de votantes',
       onCancel: goToVoters,
       icon: <CheckCircleTwoTone twoToneColor={colors.succesIconColor} />
     })
@@ -43,7 +43,11 @@ const CreateVoter = () => {
 
   return (
     <div className='create-voter'>
-      <Title level={2}>Registrar persona</Title>
+      <Title level={3}>
+        <ArrowLeftOutlined onClick={goToVoters} />
+        <Divider type='vertical' />
+        Registrar votante
+      </Title>
       <Form
         labelCol={{ span: 24 }}
         wrapperCol={{ span: 24 }}
@@ -175,7 +179,7 @@ const CreateVoter = () => {
             disabled={!isValid}
             type='primary'
           >
-            Registrar persona
+            Registrar votante
           </Button>
         </div>
       </Form>

@@ -1,25 +1,39 @@
 import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useVotersSelectors } from "../../../../services/voters/voters.selectors"
 import { votersActions } from "../../../../services/voters/voters.slice"
 import { useAppDispatch } from "../../../../store/store"
 
 const useVoterDetail = () => {
 
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { id } = useParams()
 
-  const { getVoterDetail } = votersActions
+  const { getVoterDetail, resetStatus, resetVoter } = votersActions
   const { voter, error, status } = useVotersSelectors()
 
   useEffect(() => {
     id && dispatch(getVoterDetail({ id }))
+    return () => {
+      dispatch(resetVoter())
+    }
   }, [])
+
+  const onCloseErrorAlert = () => {
+    dispatch(resetStatus('getVoterDetail'))
+  }
+
+  const goToVoters = () => {
+    navigate('/voters')
+  }
 
   return {
     voter,
     error,
-    status
+    status,
+    onCloseErrorAlert,
+    goToVoters
   }
 }
 

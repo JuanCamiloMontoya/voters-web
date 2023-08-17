@@ -81,7 +81,7 @@ const Voters = () => {
     <div className='voters'>
       <Row>
         <Title level={2} style={{ flexGrow: 1 }}>
-          Personas
+          Votantes
         </Title>
         <Button
           type='primary'

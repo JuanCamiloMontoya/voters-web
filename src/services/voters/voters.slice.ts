@@ -19,6 +19,9 @@ const voterSlice = createSlice({
     resetStatus(state: VotersState, { payload }: PayloadAction<VotersTypes>) {
       state.error[payload] = initialState.error[payload]
       state.status[payload] = initialState.status[payload]
+    },
+    resetVoter(state: VotersState) {
+      state.voter = initialState.voter
     }
   },
   extraReducers: (builder) => {
@@ -57,12 +60,13 @@ const voterSlice = createSlice({
       .addCase(getVoterDetail.rejected, (state, { payload }) => {
         state.status.getVoterDetail = 'error'
         state.error.getVoterDetail = payload?.message
+        state.voter = initialState.voter
       })
       .addCase(deleteVoter.pending, (state) => {
         state.status.deleteVoter = 'loading'
         state.error.deleteVoter = null
       })
-      .addCase(deleteVoter.fulfilled, (state, { payload }) => {
+      .addCase(deleteVoter.fulfilled, (state) => {
         state.status.deleteVoter = 'idle'
       })
       .addCase(deleteVoter.rejected, (state, { payload }) => {

@@ -1,5 +1,5 @@
 import { Breadcrumb, Layout } from "antd"
-import { Route, Routes, matchPath, useNavigate } from "react-router-dom"
+import { Route, Routes, matchPath } from "react-router-dom"
 import { HomeOutlined } from "@ant-design/icons"
 import Sider from './_layout/Sider'
 import Header from './_layout/Header'
@@ -15,7 +15,7 @@ const { Content } = Layout
 
 const Private = () => {
 
-  const { pathname } = usePrivate()
+  const { pathname, onBreadcrumbClick } = usePrivate()
 
   const routes = [
     {
@@ -26,31 +26,35 @@ const Private = () => {
     {
       path: '/leaders',
       element: <Leaders />,
-      breadcrumb: ['Líderes']
+      breadcrumb: [{ title: 'Líderes', route: '/leaders' }]
     },
     {
       path: '/voters',
       element: <Voters />,
-      breadcrumb: ['Personas']
+      breadcrumb: [{ title: 'Votantes', route: '/voters' }]
     },
     {
       path: '/voters/create',
       element: <CreateVoter />,
-      breadcrumb: ['Personas', 'Crear votante']
+      breadcrumb: [
+        { title: 'Votantes', route: '/voters' },
+        { title: 'Crear votante', route: '/voters/create' }
+      ]
     },
     {
       path: '/voters/:id',
       element: <VoterDetail />,
-      breadcrumb: ['Personas', 'Detalle votante']
+      breadcrumb: [
+        { title: 'Votantes', route: '/voters' },
+        { title: 'Detalle de votante', route: '/voters/:id' }
+      ]
     },
     {
       path: '/profile',
       element: <Profile />,
-      breadcrumb: ['Perfil']
+      breadcrumb: [{ title: 'Perfil', route: '/profile' }]
     }
   ]
-
-  const navigate = useNavigate()
 
   return (
     <Layout>
@@ -61,7 +65,11 @@ const Private = () => {
           <Breadcrumb>
             <Breadcrumb.Item><HomeOutlined /></Breadcrumb.Item>
             {routes.find(({ path }) => matchPath(path, pathname))?.breadcrumb.map((item, i) => (
-              <Breadcrumb.Item key={i} onClick={() => { navigate('/') }}>{item}</Breadcrumb.Item>
+              <Breadcrumb.Item key={i} onClick={() => onBreadcrumbClick(item.route)}>
+                <span style={{ cursor: !matchPath(item.route, pathname) ? 'pointer' : 'auto' }}>
+                  {item.title}
+                </span>
+              </Breadcrumb.Item>
             ))}
           </Breadcrumb>
           <Routes>
