@@ -10,11 +10,11 @@ export interface ISuccessCallback {
   onSuccess: () => void
 }
 
-export interface GeneralData {
+export interface IGeneralData {
   id: number
   name: string
 }
 
-export interface SuccessResponse {
+export interface ISuccessResponse {
   success: boolean
 }

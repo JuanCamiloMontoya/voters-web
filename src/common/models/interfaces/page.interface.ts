@@ -1,4 +1,4 @@
-interface PageMeta {
+interface IPageMeta {
   current: number
   pageSize: number
   total: number
@@ -7,7 +7,7 @@ interface PageMeta {
   hasNextPage: boolean
 }
 
-export interface Page<Data> {
-  meta: PageMeta
+export interface IPage<Data> {
+  meta: IPageMeta
   data: Data
 }
