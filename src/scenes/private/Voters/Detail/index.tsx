@@ -45,10 +45,16 @@ const VoterDetail = () => {
         <Item {...itemProps} label="N° Teléfono">{voter?.phone}</Item>
         <Item {...itemProps} label="Correo">{voter?.email}</Item>
         <Item {...itemProps} label="Fecha de nacimiento">{voter?.birthdate}</Item>
-        <Item {...itemProps} label={voter?.subdivision?.type === 'neighborhood' ? 'Barrio' : 'Vereda'}>
+        <Item
+          {...itemProps}
+          label={voter?.subdivision?.type === 'neighborhood' ? 'Barrio' : 'Vereda'}
+        >
           {voter?.subdivision?.name}
         </Item>
-        <Item {...itemProps} label={voter?.subdivision?.division.type === 'commune' ? 'Comuna' : 'Corregimiento'}>
+        <Item
+          {...itemProps}
+          label={voter?.subdivision?.division.type === 'commune' ? 'Comuna' : 'Corregimiento'}
+        >
           {voter?.subdivision?.division?.name}
         </Item>
         <Item {...itemProps} label="Ocupaciones" contentStyle={{ display: 'block' }}>
