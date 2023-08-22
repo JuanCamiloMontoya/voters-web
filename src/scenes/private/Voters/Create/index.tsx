@@ -126,7 +126,7 @@ const CreateVoter = () => {
               placeholder='Fecha de nacimiento'
               disabledDate={(date) => date.isAfter(today.subtract(18, 'years'))}
               required={false}
-              defaultPickerValue={dayjs().subtract(18, 'year')}
+              defaultPickerValue={today.subtract(18, 'year')}
             />
           </Col>
           <Col {...columnSizes}>
