@@ -39,6 +39,7 @@ const UpdateVoter = () => {
     onCloseErrorAlert,
     goBack,
     goToVoters,
+    goToVoterDetail,
   } = useUpdateVoter();
 
   const onSuccess = () => {
@@ -46,8 +47,9 @@ const UpdateVoter = () => {
       title: "Actualización exitosa!",
       content: "El votante a sido actualizado correctamente",
       okText: "Ver lista de votantes",
-      cancelText: "Cerrar",
+      cancelText: "Ver votante",
       onOk: goToVoters,
+      onCancel: goToVoterDetail,
       icon: <CheckCircleTwoTone twoToneColor={colors.succesIconColor} />,
     });
   };

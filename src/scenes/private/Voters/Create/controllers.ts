@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useGeneralSelectors } from "../../../../services/general/general.selectors";
@@ -15,7 +15,14 @@ const useCreateVoters = () => {
 
   const navigate = useNavigate();
 
-  const { status: votersStatus, error: votersError } = useVotersSelectors();
+  const [openSuccesModal, setOpenSuccessModal] = useState(false);
+
+  const {
+    status: votersStatus,
+    error: votersError,
+    voter,
+  } = useVotersSelectors();
+
   const {
     fullSubdivisions,
     occupations,
@@ -25,6 +32,7 @@ const useCreateVoters = () => {
   } = useGeneralSelectors();
 
   const { createVoter, resetStatus } = votersActions;
+
   const { getFullSubdivisions, getHobbies, getOccupations } = generalActions;
 
   const { createVoterResolver } = useCreateVotersValidators();
@@ -45,12 +53,22 @@ const useCreateVoters = () => {
     !hobbies.length && dispatch(getHobbies({}));
   }, []);
 
-  const onFinish = (data: CreateVoterData, onSuccess: () => void) => {
+  const onFinish = (data: CreateVoterData) => {
+    const onSuccess = () => setOpenSuccessModal(true);
     dispatch(createVoter({ data, onSuccess }));
   };
 
   const goToVoters = () => {
     navigate("/voters");
+  };
+
+  const goToVoterDetail = () => {
+    navigate(`/voters/${voter?.id}`);
+  };
+
+  const onNewRecord = () => {
+    reset();
+    setOpenSuccessModal(false);
   };
 
   const onSearchSubdivision = (name: string) => {
@@ -78,12 +96,14 @@ const useCreateVoters = () => {
     occupations,
     hobbies,
     genders,
+    openSuccesModal,
     handleSubmit,
     onFinish,
     onSearchSubdivision,
     onCloseErrorAlert,
-    reset,
     goToVoters,
+    onNewRecord,
+    goToVoterDetail,
   };
 };
 

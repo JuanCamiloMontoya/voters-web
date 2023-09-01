@@ -83,6 +83,10 @@ const useUpdateVoter = () => {
     navigate("/voters");
   };
 
+  const goToVoterDetail = () => {
+    navigate(`/voters/${voter?.id}`);
+  };
+
   const goBack = () => {
     navigate(-1);
   };
@@ -121,6 +125,7 @@ const useUpdateVoter = () => {
     reset,
     goToVoters,
     goBack,
+    goToVoterDetail,
   };
 };
 

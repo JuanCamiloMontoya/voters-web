@@ -31,25 +31,15 @@ const CreateVoter = () => {
     occupations,
     hobbies,
     genders,
+    openSuccesModal,
     handleSubmit,
     onFinish,
     onSearchSubdivision,
     onCloseErrorAlert,
-    reset,
     goToVoters,
+    onNewRecord,
+    goToVoterDetail,
   } = useCreateVoters();
-
-  const onSuccess = () => {
-    Modal.confirm({
-      title: "Registro exitoso!",
-      content: "El votante a sido registrada correctamente",
-      okText: "Realizar nuevo registro",
-      onOk: reset,
-      cancelText: "Ver lista de votantes",
-      onCancel: goToVoters,
-      icon: <CheckCircleTwoTone twoToneColor={colors.succesIconColor} />,
-    });
-  };
 
   return (
     <div className="create-voter">
@@ -61,7 +51,7 @@ const CreateVoter = () => {
       <Form
         labelCol={{ span: 24 }}
         wrapperCol={{ span: 24 }}
-        onFinish={handleSubmit((values) => onFinish(values, onSuccess))}
+        onFinish={handleSubmit(onFinish)}
       >
         {votersStatus.createVoter === "error" && (
           <Alert
@@ -205,6 +195,21 @@ const CreateVoter = () => {
           </Button>
         </div>
       </Form>
+      <Modal
+        open={openSuccesModal}
+        title="Registro exitoso!"
+        footer={
+          <>
+            <Button onClick={goToVoterDetail}>Ver votante</Button>
+            <Divider type="vertical" />
+            <Button onClick={goToVoters}>Lista de votantes</Button>
+            <Divider type="vertical" />
+            <Button onClick={onNewRecord}>Nuevo registro</Button>
+          </>
+        }
+      >
+        <p>El votante ha sido registrado correctamente</p>
+      </Modal>
     </div>
   );
 };

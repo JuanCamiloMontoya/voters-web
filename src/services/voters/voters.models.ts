@@ -79,7 +79,7 @@ export interface CreateVoterPayload extends ISuccessCallback {
   data: CreateVoterData;
 }
 
-export interface CreateVoterResponse extends Voter {}
+export interface CreateVoterResponse extends VoterDetail {}
 
 export interface UpdateVoterData extends Omit<CreateVoterData, "document"> {}
 

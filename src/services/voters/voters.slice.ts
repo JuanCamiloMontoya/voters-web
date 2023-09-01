@@ -38,8 +38,9 @@ const voterSlice = createSlice({
         state.status.createVoter = "loading";
         state.error.createVoter = null;
       })
-      .addCase(createVoter.fulfilled, (state) => {
+      .addCase(createVoter.fulfilled, (state, { payload }) => {
         state.status.createVoter = "idle";
+        state.voter = payload;
       })
       .addCase(createVoter.rejected, (state, { payload }) => {
         state.status.createVoter = "error";

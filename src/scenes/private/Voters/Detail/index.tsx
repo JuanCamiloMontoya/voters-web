@@ -9,7 +9,7 @@ import {
   Typography,
 } from "antd";
 import useVoterDetail from "./controllers";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, EditFilled } from "@ant-design/icons";
 
 const { Item } = Descriptions;
 const { Title } = Typography;
@@ -24,11 +24,21 @@ const VoterDetail = () => {
 
   return (
     <div className="voters">
-      <Title level={3}>
-        <ArrowLeftOutlined onClick={goBack} />
-        <Divider type="vertical" />
-        Detalle de votante
-      </Title>
+      <Row>
+        <Title level={3} style={{ flexGrow: 1 }}>
+          <ArrowLeftOutlined onClick={goBack} />
+          <Divider type="vertical" />
+          Detalle de votante
+        </Title>
+        {voter && (
+          <Button
+            type="primary"
+            shape="circle"
+            icon={<EditFilled />}
+            onClick={() => onUpdateVoter(voter.id)}
+          />
+        )}
+      </Row>
       {status.getVoterDetail === "loading" && (
         <Row className="center-element">
           <Spin />
@@ -110,11 +120,6 @@ const VoterDetail = () => {
               />
             </Item>
           </Descriptions>
-          <div className="center-element">
-            <Button type="primary" onClick={() => onUpdateVoter(voter.id)}>
-              Actualizar
-            </Button>
-          </div>
         </>
       )}
     </div>
