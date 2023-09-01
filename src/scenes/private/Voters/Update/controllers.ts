@@ -1,40 +1,40 @@
-import { useEffect } from "react"
-import { useForm } from "react-hook-form"
-import { useNavigate, useParams } from "react-router-dom"
-import { useGeneralSelectors } from "../../../../services/general/general.selectors"
-import { generalActions } from "../../../../services/general/general.slice"
-import { UpdateVoterData } from "../../../../services/voters/voters.models"
-import { useVotersSelectors } from "../../../../services/voters/voters.selectors"
-import { votersActions } from "../../../../services/voters/voters.slice"
-import { useAppDispatch } from "../../../../store/store"
-import { useUpdateVoterValidators } from "./validators"
-import dayjs from "dayjs"
-import { EGender } from "../../../../common/models/enums/gender.enum"
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+import { useGeneralSelectors } from "../../../../services/general/general.selectors";
+import { generalActions } from "../../../../services/general/general.slice";
+import { UpdateVoterData } from "../../../../services/voters/voters.models";
+import { useVotersSelectors } from "../../../../services/voters/voters.selectors";
+import { votersActions } from "../../../../services/voters/voters.slice";
+import { useAppDispatch } from "../../../../store/store";
+import { useUpdateVoterValidators } from "./validators";
+import dayjs from "dayjs";
+import { EGender } from "../../../../common/models/enums/gender.enum";
 
 const useUpdateVoter = () => {
-
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-  const { id } = useParams()
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const {
     status: votersStatus,
     error: votersError,
-    voter
-  } = useVotersSelectors()
+    voter,
+  } = useVotersSelectors();
 
   const {
     fullSubdivisions,
     occupations,
     hobbies,
     status: generalStatus,
-    error: generalError
-  } = useGeneralSelectors()
+    error: generalError,
+  } = useGeneralSelectors();
 
-  const { updateVoter, resetStatus, getVoterDetail, resetVoter } = votersActions
-  const { getFullSubdivisions, getHobbies, getOccupations } = generalActions
+  const { updateVoter, resetStatus, getVoterDetail, resetVoter } =
+    votersActions;
+  const { getFullSubdivisions, getHobbies, getOccupations } = generalActions;
 
-  const { updateVoterResolver } = useUpdateVoterValidators()
+  const { updateVoterResolver } = useUpdateVoterValidators();
 
   const {
     control,
@@ -43,56 +43,62 @@ const useUpdateVoter = () => {
     formState: { errors, isValid, isDirty },
   } = useForm<UpdateVoterData>({
     resolver: updateVoterResolver,
-    mode: 'all',
+    mode: "all",
     shouldUnregister: true,
-  })
+  });
 
   useEffect(() => {
-    if (!id) return
+    if (!id) return;
 
-    dispatch(getVoterDetail({ id }))
-    votersStatus.updateVoter === 'error' && onCloseErrorAlert()
-    !occupations.length && dispatch(getOccupations({}))
-    !hobbies.length && dispatch(getHobbies({}))
+    dispatch(getVoterDetail({ id }));
+    votersStatus.updateVoter === "error" && onCloseErrorAlert();
+    !occupations.length && dispatch(getOccupations({}));
+    !hobbies.length && dispatch(getHobbies({}));
 
     return () => {
-      dispatch(resetVoter())
-    }
-  }, [])
+      dispatch(resetVoter());
+    };
+  }, []);
 
   useEffect(() => {
-    voter && reset({
-      ...voter,
-      birthdate: voter.birthdate ? dayjs(voter.birthdate).toDate() : undefined,
-      hobbies: voter.hobbies.map(({ id }) => (id)),
-      occupations: voter.occupations.map(({ id }) => (id)),
-      subdivision: voter.subdivision?.id
-    })
-  }, [voter])
+    voter &&
+      reset({
+        ...voter,
+        birthdate: voter.birthdate
+          ? dayjs(voter.birthdate).toDate()
+          : undefined,
+        hobbies: voter.hobbies.map(({ id }) => id),
+        occupations: voter.occupations.map(({ id }) => id),
+        subdivision: voter.subdivision?.id,
+      });
+  }, [voter]);
 
   const onFinish = (data: UpdateVoterData, onSuccess: () => void) => {
     if (id) {
-      dispatch(updateVoter({ data, onSuccess, id }))
+      dispatch(updateVoter({ data, onSuccess, id }));
     }
-  }
+  };
 
   const goToVoters = () => {
-    navigate('/voters')
-  }
+    navigate("/voters");
+  };
 
   const goBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
   const onSearchSubdivision = (name: string) => {
-    name.length > 2 && dispatch(getFullSubdivisions({ name }))
-  }
+    name.length > 2 && dispatch(getFullSubdivisions({ name }));
+  };
 
   const onCloseErrorAlert = () => {
-    dispatch(resetStatus('updateVoter'))
-  }
+    dispatch(resetStatus("updateVoter"));
+  };
 
-  const genders = Object.values(EGender).map((gender) => ({ label: gender, value: gender }))
+  const genders = Object.values(EGender).map((gender) => ({
+    label: gender,
+    value: gender,
+  }));
 
   return {
     votersStatus,
@@ -114,8 +120,8 @@ const useUpdateVoter = () => {
     onCloseErrorAlert,
     reset,
     goToVoters,
-    goBack
-  }
-}
+    goBack,
+  };
+};
 
-export default useUpdateVoter
+export default useUpdateVoter;

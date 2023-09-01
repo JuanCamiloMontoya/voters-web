@@ -1,14 +1,13 @@
-import { Form, Select as SelectAntd, Typography } from 'antd'
-import { debounce } from 'lodash'
-import { Controller } from 'react-hook-form'
-import { SelectProps } from './models'
+import { Form, Select as SelectAntd, Typography } from "antd";
+import { debounce } from "lodash";
+import { Controller } from "react-hook-form";
+import { SelectProps } from "./models";
 
-const { Item } = Form
-const { Text } = Typography
-const { Option } = SelectAntd
+const { Item } = Form;
+const { Text } = Typography;
+const { Option } = SelectAntd;
 
 const Select = (props: SelectProps) => {
-
   const {
     name,
     control,
@@ -23,14 +22,16 @@ const Select = (props: SelectProps) => {
     mode,
     defaultValue,
     onSearch,
-    onCustomChange
-  } = props
+    onCustomChange,
+  } = props;
 
-  const search = showSearch ? {
-    showSearch,
-    onSearch: debounce((value: string) => onSearch && onSearch(value), 500),
-    optionFilterProp: "children"
-  } : null
+  const search = showSearch
+    ? {
+        showSearch,
+        onSearch: debounce((value: string) => onSearch && onSearch(value), 500),
+        optionFilterProp: "children",
+      }
+    : null;
 
   return (
     <Item label={label} required={required}>
@@ -44,11 +45,11 @@ const Select = (props: SelectProps) => {
             loading={loading}
             allowClear={allowClear}
             mode={mode}
-            maxTagCount='responsive'
+            maxTagCount="responsive"
             defaultValue={defaultValue}
             onChange={(value) => {
-              onChange(value || null)
-              onCustomChange && onCustomChange(value)
+              onChange(value || null);
+              onCustomChange && onCustomChange(value);
             }}
           >
             {options.map(({ label, value }) => (
@@ -59,12 +60,15 @@ const Select = (props: SelectProps) => {
           </SelectAntd>
         )}
       />
-      {Array.isArray(error) ?
-        error.map(({ message }, i) => <Text type="danger" key={i}>{message}</Text>) :
-        error && <Text type="danger">{error.message}</Text>
-      }
+      {Array.isArray(error)
+        ? error.map(({ message }, i) => (
+            <Text type="danger" key={i}>
+              {message}
+            </Text>
+          ))
+        : error && <Text type="danger">{error.message}</Text>}
     </Item>
-  )
-}
+  );
+};
 
-export default Select
+export default Select;

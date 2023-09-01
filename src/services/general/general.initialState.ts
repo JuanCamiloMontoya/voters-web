@@ -1,4 +1,4 @@
-import { GeneralState } from "./general.models"
+import { GeneralState } from "./general.models";
 
 export const generalInitialState = (): GeneralState => ({
   divisions: [],
@@ -11,13 +11,13 @@ export const generalInitialState = (): GeneralState => ({
     getSubdivisions: null,
     getFullSubdivisions: null,
     getHobbies: null,
-    getOccupations: null
+    getOccupations: null,
   },
   status: {
-    getDivisions: 'idle',
-    getSubdivisions: 'idle',
-    getFullSubdivisions: 'idle',
-    getHobbies: 'idle',
-    getOccupations: 'idle'
-  }
-})
+    getDivisions: "idle",
+    getSubdivisions: "idle",
+    getFullSubdivisions: "idle",
+    getHobbies: "idle",
+    getOccupations: "idle",
+  },
+});

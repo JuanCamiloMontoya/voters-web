@@ -1,4 +1,4 @@
-import { VotersState } from "./voters.models"
+import { VotersState } from "./voters.models";
 
 export const votersInitialState = (): VotersState => ({
   voters: {
@@ -9,8 +9,8 @@ export const votersInitialState = (): VotersState => ({
       total: 10,
       pageCount: 0,
       hasPreviousPage: false,
-      hasNextPage: false
-    }
+      hasNextPage: false,
+    },
   },
   voter: null,
   error: {
@@ -18,13 +18,13 @@ export const votersInitialState = (): VotersState => ({
     createVoter: null,
     getVoterDetail: null,
     deleteVoter: null,
-    updateVoter: null
+    updateVoter: null,
   },
   status: {
-    getAllVoters: 'idle',
-    createVoter: 'idle',
-    getVoterDetail: 'idle',
-    deleteVoter: 'idle',
-    updateVoter: 'idle'
-  }
-})
+    getAllVoters: "idle",
+    createVoter: "idle",
+    getVoterDetail: "idle",
+    deleteVoter: "idle",
+    updateVoter: "idle",
+  },
+});

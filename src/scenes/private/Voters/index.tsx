@@ -1,17 +1,15 @@
-import { DeleteOutlined, EditFilled, EyeFilled, PlusOutlined } from '@ant-design/icons'
 import {
-  Button,
-  Divider,
-  Popconfirm,
-  Row,
-  Table,
-  Typography,
-} from 'antd'
-import type { ColumnsType } from 'antd/es/table'
-import { Voter } from '../../../services/voters/voters.models'
-import useVoters from './controllers'
+  DeleteOutlined,
+  EditFilled,
+  EyeFilled,
+  PlusOutlined,
+} from "@ant-design/icons";
+import { Button, Divider, Popconfirm, Row, Table, Typography } from "antd";
+import type { ColumnsType } from "antd/es/table";
+import { Voter } from "../../../services/voters/voters.models";
+import useVoters from "./controllers";
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 const Voters = () => {
   const {
@@ -21,79 +19,79 @@ const Voters = () => {
     onShowVoter,
     onDeleteVoter,
     onUpdateVoter,
-    onPageChange
-  } = useVoters()
+    onPageChange,
+  } = useVoters();
 
   const columns: ColumnsType<Voter> = [
     {
       title: <Text strong>Nombre</Text>,
-      dataIndex: 'firstname',
-      key: 'firstname',
+      dataIndex: "firstname",
+      key: "firstname",
     },
     {
       title: <Text strong>Apellido</Text>,
-      dataIndex: 'lastname',
-      key: 'lastname',
+      dataIndex: "lastname",
+      key: "lastname",
     },
     {
       title: <Text strong>N° Documento</Text>,
-      dataIndex: 'document',
-      key: 'document',
+      dataIndex: "document",
+      key: "document",
     },
     {
       title: <Text strong>N° Telefono</Text>,
-      dataIndex: 'phone',
-      key: 'phone',
+      dataIndex: "phone",
+      key: "phone",
     },
-    { title: <Text strong>Correo</Text>, dataIndex: 'email', key: 'email' },
+    { title: <Text strong>Correo</Text>, dataIndex: "email", key: "email" },
     {
       title: <Text strong>Acción</Text>,
-      key: 'action',
+      key: "action",
       render: (_, record) => (
         <div style={{ width: 140 }}>
           <Button
-            type='primary'
-            shape='circle'
+            type="primary"
+            shape="circle"
             icon={<EyeFilled />}
             onClick={() => onShowVoter(record.id)}
           />
-          <Divider type='vertical' />
+          <Divider type="vertical" />
           <Button
-            type='primary'
-            shape='circle'
+            type="primary"
+            shape="circle"
             icon={<EditFilled />}
             onClick={() => onUpdateVoter(record.id)}
           />
-          <Divider type='vertical' />
+          <Divider type="vertical" />
           <Popconfirm
-            title='Eliminar votante'
+            title="Eliminar votante"
             description={`Está seguro de eliminar a ${record.firstname} ${record.lastname}?`}
             onConfirm={() => onDeleteVoter(record.id)}
-            okText='Sí'
-            cancelText='Cancelar'
-            placement='topRight'
+            okText="Sí"
+            cancelText="Cancelar"
+            placement="topRight"
           >
             <Button
-              type='primary'
+              type="primary"
               danger
-              shape='circle'
+              shape="circle"
               icon={<DeleteOutlined />}
             />
           </Popconfirm>
         </div>
       ),
     },
-  ]
+  ];
 
   return (
-    <div className='voters'>
+    <div className="voters">
       <Row>
         <Title level={2} style={{ flexGrow: 1 }}>
           Votantes
         </Title>
         <Button
-          type='primary'
-          shape='circle'
+          type="primary"
+          shape="circle"
           icon={<PlusOutlined />}
           onClick={onCreateVoter}
         />
@@ -102,7 +100,9 @@ const Voters = () => {
         dataSource={voters.data.map((voter) => ({ ...voter, key: voter.id }))}
         columns={columns}
         scroll={{ x: 600 }}
-        loading={status.getAllVoters === 'loading' || status.deleteVoter === 'loading'}
+        loading={
+          status.getAllVoters === "loading" || status.deleteVoter === "loading"
+        }
         onChange={onPageChange}
         pagination={{
           pageSize: voters.meta.pageSize,
@@ -110,11 +110,11 @@ const Voters = () => {
           current: voters.meta.current,
           showSizeChanger: true,
           pageSizeOptions: [5, 10, 20, 50],
-          locale: { items_per_page: '/ Página' }
+          locale: { items_per_page: "/ Página" },
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Voters
+export default Voters;

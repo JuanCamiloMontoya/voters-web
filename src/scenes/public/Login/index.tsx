@@ -1,11 +1,10 @@
-import { Button, Typography, Form, Alert } from 'antd'
-import TextInput from '../../_components/TextInput'
-import useLogin from './controllers'
+import { Button, Typography, Form, Alert } from "antd";
+import TextInput from "../../_components/TextInput";
+import useLogin from "./controllers";
 
-const { Title } = Typography
+const { Title } = Typography;
 
 const Login = () => {
-
   const {
     error,
     status,
@@ -15,18 +14,18 @@ const Login = () => {
     onFinish,
     onResetPassword,
     onCloseErrorAlert,
-    handleSubmit
-  } = useLogin()
+    handleSubmit,
+  } = useLogin();
 
   return (
     <Form
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
       onFinish={handleSubmit(onFinish)}
-      className='public-form'
+      className="public-form"
     >
       <Title>Voters App</Title>
-      {status.login === 'error' && (
+      {status.login === "error" && (
         <Alert
           message={error.login}
           type="error"
@@ -36,39 +35,39 @@ const Login = () => {
         />
       )}
       <TextInput
-        name='email'
+        name="email"
         control={control}
-        label='Correo'
-        placeholder='Dirección de correo'
+        label="Correo"
+        placeholder="Dirección de correo"
         maxLength={50}
         error={errors.email}
       />
       <TextInput
-        name='password'
+        name="password"
         control={control}
-        label='Contraseña'
-        placeholder='Contraseña'
+        label="Contraseña"
+        placeholder="Contraseña"
         maxLength={50}
         error={errors.password}
         isPassword
       />
-      <div className='center-element'>
+      <div className="center-element">
         <Button
-          htmlType='submit'
-          loading={status.login === 'loading'}
+          htmlType="submit"
+          loading={status.login === "loading"}
           disabled={!isValid}
           type="primary"
         >
           Iniciar sesión
         </Button>
       </div>
-      <div className='center-element'>
+      <div className="center-element">
         <Button onClick={onResetPassword} type="link">
           ¿Olvidaste tu contraseña?
         </Button>
       </div>
     </Form>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

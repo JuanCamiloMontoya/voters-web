@@ -1,22 +1,22 @@
-import { AuthState } from "./auth.models"
+import { AuthState } from "./auth.models";
 
 export const authInitialState = (): AuthState => ({
   isAuthenticated: false,
   accessToken: null,
   passwordReset: {
     email: null,
-    code: null
+    code: null,
   },
   error: {
     login: null,
     passwordResetRequest: null,
     verifyEmail: null,
-    resetPassword: null
+    resetPassword: null,
   },
   status: {
-    login: 'idle',
-    passwordResetRequest: 'idle',
-    verifyEmail: 'idle',
-    resetPassword: 'idle'
-  }
-})
+    login: "idle",
+    passwordResetRequest: "idle",
+    verifyEmail: "idle",
+    resetPassword: "idle",
+  },
+});

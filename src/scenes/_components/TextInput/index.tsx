@@ -1,13 +1,12 @@
-import { Form, Input as InputAntd, Typography } from "antd"
-import { Controller } from "react-hook-form"
-import useTextInput from "./controller"
-import { TextInputProps } from "./models"
+import { Form, Input as InputAntd, Typography } from "antd";
+import { Controller } from "react-hook-form";
+import useTextInput from "./controller";
+import { TextInputProps } from "./models";
 
-const { Item } = Form
-const { Text } = Typography
+const { Item } = Form;
+const { Text } = Typography;
 
 const TextInput = (props: TextInputProps) => {
-
   const {
     name,
     control,
@@ -17,13 +16,13 @@ const TextInput = (props: TextInputProps) => {
     maxLength = 255,
     required = true,
     isPassword = false,
-    type = 'text',
-    disabled = false
-  } = props
+    type = "text",
+    disabled = false,
+  } = props;
 
-  const Input = isPassword ? InputAntd.Password : InputAntd
+  const Input = isPassword ? InputAntd.Password : InputAntd;
 
-  const { validateLength } = useTextInput()
+  const { validateLength } = useTextInput();
 
   return (
     <Item label={label} required={required}>
@@ -34,7 +33,7 @@ const TextInput = (props: TextInputProps) => {
           <Input
             placeholder={placeholder}
             maxLength={maxLength}
-            onChange={(e) => onChange(e.target.value || (required ? '' : null))}
+            onChange={(e) => onChange(e.target.value || (required ? "" : null))}
             value={value}
             type={type}
             onKeyDown={(e) => value && validateLength(e, value, maxLength)}
@@ -44,7 +43,7 @@ const TextInput = (props: TextInputProps) => {
       />
       {error && <Text type="danger">{error.message}</Text>}
     </Item>
-  )
-}
+  );
+};
 
-export default TextInput
+export default TextInput;

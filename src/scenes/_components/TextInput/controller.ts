@@ -1,13 +1,16 @@
 const useTextInput = () => {
-
-  const validateLength = (e: React.KeyboardEvent, value: string, maxLength: number) => {
+  const validateLength = (
+    e: React.KeyboardEvent,
+    value: string,
+    maxLength: number,
+  ) => {
     if (value.length >= maxLength && e.key.match(/^[0-9]*$/))
-      e.preventDefault()
-  }
+      e.preventDefault();
+  };
 
   return {
-    validateLength
-  }
-}
+    validateLength,
+  };
+};
 
-export default useTextInput
+export default useTextInput;

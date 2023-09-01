@@ -1,11 +1,10 @@
-import { Button, Typography, Form, Alert } from 'antd'
-import TextInput from '../../_components/TextInput'
-import useResetPassword from './controllers'
+import { Button, Typography, Form, Alert } from "antd";
+import TextInput from "../../_components/TextInput";
+import useResetPassword from "./controllers";
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 const ResetPassword = () => {
-
   const {
     error,
     status,
@@ -16,19 +15,19 @@ const ResetPassword = () => {
     handleSubmit,
     onCloseErrorAlert,
     onFinish,
-    onLogin
-  } = useResetPassword()
+    onLogin,
+  } = useResetPassword();
 
   return (
     <Form
-      name='password-reset'
+      name="password-reset"
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
       onFinish={handleSubmit(onFinish)}
-      className='public-form'
+      className="public-form"
     >
       <Title level={3}>Actualizar contraseña</Title>
-      {status.resetPassword === 'error' && (
+      {status.resetPassword === "error" && (
         <Alert
           message={error.resetPassword}
           type="error"
@@ -41,41 +40,41 @@ const ResetPassword = () => {
         Crea una nueva contraseña para tu correo {passwordReset.email}
       </Text>
       <TextInput
-        name='password'
+        name="password"
         control={control}
-        label='Contraseña'
-        placeholder='Contraseña'
+        label="Contraseña"
+        placeholder="Contraseña"
         maxLength={50}
         error={errors.password}
         isPassword
       />
       <TextInput
-        name='passwordConfirm'
+        name="passwordConfirm"
         control={control}
-        label='Verificar contraseña'
-        placeholder='Contraseña'
+        label="Verificar contraseña"
+        placeholder="Contraseña"
         maxLength={50}
         error={errors.passwordConfirm}
         isPassword
       />
 
-      <div className='center-element'>
+      <div className="center-element">
         <Button
-          htmlType='submit'
+          htmlType="submit"
           type="primary"
-          loading={status.resetPassword === 'loading'}
+          loading={status.resetPassword === "loading"}
           disabled={!isValid}
         >
           Guardar cambios e inciar sesión
         </Button>
       </div>
-      <div className='center-element'>
+      <div className="center-element">
         <Button onClick={onLogin} type="link">
           Iniciar sesión
         </Button>
       </div>
     </Form>
-  )
-}
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;

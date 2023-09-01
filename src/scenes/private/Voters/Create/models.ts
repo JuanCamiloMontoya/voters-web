@@ -1,7 +1,7 @@
 export interface CheckDocumentResponse {
-  exists: boolean
+  exists: boolean;
 }
 
-export type DocumentType = string | undefined
+export type DocumentType = string | undefined;
 
-export type ResolveType = (exists: boolean) => void
+export type ResolveType = (exists: boolean) => void;
