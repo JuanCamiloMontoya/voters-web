@@ -17,12 +17,14 @@ export const votersInitialState = (): VotersState => ({
     getAllVoters: null,
     createVoter: null,
     getVoterDetail: null,
-    deleteVoter: null
+    deleteVoter: null,
+    updateVoter: null
   },
   status: {
     getAllVoters: 'idle',
     createVoter: 'idle',
     getVoterDetail: 'idle',
-    deleteVoter: 'idle'
+    deleteVoter: 'idle',
+    updateVoter: 'idle'
   }
 })

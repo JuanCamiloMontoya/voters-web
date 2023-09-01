@@ -1,25 +1,28 @@
-import { GeneralData } from "../../common/models/interfaces/common.interface"
-import { StatusTypes } from "../../common/models/types/common.type"
+import { IGeneralData } from "../../common/models/interfaces/common.interface"
+import { TStatus } from "../../common/models/types/common.type"
 
-export type GeneralTypes = 'getDivisions' |
+export type GeneralThunksTypes =
+  'getDivisions' |
   'getSubdivisions' |
   'getFullSubdivisions' |
   'getHobbies' |
   'getOccupations'
+
 export type DivisionsType = 'commune' | 'corregimiento'
+
 export type SubdivisionsType = 'neighborhood' | 'rural_settlement'
 
-export interface FullSubdivisions extends GeneralData { }
+export interface FullSubdivisions extends IGeneralData { }
 
-export interface Hobbies extends GeneralData { }
+export interface Hobbies extends IGeneralData { }
 
-export interface Occupations extends GeneralData { }
+export interface Occupations extends IGeneralData { }
 
-export interface Divisions extends GeneralData {
+export interface Divisions extends IGeneralData {
   type: DivisionsType
 }
 
-export interface Subdivisions extends GeneralData {
+export interface Subdivisions extends IGeneralData {
   type: SubdivisionsType
 }
 
@@ -37,11 +40,11 @@ export interface GeneralState {
     getOccupations: string | null | undefined
   }
   status: {
-    getDivisions: StatusTypes
-    getSubdivisions: StatusTypes
-    getFullSubdivisions: StatusTypes
-    getHobbies: StatusTypes
-    getOccupations: StatusTypes
+    getDivisions: TStatus
+    getSubdivisions: TStatus
+    getFullSubdivisions: TStatus
+    getHobbies: TStatus
+    getOccupations: TStatus
   }
 }
 

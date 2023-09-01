@@ -21,6 +21,7 @@ const CreateVoter = () => {
     fullSubdivisions,
     occupations,
     hobbies,
+    genders,
     handleSubmit,
     onFinish,
     onSearchSubdivision,
@@ -131,11 +132,23 @@ const CreateVoter = () => {
           </Col>
           <Col {...columnSizes}>
             <Select
-              name='subdivisionId'
+              name='gender'
+              control={control}
+              label='Género'
+              placeholder='Género'
+              error={errors.gender}
+              required={false}
+              options={genders}
+              allowClear
+            />
+          </Col>
+          <Col {...columnSizes}>
+            <Select
+              name='subdivision'
               control={control}
               label='Vereda/Barrio'
               placeholder='Vereda/Barrio'
-              error={errors.subdivisionId}
+              error={errors.subdivision}
               required={false}
               options={fullSubdivisions}
               showSearch

@@ -1,4 +1,4 @@
-import { DeleteOutlined, EyeFilled, PlusOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditFilled, EyeFilled, PlusOutlined } from '@ant-design/icons'
 import {
   Button,
   Divider,
@@ -20,6 +20,7 @@ const Voters = () => {
     onCreateVoter,
     onShowVoter,
     onDeleteVoter,
+    onUpdateVoter,
     onPageChange
   } = useVoters()
 
@@ -49,12 +50,19 @@ const Voters = () => {
       title: <Text strong>Acción</Text>,
       key: 'action',
       render: (_, record) => (
-        <div style={{ width: 81 }}>
+        <div style={{ width: 140 }}>
           <Button
             type='primary'
             shape='circle'
             icon={<EyeFilled />}
             onClick={() => onShowVoter(record.id)}
+          />
+          <Divider type='vertical' />
+          <Button
+            type='primary'
+            shape='circle'
+            icon={<EditFilled />}
+            onClick={() => onUpdateVoter(record.id)}
           />
           <Divider type='vertical' />
           <Popconfirm

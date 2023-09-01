@@ -9,6 +9,8 @@ export interface TextInputProps {
   placeholder: string
   maxLength: number
   required?: boolean
+  disabled?: boolean
+  defaultValue?: string | null
   isPassword?: boolean
   type?: HTMLInputTypeAttribute
 }

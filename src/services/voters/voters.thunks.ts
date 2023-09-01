@@ -9,11 +9,16 @@ import {
   GetVoterDetailPayload,
   GetVoterDetailResponse,
   GetVotersAllPayload,
-  GetVotersAllResponse
+  GetVotersAllResponse,
+  UpdateVoterPayload,
+  UpdateVoterResponse
 } from "./voters.models"
 import { RootState } from "../../store/reducers"
+import { generalActions } from "../general/general.slice"
 
 export const votersThunks = () => {
+
+  const { setFullSubdivisions } = generalActions
 
   const getAllVoters = createAsyncThunk<
     GetVotersAllResponse,
@@ -37,9 +42,13 @@ export const votersThunks = () => {
     { rejectValue: ErrorMsgResponse }
   >(
     'voters/detail',
-    async ({ id }, { rejectWithValue }) => {
+    async ({ id }, { rejectWithValue, dispatch }) => {
       try {
         const { data } = await apiInstence.get<GetVoterDetailResponse>(`/voters/${id}`)
+        if (data.subdivision) {
+          const { id, name, division } = data.subdivision
+          dispatch(setFullSubdivisions([{ id, name: `${name} - ${division.name}` }]))
+        }
         return data
       } catch (error: any) {
         return rejectWithValue({ message: error.toString() })
@@ -56,6 +65,23 @@ export const votersThunks = () => {
     async ({ data, onSuccess }, { rejectWithValue }) => {
       try {
         const { data: response } = await apiInstence.post<CreateVoterResponse>('/voters', data)
+        onSuccess()
+        return response
+      } catch (error: any) {
+        return rejectWithValue({ message: error.toString() })
+      }
+    }
+  )
+
+  const updateVoter = createAsyncThunk<
+    UpdateVoterResponse,
+    UpdateVoterPayload,
+    { rejectValue: ErrorMsgResponse }
+  >(
+    'voters/update',
+    async ({ data, onSuccess, id }, { rejectWithValue }) => {
+      try {
+        const { data: response } = await apiInstence.put<UpdateVoterResponse>(`/voters/${id}`, data)
         onSuccess()
         return response
       } catch (error: any) {
@@ -86,6 +112,7 @@ export const votersThunks = () => {
   return {
     getAllVoters,
     createVoter,
+    updateVoter,
     getVoterDetail,
     deleteVoter
   }

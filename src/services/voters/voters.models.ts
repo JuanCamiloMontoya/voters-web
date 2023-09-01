@@ -1,63 +1,71 @@
-import { ISuccessCallback, GeneralData, SuccessResponse } from "../../common/models/interfaces/common.interface"
-import { Page } from "../../common/models/interfaces/page.interface"
-import { OrderTypes, StatusTypes } from "../../common/models/types/common.type"
+import { EGender } from "../../common/models/enums/gender.enum"
+import {
+  ISuccessCallback,
+  IGeneralData,
+  ISuccessResponse
+} from "../../common/models/interfaces/common.interface"
+import { IPage } from "../../common/models/interfaces/page.interface"
+import { TDivision, TOrder, TStatus, TSubdivision } from "../../common/models/types/common.type"
 
-export type VotersTypes = 'getAllVoters' | 'createVoter' | 'getVoterDetail'
+export type VotersTypes =
+  | "getAllVoters"
+  | "createVoter"
+  | "getVoterDetail"
+  | "deleteVoter"
+  | "updateVoter"
 
 export interface Voter {
+  id: number | string
   firstname: string
   lastname: string
   phone: string
   document: string
-  email?: string
-  id: string
+  email?: string | null
+  gender?: EGender | null
 }
 
 export interface VoterDetail extends Voter {
   birthdate: string
-  hobbies: GeneralData[]
-  occupations: GeneralData[]
-  subdivision: GeneralData & {
-    type: 'neighborhood' | 'rural_settlement'
-    division: GeneralData & {
-      type: 'commune' | 'corregimiento'
+  hobbies: IGeneralData[]
+  occupations: IGeneralData[]
+  subdivision: IGeneralData & {
+    type: TDivision
+    division: IGeneralData & {
+      type: TSubdivision
     }
   }
 }
 
 export interface VotersState {
-  voters: Page<Voter[]>
+  voters: IPage<Voter[]>
   voter: VoterDetail | null | undefined
   error: {
     getAllVoters: string | null | undefined
     createVoter: string | null | undefined
     getVoterDetail: string | null | undefined
     deleteVoter: string | null | undefined
+    updateVoter: string | null | undefined
   }
   status: {
-    getAllVoters: StatusTypes
-    createVoter: StatusTypes
-    getVoterDetail: StatusTypes
-    deleteVoter: StatusTypes
+    getAllVoters: TStatus
+    createVoter: TStatus
+    getVoterDetail: TStatus
+    deleteVoter: TStatus
+    updateVoter: TStatus
   }
 }
 
 export interface GetVotersAllPayload {
-  order?: OrderTypes
+  order?: TOrder
   current: number
   pageSize: number
 }
 
-export interface GetVotersAllResponse extends Page<Voter[]> { }
+export interface GetVotersAllResponse extends IPage<Voter[]> { }
 
-export interface CreateVoterData {
-  firstname: string
-  lastname: string
-  phone: string
-  document: string
-  birthdate?: Date
-  email?: string
-  subdivisionId?: number
+export interface CreateVoterData extends Omit<Voter, 'id'> {
+  birthdate?: Date | null
+  subdivision?: number | null
   occupations?: number[]
   hobbies?: number[]
 }
@@ -67,6 +75,15 @@ export interface CreateVoterPayload extends ISuccessCallback {
 }
 
 export interface CreateVoterResponse extends Voter { }
+
+export interface UpdateVoterData extends Omit<CreateVoterData, 'document'> { }
+
+export interface UpdateVoterPayload extends ISuccessCallback {
+  data: UpdateVoterData
+  id: number | string
+}
+
+export interface UpdateVoterResponse extends Voter { }
 
 export interface GetVoterDetailPayload {
   id: number | string
@@ -78,4 +95,4 @@ export interface DeleteVoterPayload {
   id: number | string
 }
 
-export interface DeleteVoterResponse extends SuccessResponse { }
+export interface DeleteVoterResponse extends ISuccessResponse { }

@@ -17,7 +17,8 @@ const TextInput = (props: TextInputProps) => {
     maxLength = 255,
     required = true,
     isPassword = false,
-    type = 'text'
+    type = 'text',
+    disabled = false
   } = props
 
   const Input = isPassword ? InputAntd.Password : InputAntd
@@ -33,10 +34,11 @@ const TextInput = (props: TextInputProps) => {
           <Input
             placeholder={placeholder}
             maxLength={maxLength}
-            onChange={onChange}
+            onChange={(e) => onChange(e.target.value || (required ? '' : null))}
             value={value}
             type={type}
             onKeyDown={(e) => value && validateLength(e, value, maxLength)}
+            disabled={disabled}
           />
         )}
       />

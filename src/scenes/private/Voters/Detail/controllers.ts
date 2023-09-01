@@ -24,8 +24,12 @@ const useVoterDetail = () => {
     dispatch(resetStatus('getVoterDetail'))
   }
 
-  const goToVoters = () => {
-    navigate('/voters')
+  const goBack = () => {
+    navigate(-1)
+  }
+
+  const onUpdateVoter = (id: number | string) => {
+    navigate(`/voters/update/${id}`)
   }
 
   return {
@@ -33,7 +37,8 @@ const useVoterDetail = () => {
     error,
     status,
     onCloseErrorAlert,
-    goToVoters
+    onUpdateVoter,
+    goBack
   }
 }
 

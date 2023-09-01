@@ -25,11 +25,15 @@ const useVoters = () => {
     navigate('/voters/create')
   }
 
-  const onShowVoter = (id: string) => {
+  const onShowVoter = (id: number | string) => {
     navigate(`/voters/${id}`)
   }
 
-  const onDeleteVoter = (id: string) => {
+  const onUpdateVoter = (id: number | string) => {
+    navigate(`/voters/update/${id}`)
+  }
+
+  const onDeleteVoter = (id: number | string) => {
     dispatch(deleteVoter({ id }))
   }
 
@@ -48,6 +52,7 @@ const useVoters = () => {
     onCreateVoter,
     onShowVoter,
     onDeleteVoter,
+    onUpdateVoter,
     onPageChange
   }
 }

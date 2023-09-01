@@ -5,6 +5,7 @@ import { apiInstence } from "../../../../common/axios/interceptors"
 import { CheckDocumentResponse, DocumentType, ResolveType } from './models'
 import { CreateVoterData } from "../../../../services/voters/voters.models"
 import { useGeneralSelectors } from "../../../../services/general/general.selectors"
+import { EGender } from '../../../../common/models/enums/gender.enum'
 
 let currentDoc: DocumentType
 let currentDocState: boolean = true
@@ -66,9 +67,15 @@ export const useCreateVotersValidators = () => {
     birthdate: yup.date(),
     email: yup.string()
       .max(50, 'Deben ser máximo 50 carácteres!')
-      .email('Debe ser un correo electrónico válido!'),
-    subdivisionId: yup.number()
-      .oneOf(fullSubdivisions.map(({ value }) => value)),
+      .email('Debe ser un correo electrónico válido!')
+      .nullable(),
+    gender: yup.mixed<EGender>()
+      .optional()
+      .nullable(),
+    subdivision: yup.number()
+      .oneOf([...fullSubdivisions.map(({ value }) => value), null])
+      .optional()
+      .nullable(),
     occupations: yup.array()
       .of(yup.number().oneOf(occupations.map(({ value }) => value)))
       .optional(),

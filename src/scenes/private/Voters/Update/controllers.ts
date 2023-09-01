@@ -1,22 +1,28 @@
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useGeneralSelectors } from "../../../../services/general/general.selectors"
 import { generalActions } from "../../../../services/general/general.slice"
-import { CreateVoterData } from "../../../../services/voters/voters.models"
+import { UpdateVoterData } from "../../../../services/voters/voters.models"
 import { useVotersSelectors } from "../../../../services/voters/voters.selectors"
 import { votersActions } from "../../../../services/voters/voters.slice"
 import { useAppDispatch } from "../../../../store/store"
-import { useCreateVotersValidators } from "./validators"
+import { useUpdateVoterValidators } from "./validators"
+import dayjs from "dayjs"
 import { EGender } from "../../../../common/models/enums/gender.enum"
 
-const useCreateVoters = () => {
+const useUpdateVoter = () => {
 
   const dispatch = useAppDispatch()
-
   const navigate = useNavigate()
+  const { id } = useParams()
 
-  const { status: votersStatus, error: votersError } = useVotersSelectors()
+  const {
+    status: votersStatus,
+    error: votersError,
+    voter
+  } = useVotersSelectors()
+
   const {
     fullSubdivisions,
     occupations,
@@ -25,33 +31,57 @@ const useCreateVoters = () => {
     error: generalError
   } = useGeneralSelectors()
 
-  const { createVoter, resetStatus } = votersActions
+  const { updateVoter, resetStatus, getVoterDetail, resetVoter } = votersActions
   const { getFullSubdivisions, getHobbies, getOccupations } = generalActions
 
-  const { createVoterResolver } = useCreateVotersValidators()
+  const { updateVoterResolver } = useUpdateVoterValidators()
 
   const {
     control,
     handleSubmit,
     reset,
-    formState: { errors, isValid }
-  } = useForm<CreateVoterData>({
-    resolver: createVoterResolver,
-    mode: 'all'
+    formState: { errors, isValid, isDirty },
+  } = useForm<UpdateVoterData>({
+    resolver: updateVoterResolver,
+    mode: 'all',
+    shouldUnregister: true,
   })
 
   useEffect(() => {
-    votersStatus.createVoter === 'error' && onCloseErrorAlert()
+    if (!id) return
+
+    dispatch(getVoterDetail({ id }))
+    votersStatus.updateVoter === 'error' && onCloseErrorAlert()
     !occupations.length && dispatch(getOccupations({}))
     !hobbies.length && dispatch(getHobbies({}))
+
+    return () => {
+      dispatch(resetVoter())
+    }
   }, [])
 
-  const onFinish = (data: CreateVoterData, onSuccess: () => void) => {
-    dispatch(createVoter({ data, onSuccess }))
+  useEffect(() => {
+    voter && reset({
+      ...voter,
+      birthdate: voter.birthdate ? dayjs(voter.birthdate).toDate() : undefined,
+      hobbies: voter.hobbies.map(({ id }) => (id)),
+      occupations: voter.occupations.map(({ id }) => (id)),
+      subdivision: voter.subdivision?.id
+    })
+  }, [voter])
+
+  const onFinish = (data: UpdateVoterData, onSuccess: () => void) => {
+    if (id) {
+      dispatch(updateVoter({ data, onSuccess, id }))
+    }
   }
 
   const goToVoters = () => {
     navigate('/voters')
+  }
+
+  const goBack = () => {
+    navigate(-1)
   }
 
   const onSearchSubdivision = (name: string) => {
@@ -59,7 +89,7 @@ const useCreateVoters = () => {
   }
 
   const onCloseErrorAlert = () => {
-    dispatch(resetStatus('createVoter'))
+    dispatch(resetStatus('updateVoter'))
   }
 
   const genders = Object.values(EGender).map((gender) => ({ label: gender, value: gender }))
@@ -75,14 +105,17 @@ const useCreateVoters = () => {
     fullSubdivisions,
     occupations,
     hobbies,
+    voter,
+    isDirty,
     genders,
     handleSubmit,
     onFinish,
     onSearchSubdivision,
     onCloseErrorAlert,
     reset,
-    goToVoters
+    goToVoters,
+    goBack
   }
 }
 
-export default useCreateVoters
+export default useUpdateVoter

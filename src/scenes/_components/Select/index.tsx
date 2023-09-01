@@ -17,12 +17,13 @@ const Select = (props: SelectProps) => {
     placeholder,
     options,
     required = true,
-    onCustomChange,
     showSearch = false,
-    onSearch,
     loading = false,
     allowClear = false,
-    mode
+    mode,
+    defaultValue,
+    onSearch,
+    onCustomChange
   } = props
 
   const search = showSearch ? {
@@ -44,8 +45,9 @@ const Select = (props: SelectProps) => {
             allowClear={allowClear}
             mode={mode}
             maxTagCount='responsive'
+            defaultValue={defaultValue}
             onChange={(value) => {
-              onChange(value)
+              onChange(value || null)
               onCustomChange && onCustomChange(value)
             }}
           >

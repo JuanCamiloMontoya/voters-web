@@ -10,6 +10,7 @@ import Profile from './Profile'
 import CreateVoter from "./Voters/Create"
 import usePrivate from "./controllers"
 import VoterDetail from "./Voters/Detail"
+import UpdateVoter from "./Voters/Update"
 
 const { Content } = Layout
 
@@ -47,6 +48,14 @@ const Private = () => {
       breadcrumb: [
         { title: 'Votantes', route: '/voters' },
         { title: 'Detalle de votante', route: '/voters/:id' }
+      ]
+    },
+    {
+      path: '/voters/update/:id',
+      element: <UpdateVoter />,
+      breadcrumb: [
+        { title: 'Votantes', route: '/voters' },
+        { title: 'Actualizar votante', route: '/voters/update/:id' }
       ]
     },
     {

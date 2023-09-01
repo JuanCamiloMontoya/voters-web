@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { generalInitialState } from "./general.initialState"
-import { GeneralState, GeneralTypes } from "./general.models"
+import { FullSubdivisions, GeneralState, GeneralThunksTypes } from "./general.models"
 import { generalThunks } from "./general.thunks"
 
 const initialState = generalInitialState()
@@ -17,9 +17,12 @@ const generalSlice = createSlice({
   name: 'general',
   initialState,
   reducers: {
-    resetStatus(state: GeneralState, { payload }: PayloadAction<GeneralTypes>) {
+    resetStatus(state: GeneralState, { payload }: PayloadAction<GeneralThunksTypes>) {
       state.error[payload] = initialState.error[payload]
       state.status[payload] = initialState.status[payload]
+    },
+    setFullSubdivisions(state: GeneralState, { payload }: PayloadAction<FullSubdivisions[]>) {
+      state.fullSubdivisions = payload
     }
   },
   extraReducers: (builder) => {
