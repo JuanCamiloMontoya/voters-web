@@ -13,9 +13,9 @@ const useVoters = () => {
   const { getAllVoters, deleteVoter } = votersActions;
 
   const { voters, status } = useVotersSelectors();
+  const { current, pageSize } = voters.meta;
 
   useEffect(() => {
-    const { current, pageSize } = voters.meta;
     dispatch(getAllVoters({ current, pageSize }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -33,7 +33,10 @@ const useVoters = () => {
   };
 
   const onDeleteVoter = (id: number | string) => {
-    dispatch(deleteVoter({ id }));
+    const onSuccess = () => {
+      dispatch(getAllVoters({ current, pageSize }));
+    };
+    dispatch(deleteVoter({ id, onSuccess }));
   };
 
   const onPageChange = (pageData: TablePaginationConfig) => {

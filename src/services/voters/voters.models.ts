@@ -96,7 +96,7 @@ export interface GetVoterDetailPayload {
 
 export interface GetVoterDetailResponse extends VoterDetail {}
 
-export interface DeleteVoterPayload {
+export interface DeleteVoterPayload extends ISuccessCallback {
   id: number | string;
 }
 

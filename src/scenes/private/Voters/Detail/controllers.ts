@@ -6,10 +6,14 @@ import { useAppDispatch } from "../../../../store/store";
 
 const useVoterDetail = () => {
   const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
+
   const { id } = useParams();
 
-  const { getVoterDetail, resetStatus, resetVoter } = votersActions;
+  const { getVoterDetail, resetStatus, resetVoter, deleteVoter } =
+    votersActions;
+
   const { voter, error, status } = useVotersSelectors();
 
   useEffect(() => {
@@ -31,6 +35,11 @@ const useVoterDetail = () => {
     navigate(`/voters/update/${id}`);
   };
 
+  const onDeleteVoter = (id: number | string) => {
+    const onSuccess = () => navigate("/voters");
+    dispatch(deleteVoter({ id, onSuccess }));
+  };
+
   return {
     voter,
     error,
@@ -38,6 +47,7 @@ const useVoterDetail = () => {
     onCloseErrorAlert,
     onUpdateVoter,
     goBack,
+    onDeleteVoter,
   };
 };
 

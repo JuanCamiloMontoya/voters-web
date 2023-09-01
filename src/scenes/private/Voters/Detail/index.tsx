@@ -4,12 +4,17 @@ import {
   Descriptions,
   Divider,
   List,
+  Popconfirm,
   Row,
   Spin,
   Typography,
 } from "antd";
 import useVoterDetail from "./controllers";
-import { ArrowLeftOutlined, EditFilled } from "@ant-design/icons";
+import {
+  ArrowLeftOutlined,
+  DeleteOutlined,
+  EditFilled,
+} from "@ant-design/icons";
 
 const { Item } = Descriptions;
 const { Title } = Typography;
@@ -19,8 +24,15 @@ const itemProps = {
 };
 
 const VoterDetail = () => {
-  const { voter, error, status, onCloseErrorAlert, goBack, onUpdateVoter } =
-    useVoterDetail();
+  const {
+    voter,
+    error,
+    status,
+    onCloseErrorAlert,
+    goBack,
+    onUpdateVoter,
+    onDeleteVoter,
+  } = useVoterDetail();
 
   return (
     <div className="voters">
@@ -31,12 +43,30 @@ const VoterDetail = () => {
           Detalle de votante
         </Title>
         {voter && (
-          <Button
-            type="primary"
-            shape="circle"
-            icon={<EditFilled />}
-            onClick={() => onUpdateVoter(voter.id)}
-          />
+          <div>
+            <Button
+              type="primary"
+              shape="circle"
+              icon={<EditFilled />}
+              onClick={() => onUpdateVoter(voter.id)}
+            />
+            <Divider type="vertical" />
+            <Popconfirm
+              title="Eliminar votante"
+              description={`Está seguro de eliminar a ${voter.firstname} ${voter.lastname}?`}
+              onConfirm={() => onDeleteVoter(voter.id)}
+              okText="Sí"
+              cancelText="Cancelar"
+              placement="topRight"
+            >
+              <Button
+                type="primary"
+                danger
+                shape="circle"
+                icon={<DeleteOutlined />}
+              />
+            </Popconfirm>
+          </div>
         )}
       </Row>
       {status.getVoterDetail === "loading" && (

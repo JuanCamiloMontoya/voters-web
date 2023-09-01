@@ -41,12 +41,12 @@ export const votersThunks = () => {
   >("voters/detail", async ({ id }, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await apiInstence.get<GetVoterDetailResponse>(
-        `/voters/${id}`,
+        `/voters/${id}`
       );
       if (data.subdivision) {
         const { id, name, division } = data.subdivision;
         dispatch(
-          setFullSubdivisions([{ id, name: `${name} - ${division.name}` }]),
+          setFullSubdivisions([{ id, name: `${name} - ${division.name}` }])
         );
       }
       return data;
@@ -63,7 +63,7 @@ export const votersThunks = () => {
     try {
       const { data: response } = await apiInstence.post<CreateVoterResponse>(
         "/voters",
-        data,
+        data
       );
       onSuccess();
       return response;
@@ -80,7 +80,7 @@ export const votersThunks = () => {
     try {
       const { data: response } = await apiInstence.put<UpdateVoterResponse>(
         `/voters/${id}`,
-        data,
+        data
       );
       onSuccess();
       return response;
@@ -92,28 +92,18 @@ export const votersThunks = () => {
   const deleteVoter = createAsyncThunk<
     DeleteVoterResponse,
     DeleteVoterPayload,
-    { rejectValue: ErrorMsgResponse; state: RootState }
-  >(
-    "voters/delete",
-    async ({ id }, { rejectWithValue, dispatch, getState }) => {
-      try {
-        const { data: response } =
-          await apiInstence.delete<DeleteVoterResponse>(`/voters/${id}`);
-
-        const {
-          voters: {
-            voters: {
-              meta: { current, pageSize },
-            },
-          },
-        } = getState();
-        dispatch(getAllVoters({ current, pageSize }));
-        return response;
-      } catch (error: any) {
-        return rejectWithValue({ message: error.toString() });
-      }
-    },
-  );
+    { rejectValue: ErrorMsgResponse }
+  >("voters/delete", async ({ id, onSuccess }, { rejectWithValue }) => {
+    try {
+      const { data: response } = await apiInstence.delete<DeleteVoterResponse>(
+        `/voters/${id}`
+      );
+      onSuccess();
+      return response;
+    } catch (error: any) {
+      return rejectWithValue({ message: error.toString() });
+    }
+  });
 
   return {
     getAllVoters,
