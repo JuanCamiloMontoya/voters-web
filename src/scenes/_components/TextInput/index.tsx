@@ -29,8 +29,9 @@ const TextInput = (props: TextInputProps) => {
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value, ...field } }) => (
           <Input
+            {...field}
             placeholder={placeholder}
             maxLength={maxLength}
             onChange={(e) => onChange(e.target.value || (required ? "" : null))}

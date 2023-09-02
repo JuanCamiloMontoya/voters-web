@@ -23,8 +23,9 @@ const CodeInput = (props: CodeInputProps) => {
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange } }) => (
+        render={({ field: { onChange, ...field } }) => (
           <ReactCodeInput
+            {...field}
             type={type}
             fields={fields}
             name={name}

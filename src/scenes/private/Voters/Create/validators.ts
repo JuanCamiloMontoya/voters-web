@@ -69,7 +69,7 @@ export const useCreateVotersValidators = () => {
       .required("Ingrese el número de teléfono!")
       .matches(/^[0-9]+$/, "Debe ser un número!")
       .length(10, "Deben ser 10 dígitos!"),
-    birthdate: yup.date(),
+    birthdate: yup.date().optional().nullable(),
     email: yup
       .string()
       .max(50, "Deben ser máximo 50 carácteres!")

@@ -45,6 +45,18 @@ const useCreateVoters = () => {
   } = useForm<CreateVoterData>({
     resolver: createVoterResolver,
     mode: "all",
+    defaultValues: {
+      birthdate: null,
+      document: undefined,
+      email: null,
+      firstname: undefined,
+      gender: null,
+      hobbies: [],
+      lastname: undefined,
+      occupations: [],
+      phone: undefined,
+      subdivision: null,
+    },
   });
 
   useEffect(() => {

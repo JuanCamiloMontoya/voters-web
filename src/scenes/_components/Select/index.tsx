@@ -38,8 +38,9 @@ const Select = (props: SelectProps) => {
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange } }) => (
+        render={({ field: { onChange, ...field } }) => (
           <SelectAntd
+            {...field}
             {...search}
             placeholder={placeholder}
             loading={loading}

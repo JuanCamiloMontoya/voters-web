@@ -1,6 +1,7 @@
 import { DatePicker as DatePickerAntd, Form, Typography } from "antd";
 import { Controller } from "react-hook-form";
 import { DatePickerProps } from "./models";
+import dayjs from "dayjs";
 
 const { Item } = Form;
 const { Text } = Typography;
@@ -13,7 +14,6 @@ const DatePicker = (props: DatePickerProps) => {
     label,
     required = true,
     placeholder,
-    defaultValue,
     defaultPickerValue,
     disabledDate,
   } = props;
@@ -23,13 +23,14 @@ const DatePicker = (props: DatePickerProps) => {
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange } }) => (
+        render={({ field: { onChange, value, ...field } }) => (
           <DatePickerAntd
-            onChange={(value) => onChange(value?.toDate())}
+            {...field}
             style={{ width: "100%" }}
+            onChange={(value) => onChange(value || undefined)}
             placeholder={placeholder}
             disabledDate={disabledDate}
-            defaultValue={defaultValue}
+            value={value && dayjs(value)}
             defaultPickerValue={defaultPickerValue}
           />
         )}
