@@ -1,51 +1,50 @@
-import { useEffect } from "react"
-import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
-import { IEmail } from "../../../common/models/interfaces/common.interface"
-import { useAuthSelectors } from "../../../services/auth/auth.selectors"
-import { authActions } from "../../../services/auth/auth.slice"
-import { useAppDispatch } from "../../../store/store"
-import { usePasswordResetRequestValidator } from "./validators"
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { IEmail } from "../../../common/models/interfaces/common.interface";
+import { useAuthSelectors } from "../../../services/auth/auth.selectors";
+import { authActions } from "../../../services/auth/auth.slice";
+import { useAppDispatch } from "../../../store/store";
+import { usePasswordResetRequestValidator } from "./validators";
 
 const usePasswordResetRequest = () => {
+  const dispatch = useAppDispatch();
 
-  const dispatch = useAppDispatch()
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
+  const { status, error } = useAuthSelectors();
 
-  const { status, error } = useAuthSelectors()
+  const { passwordResetRequest, resetStatus } = authActions;
 
-  const { passwordResetRequest, resetStatus } = authActions
-
-  const { passwordResetRequestResolver } = usePasswordResetRequestValidator()
+  const { passwordResetRequestResolver } = usePasswordResetRequestValidator();
 
   useEffect(() => {
-    status.passwordResetRequest === 'error' && onCloseErrorAlert()
+    status.passwordResetRequest === "error" && onCloseErrorAlert();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
   } = useForm<IEmail>({
     resolver: passwordResetRequestResolver,
-    mode: 'all'
-  })
+    mode: "all",
+  });
 
   const onFinish = (data: IEmail) => {
-    const onSuccess = () => navigate('/verify-email')
+    const onSuccess = () => navigate("/verify-email");
 
-    dispatch(passwordResetRequest({ data, onSuccess }))
-  }
+    dispatch(passwordResetRequest({ data, onSuccess }));
+  };
 
   const onLogin = () => {
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   const onCloseErrorAlert = () => {
-    dispatch(resetStatus('passwordResetRequest'))
-  }
+    dispatch(resetStatus("passwordResetRequest"));
+  };
 
   return {
     status,
@@ -56,8 +55,8 @@ const usePasswordResetRequest = () => {
     handleSubmit,
     onFinish,
     onLogin,
-    onCloseErrorAlert
-  }
-}
+    onCloseErrorAlert,
+  };
+};
 
-export default usePasswordResetRequest
+export default usePasswordResetRequest;

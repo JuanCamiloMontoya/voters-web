@@ -1,6 +1,5 @@
 const Leaders = () => {
+  return <>Leaders</>;
+};
 
-  return <>Leaders</>
-}
-
-export default Leaders
+export default Leaders;

@@ -1,17 +1,25 @@
-import { CheckCircleTwoTone } from "@ant-design/icons"
-import { Alert, Button, Col, Form, Modal, Row, Typography } from "antd"
-import dayjs from "dayjs"
-import { colors, columnSizes } from "../../../../common/antd/theme"
-import DatePicker from "../../../_components/DatePicker"
-import Select from "../../../_components/Select"
-import TextInput from "../../../_components/TextInput"
-import useCreateVoters from "./controllers"
+import { ArrowLeftOutlined, CheckCircleTwoTone } from "@ant-design/icons";
+import {
+  Alert,
+  Button,
+  Col,
+  Divider,
+  Form,
+  Modal,
+  Row,
+  Typography,
+} from "antd";
+import dayjs from "dayjs";
+import { colors, columnSizes } from "../../../../common/antd/theme";
+import DatePicker from "../../../_components/DatePicker";
+import Select from "../../../_components/Select";
+import TextInput from "../../../_components/TextInput";
+import useCreateVoters from "./controllers";
 
-const { Title } = Typography
-const today = dayjs()
+const { Title } = Typography;
+const today = dayjs();
 
 const CreateVoter = () => {
-
   const {
     votersStatus,
     votersError,
@@ -22,35 +30,30 @@ const CreateVoter = () => {
     fullSubdivisions,
     occupations,
     hobbies,
+    genders,
+    openSuccesModal,
     handleSubmit,
     onFinish,
     onSearchSubdivision,
     onCloseErrorAlert,
-    reset,
-    goToVoters
-  } = useCreateVoters()
-
-  const onSuccess = () => {
-    Modal.confirm({
-      title: 'Registro exitoso!',
-      content: 'La persona a sido registrada correctamente',
-      okText: 'Realizar nuevo registro',
-      onOk: reset,
-      cancelText: 'Ver lista de personas',
-      onCancel: goToVoters,
-      icon: <CheckCircleTwoTone twoToneColor={colors.succesIconColor} />
-    })
-  }
+    goToVoters,
+    onNewRecord,
+    goToVoterDetail,
+  } = useCreateVoters();
 
   return (
-    <div className='create-voter'>
-      <Title level={2}>Registrar persona</Title>
+    <div className="create-voter">
+      <Title level={3}>
+        <ArrowLeftOutlined onClick={goToVoters} />
+        <Divider type="vertical" />
+        Registrar votante
+      </Title>
       <Form
         labelCol={{ span: 24 }}
         wrapperCol={{ span: 24 }}
-        onFinish={handleSubmit((values) => onFinish(values, onSuccess))}
+        onFinish={handleSubmit(onFinish)}
       >
-        {votersStatus.createVoter === 'error' && (
+        {votersStatus.createVoter === "error" && (
           <Alert
             message={votersError.createVoter}
             type="error"
@@ -62,90 +65,103 @@ const CreateVoter = () => {
         <Row gutter={10}>
           <Col {...columnSizes}>
             <TextInput
-              name='document'
+              name="document"
               control={control}
-              label='N° de documento'
-              placeholder='N° de documento'
+              label="N° de documento"
+              placeholder="N° de documento"
               maxLength={10}
               error={errors.document}
-              type='number'
+              type="number"
             />
           </Col>
           <Col {...columnSizes}>
             <TextInput
-              name='firstname'
+              name="firstname"
               control={control}
-              label='Nombre(s)'
-              placeholder='Nombre(s)'
+              label="Nombre(s)"
+              placeholder="Nombre(s)"
               maxLength={30}
               error={errors.firstname}
             />
           </Col>
           <Col {...columnSizes}>
             <TextInput
-              name='lastname'
+              name="lastname"
               control={control}
-              label='Apellidos'
-              placeholder='Apellidos'
+              label="Apellidos"
+              placeholder="Apellidos"
               maxLength={30}
               error={errors.lastname}
             />
           </Col>
           <Col {...columnSizes}>
             <TextInput
-              name='phone'
+              name="phone"
               control={control}
-              label='N° de teléfono'
-              placeholder='N° de teléfono'
+              label="N° de teléfono"
+              placeholder="N° de teléfono"
               maxLength={10}
               error={errors.phone}
-              type='number'
+              type="number"
             />
           </Col>
           <Col {...columnSizes}>
             <TextInput
-              name='email'
+              name="email"
               control={control}
-              label='Correo'
-              placeholder='Dirección de correo'
+              label="Correo"
+              placeholder="Dirección de correo"
               maxLength={50}
               error={errors.email}
               required={false}
-              type='email'
+              type="email"
             />
           </Col>
           <Col {...columnSizes}>
             <DatePicker
-              name='birthdate'
+              name="birthdate"
               control={control}
-              label='Fecha de nacimiento'
+              label="Fecha de nacimiento"
               error={errors.birthdate}
               placeholder="Fecha de nacimiento"
-              disabledDate={(date) => date.isAfter(today.subtract(18, 'years'))}
+              disabledDate={(date) => date.isAfter(today.subtract(18, "years"))}
               required={false}
+              defaultPickerValue={today.subtract(18, "year")}
             />
           </Col>
           <Col {...columnSizes}>
             <Select
-              name='subdivisionId'
+              name="gender"
               control={control}
-              label='Vereda/Barrio'
-              placeholder='Vereda/Barrio'
-              error={errors.subdivisionId}
+              label="Género"
+              placeholder="Género"
+              error={errors.gender}
               required={false}
-              options={fullSubdivisions}
-              showSearch
-              onSearch={onSearchSubdivision}
-              loading={generalStatus.getFullSubdivisions === 'loading'}
+              options={genders}
               allowClear
             />
           </Col>
           <Col {...columnSizes}>
             <Select
-              name='occupations'
+              name="subdivision"
               control={control}
-              label='Ocupación(es)'
-              placeholder='Ocupación(es)'
+              label="Vereda/Barrio"
+              placeholder="Vereda/Barrio"
+              error={errors.subdivision}
+              required={false}
+              options={fullSubdivisions}
+              showSearch
+              onSearch={onSearchSubdivision}
+              loading={generalStatus.getFullSubdivisions === "loading"}
+              allowClear
+            />
+          </Col>
+          <Col {...columnSizes}>
+            <Select
+              name="occupations"
+              control={control}
+              label="Ocupación(es)"
+              placeholder="Ocupación(es)"
               error={errors.occupations}
               required={false}
               options={occupations}
@@ -156,10 +172,10 @@ const CreateVoter = () => {
           </Col>
           <Col {...columnSizes}>
             <Select
-              name='hobbies'
+              name="hobbies"
               control={control}
-              label='Pasatiempo(s)'
-              placeholder='Pasatiempo(s)'
+              label="Pasatiempo(s)"
+              placeholder="Pasatiempo(s)"
               error={errors.hobbies}
               required={false}
               options={hobbies}
@@ -168,19 +184,34 @@ const CreateVoter = () => {
             />
           </Col>
         </Row>
-        <div className='center-element'>
+        <div className="center-element">
           <Button
-            htmlType='submit'
-            loading={votersStatus.createVoter === 'loading'}
+            htmlType="submit"
+            loading={votersStatus.createVoter === "loading"}
             disabled={!isValid}
             type="primary"
           >
-            Registrar persona
+            Registrar votante
           </Button>
         </div>
       </Form>
+      <Modal
+        open={openSuccesModal}
+        title="Registro exitoso!"
+        footer={
+          <>
+            <Button onClick={goToVoterDetail}>Ver votante</Button>
+            <Divider type="vertical" />
+            <Button onClick={goToVoters}>Lista de votantes</Button>
+            <Divider type="vertical" />
+            <Button onClick={onNewRecord}>Nuevo registro</Button>
+          </>
+        }
+      >
+        <p>El votante ha sido registrado correctamente</p>
+      </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default CreateVoter
+export default CreateVoter;

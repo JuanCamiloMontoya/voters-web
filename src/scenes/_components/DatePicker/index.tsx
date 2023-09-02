@@ -1,12 +1,11 @@
-import { DatePicker as DatePickerAntd, Form, Typography } from 'antd'
-import { Controller } from 'react-hook-form'
-import { DatePickerProps } from './models'
+import { DatePicker as DatePickerAntd, Form, Typography } from "antd";
+import { Controller } from "react-hook-form";
+import { DatePickerProps } from "./models";
 
-const { Item } = Form
-const { Text } = Typography
+const { Item } = Form;
+const { Text } = Typography;
 
 const DatePicker = (props: DatePickerProps) => {
-
   const {
     name,
     control,
@@ -15,8 +14,9 @@ const DatePicker = (props: DatePickerProps) => {
     required = true,
     placeholder,
     defaultValue,
-    disabledDate
-  } = props
+    defaultPickerValue,
+    disabledDate,
+  } = props;
 
   return (
     <Item label={label} required={required}>
@@ -26,16 +26,17 @@ const DatePicker = (props: DatePickerProps) => {
         render={({ field: { onChange } }) => (
           <DatePickerAntd
             onChange={(value) => onChange(value?.toDate())}
-            style={{ width: '100%' }}
+            style={{ width: "100%" }}
             placeholder={placeholder}
             disabledDate={disabledDate}
             defaultValue={defaultValue}
+            defaultPickerValue={defaultPickerValue}
           />
         )}
       />
       {error && <Text type="danger">{error.message}</Text>}
     </Item>
-  )
-}
+  );
+};
 
-export default DatePicker
+export default DatePicker;

@@ -1,68 +1,97 @@
-import { Breadcrumb, Layout } from "antd"
-import { Route, Routes, matchPath, useNavigate } from "react-router-dom"
-import { HomeOutlined } from "@ant-design/icons"
-import Sider from './_layout/Sider'
-import Header from './_layout/Header'
-import Home from "./Home"
-import Leaders from "./Leaders"
-import Voters from "./Voters"
-import Profile from './Profile'
-import CreateVoter from "./Voters/Create"
-import usePrivate from "./controllers"
-import VoterDetail from "./Voters/Detail"
+import { Breadcrumb, Layout } from "antd";
+import { Route, Routes, matchPath } from "react-router-dom";
+import { HomeOutlined } from "@ant-design/icons";
+import Sider from "./_layout/Sider";
+import Header from "./_layout/Header";
+import Home from "./Home";
+import Leaders from "./Leaders";
+import Voters from "./Voters";
+import Profile from "./Profile";
+import CreateVoter from "./Voters/Create";
+import usePrivate from "./controllers";
+import VoterDetail from "./Voters/Detail";
+import UpdateVoter from "./Voters/Update";
 
-const { Content } = Layout
+const { Content } = Layout;
 
 const Private = () => {
-
-  const { pathname } = usePrivate()
+  const { pathname, onBreadcrumbClick } = usePrivate();
 
   const routes = [
     {
-      path: '/',
+      path: "/",
       element: <Home />,
-      breadcrumb: []
+      breadcrumb: [],
     },
     {
-      path: '/leaders',
+      path: "/leaders",
       element: <Leaders />,
-      breadcrumb: ['Líderes']
+      breadcrumb: [{ title: "Líderes", route: "/leaders" }],
     },
     {
-      path: '/voters',
+      path: "/voters",
       element: <Voters />,
-      breadcrumb: ['Personas']
+      breadcrumb: [{ title: "Votantes", route: "/voters" }],
     },
     {
-      path: '/voters/create',
+      path: "/voters/create",
       element: <CreateVoter />,
-      breadcrumb: ['Personas', 'Crear votante']
+      breadcrumb: [
+        { title: "Votantes", route: "/voters" },
+        { title: "Crear votante", route: "/voters/create" },
+      ],
     },
     {
-      path: '/voters/:id',
+      path: "/voters/:id",
       element: <VoterDetail />,
-      breadcrumb: ['Personas', 'Detalle votante']
+      breadcrumb: [
+        { title: "Votantes", route: "/voters" },
+        { title: "Detalle de votante", route: "/voters/:id" },
+      ],
     },
     {
-      path: '/profile',
+      path: "/voters/update/:id",
+      element: <UpdateVoter />,
+      breadcrumb: [
+        { title: "Votantes", route: "/voters" },
+        { title: "Actualizar votante", route: "/voters/update/:id" },
+      ],
+    },
+    {
+      path: "/profile",
       element: <Profile />,
-      breadcrumb: ['Perfil']
-    }
-  ]
-
-  const navigate = useNavigate()
+      breadcrumb: [{ title: "Perfil", route: "/profile" }],
+    },
+  ];
 
   return (
     <Layout>
       <Sider />
       <Layout>
         <Header />
-        <Content className='private-content'>
+        <Content className="private-content">
           <Breadcrumb>
-            <Breadcrumb.Item><HomeOutlined /></Breadcrumb.Item>
-            {routes.find(({ path }) => matchPath(path, pathname))?.breadcrumb.map((item, i) => (
-              <Breadcrumb.Item key={i} onClick={() => { navigate('/') }}>{item}</Breadcrumb.Item>
-            ))}
+            <Breadcrumb.Item>
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            {routes
+              .find(({ path }) => matchPath(path, pathname))
+              ?.breadcrumb.map((item, i) => (
+                <Breadcrumb.Item
+                  key={i}
+                  onClick={() => onBreadcrumbClick(item.route)}
+                >
+                  <span
+                    style={{
+                      cursor: !matchPath(item.route, pathname)
+                        ? "pointer"
+                        : "auto",
+                    }}
+                  >
+                    {item.title}
+                  </span>
+                </Breadcrumb.Item>
+              ))}
           </Breadcrumb>
           <Routes>
             {routes.map(({ path, element }, i) => (
@@ -72,7 +101,7 @@ const Private = () => {
         </Content>
       </Layout>
     </Layout>
-  )
-}
+  );
+};
 
-export default Private
+export default Private;

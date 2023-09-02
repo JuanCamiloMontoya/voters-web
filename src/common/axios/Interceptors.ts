@@ -1,58 +1,61 @@
-import axios from 'axios'
+import axios from "axios";
 import {
   AxiosError,
   AxiosInstance,
   InternalAxiosRequestConfig,
-  AxiosResponse
-} from "axios"
-import { apiUrl } from "../config/environments"
-import { AppStore } from '../../store/store'
+  AxiosResponse,
+} from "axios";
+import { apiUrl } from "../config/environments";
+import { AppStore } from "../../store/store";
 
-const defaultErrorMessage = `Lo sentimos! Tenemos un error inesperado. Por favor intentelo más tarde.`
+const defaultErrorMessage = `Lo sentimos! Tenemos un error inesperado. Por favor intentelo más tarde.`;
 
 interface ErrorMsgResponse {
-  message: string | []
+  message: string | [];
 }
 
-let store: AppStore
+let store: AppStore;
 
 export const injectStore = (_store: AppStore) => {
-  store = _store
-}
+  store = _store;
+};
 
-const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-  config.baseURL = apiUrl
+const onRequest = (
+  config: InternalAxiosRequestConfig,
+): InternalAxiosRequestConfig => {
+  config.baseURL = apiUrl;
   config.headers.set({
-    'Authorization': `Bearer ${store.getState().auth.accessToken}`,
-    'Accept': 'application/json',
-    'Content-Type': 'application/x-www-form-urlencoded'
-  })
-  return config
-}
+    Authorization: `Bearer ${store.getState().auth.accessToken}`,
+    Accept: "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
+  });
+  return config;
+};
 
 const onRequestError = (error: AxiosError): Promise<AxiosError> => {
-  const errorMsg = error.response?.data || defaultErrorMessage
-  return Promise.reject(errorMsg)
-}
+  const errorMsg = error.response?.data || defaultErrorMessage;
+  return Promise.reject(errorMsg);
+};
 
 const onResponse = (response: AxiosResponse): AxiosResponse => {
-  return response
-}
+  return response;
+};
 
-const onResponseError = (error: AxiosError<ErrorMsgResponse>): Promise<string> => {
-  const errorMsg = error.response?.data?.message || defaultErrorMessage
+const onResponseError = (
+  error: AxiosError<ErrorMsgResponse>,
+): Promise<string> => {
+  const errorMsg = error.response?.data?.message || defaultErrorMessage;
 
-  if (Array.isArray(errorMsg))
-    return Promise.reject(errorMsg.join('\n'))
+  if (Array.isArray(errorMsg)) return Promise.reject(errorMsg.join("\n"));
 
-  return Promise.reject(errorMsg)
-}
+  return Promise.reject(errorMsg);
+};
 
 const setupInterceptorsTo = (axiosInstance: AxiosInstance): AxiosInstance => {
-  axiosInstance.interceptors.request.use(onRequest, onRequestError)
-  axiosInstance.interceptors.response.use(onResponse, onResponseError)
-  return axiosInstance
-}
+  axiosInstance.interceptors.request.use(onRequest, onRequestError);
+  axiosInstance.interceptors.response.use(onResponse, onResponseError);
+  return axiosInstance;
+};
 
-export const apiInstence = axios.create()
-setupInterceptorsTo(apiInstence)
+export const apiInstence = axios.create();
+setupInterceptorsTo(apiInstence);

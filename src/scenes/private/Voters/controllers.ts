@@ -1,42 +1,62 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useVotersSelectors } from '../../../services/voters/voters.selectors'
-import { votersActions } from '../../../services/voters/voters.slice'
-import { useAppDispatch } from '../../../store/store'
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useVotersSelectors } from "../../../services/voters/voters.selectors";
+import { votersActions } from "../../../services/voters/voters.slice";
+import { useAppDispatch } from "../../../store/store";
+import { TablePaginationConfig } from "antd";
+import { GetVotersAllPayload } from "../../../services/voters/voters.models";
 
 const useVoters = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  const { getAllVoters, deleteVoter } = votersActions;
 
-  const { getAllVoters } = votersActions
+  const { voters, status } = useVotersSelectors();
+  const { current, pageSize } = voters.meta;
 
   useEffect(() => {
-    dispatch(getAllVoters({}))
+    dispatch(getAllVoters({ current, pageSize }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const { voters, status } = useVotersSelectors()
+  }, []);
 
   const onCreateVoter = () => {
-    navigate('/voters/create')
-  }
+    navigate("/voters/create");
+  };
 
-  const onShowVoter = (id: string) => {
-    navigate(`/voters/${id}`)
-  }
+  const onShowVoter = (id: number | string) => {
+    navigate(`/voters/${id}`);
+  };
 
-  const onDeleteVoter = (id: string) => {
+  const onUpdateVoter = (id: number | string) => {
+    navigate(`/voters/update/${id}`);
+  };
 
-  }
+  const onDeleteVoter = (id: number | string) => {
+    const onSuccess = () => {
+      dispatch(getAllVoters({ current, pageSize }));
+    };
+    dispatch(deleteVoter({ id, onSuccess }));
+  };
+
+  const onPageChange = (pageData: TablePaginationConfig) => {
+    const { pageSize, current } = pageData;
+    const payload: GetVotersAllPayload = {
+      current: current || 1,
+      pageSize: pageSize || 10,
+    };
+    dispatch(getAllVoters(payload));
+  };
 
   return {
     voters,
     status,
     onCreateVoter,
     onShowVoter,
-    onDeleteVoter
-  }
-}
+    onDeleteVoter,
+    onUpdateVoter,
+    onPageChange,
+  };
+};
 
-export default useVoters
+export default useVoters;

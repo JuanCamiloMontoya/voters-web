@@ -1,24 +1,23 @@
-import { useNavigate } from "react-router-dom"
-import { useAppDispatch } from "../../../../store/store"
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../../store/store";
 
 const useHeader = () => {
-
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onLogout = () => {
-    dispatch({ type: 'auth/logout' })
-    navigate('/')
-  }
+    dispatch({ type: "auth/logout" });
+    navigate("/");
+  };
 
   const onProfile = () => {
-    navigate('/profile')
-  }
+    navigate("/profile");
+  };
 
   return {
     onLogout,
-    onProfile
-  }
-}
+    onProfile,
+  };
+};
 
-export default useHeader
+export default useHeader;

@@ -1,15 +1,20 @@
 export interface ErrorMsgResponse {
-  message: string
+  message: string;
 }
+
 export interface IEmail {
-  email: string
+  email: string;
 }
 
 export interface ISuccessCallback {
-  onSuccess: () => void
+  onSuccess: () => void;
 }
 
-export interface GeneralData {
-  id: number
-  name: string
+export interface IGeneralData {
+  id: number;
+  name: string;
+}
+
+export interface ISuccessResponse {
+  success: boolean;
 }

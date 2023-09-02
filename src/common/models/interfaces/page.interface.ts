@@ -1,13 +1,13 @@
-interface PageMeta {
-  page: number
-  take: number
-  itemCount: number
-  pageCount: number
-  hasPreviousPage: boolean
-  hasNextPage: boolean
+interface IPageMeta {
+  current: number;
+  pageSize: number;
+  total: number;
+  pageCount: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
-export interface Page<Data> {
-  meta: PageMeta
-  data: Data
+export interface IPage<Data> {
+  meta: IPageMeta;
+  data: Data;
 }

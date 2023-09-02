@@ -1,55 +1,53 @@
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { ResetPasswordData } from '../../../services/auth/auth.models'
-import { useAuthSelectors } from '../../../services/auth/auth.selectors'
-import { authActions } from '../../../services/auth/auth.slice'
-import { useAppDispatch } from '../../../store/store'
-import { useResetPasswordValidator } from './validators'
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { ResetPasswordData } from "../../../services/auth/auth.models";
+import { useAuthSelectors } from "../../../services/auth/auth.selectors";
+import { authActions } from "../../../services/auth/auth.slice";
+import { useAppDispatch } from "../../../store/store";
+import { useResetPasswordValidator } from "./validators";
 
 const useResetPassword = () => {
+  const dispatch = useAppDispatch();
 
-  const dispatch = useAppDispatch()
+  const { status, error, passwordReset } = useAuthSelectors();
 
-  const { status, error, passwordReset } = useAuthSelectors()
+  const { resetPassword, resetStatus } = authActions;
 
-  const { resetPassword, resetStatus } = authActions
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const { resetPasswordResolver } = useResetPasswordValidator()
+  const { resetPasswordResolver } = useResetPasswordValidator();
 
   useEffect(() => {
-    status.resetPassword === 'error' && onCloseErrorAlert()
+    status.resetPassword === "error" && onCloseErrorAlert();
 
-    if (!passwordReset.email || !passwordReset.code)
-      navigate('/')
+    if (!passwordReset.email || !passwordReset.code) navigate("/");
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
   } = useForm<ResetPasswordData>({
     resolver: resetPasswordResolver,
-    mode: 'all'
-  })
+    mode: "all",
+  });
 
   const onFinish = (data: ResetPasswordData) => {
     const onSuccess = () => {
-      navigate('/')
-    }
-    dispatch(resetPassword({ data, onSuccess }))
-  }
+      navigate("/");
+    };
+    dispatch(resetPassword({ data, onSuccess }));
+  };
 
   const onLogin = () => {
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   const onCloseErrorAlert = () => {
-    dispatch(resetStatus('resetPassword'))
-  }
+    dispatch(resetStatus("resetPassword"));
+  };
 
   return {
     error,
@@ -61,8 +59,8 @@ const useResetPassword = () => {
     handleSubmit,
     onFinish,
     onLogin,
-    onCloseErrorAlert
-  }
-}
+    onCloseErrorAlert,
+  };
+};
 
-export default useResetPassword
+export default useResetPassword;

@@ -1,65 +1,72 @@
-import { IEmail, ISuccessCallback } from "../../common/models/interfaces/common.interface"
-import { StatusTypes } from "../../common/models/types/status.type"
+import {
+  IEmail,
+  ISuccessCallback,
+} from "../../common/models/interfaces/common.interface";
+import { TStatus } from "../../common/models/types/common.type";
 
-export type AuthTypes = 'login' | 'passwordResetRequest' | 'verifyEmail' | 'resetPassword'
+export type AuthTypes =
+  | "login"
+  | "passwordResetRequest"
+  | "verifyEmail"
+  | "resetPassword";
 
 export interface AuthState {
-  isAuthenticated: boolean
-  accessToken: string | null
+  isAuthenticated: boolean;
+  accessToken: string | null;
   passwordReset: {
-    email: string | null
-    code: string | null
-  }
+    email: string | null;
+    code: string | null;
+  };
   error: {
-    login: string | null | undefined
-    passwordResetRequest: string | null | undefined
-    verifyEmail: string | null | undefined
-    resetPassword: string | null | undefined
-  }
+    login: string | null | undefined;
+    passwordResetRequest: string | null | undefined;
+    verifyEmail: string | null | undefined;
+    resetPassword: string | null | undefined;
+  };
   status: {
-    login: StatusTypes
-    passwordResetRequest: StatusTypes
-    verifyEmail: StatusTypes
-    resetPassword: StatusTypes
-  }
+    login: TStatus;
+    passwordResetRequest: TStatus;
+    verifyEmail: TStatus;
+    resetPassword: TStatus;
+  };
 }
 
 export interface LoginPayload {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 export interface LoginResponse {
-  accessToken: string
+  accessToken: string;
 }
 
 export interface PasswordResetRequestPayload extends ISuccessCallback {
-  data: IEmail
+  data: IEmail;
 }
 
 export interface PasswordResetRequestResponse {
-  email: string
+  email: string;
 }
 
 export interface ICode {
-  code: string
+  code: string;
 }
 
 export interface VerifyEmailPayload extends ISuccessCallback {
-  data: IEmail & ICode
+  data: IEmail & ICode;
 }
 
 export interface VerifyEmailResponse {
-  code: string
+  code: string;
 }
 
 export interface ResetPasswordData {
-  password: string
-  passwordConfirm: string
+  password: string;
+  passwordConfirm: string;
 }
 
 export interface ResetPasswordPayload extends ISuccessCallback {
-  data: ResetPasswordData
+  data: ResetPasswordData;
 }
 
-export interface ResetPasswordResponse extends LoginResponse { }
+export interface ResetPasswordResponse extends LoginResponse {}

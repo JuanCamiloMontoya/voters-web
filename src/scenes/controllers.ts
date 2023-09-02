@@ -1,12 +1,11 @@
-import { useAuthSelectors } from "../services/auth/auth.selectors"
+import { useAuthSelectors } from "../services/auth/auth.selectors";
 
 const useApp = () => {
-
-  const { isAuthenticated } = useAuthSelectors()
+  const { isAuthenticated } = useAuthSelectors();
 
   return {
-    isAuthenticated
-  }
-}
+    isAuthenticated,
+  };
+};
 
-export default useApp
+export default useApp;

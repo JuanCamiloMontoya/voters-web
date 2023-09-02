@@ -1,13 +1,12 @@
-import { Form, Typography } from "antd"
-import ReactCodeInput from "react-code-input"
-import { Controller } from "react-hook-form"
-import { CodeInputProps } from "./models"
+import { Form, Typography } from "antd";
+import ReactCodeInput from "react-code-input";
+import { Controller } from "react-hook-form";
+import { CodeInputProps } from "./models";
 
-const { Item } = Form
-const { Text } = Typography
+const { Item } = Form;
+const { Text } = Typography;
 
 const CodeInput = (props: CodeInputProps) => {
-
   const {
     name,
     control,
@@ -15,9 +14,9 @@ const CodeInput = (props: CodeInputProps) => {
     label,
     fields,
     inputMode,
-    type = 'text',
-    required = true
-  } = props
+    type = "text",
+    required = true,
+  } = props;
 
   return (
     <Item label={label} required={required}>
@@ -36,7 +35,7 @@ const CodeInput = (props: CodeInputProps) => {
       />
       {error && <Text type="danger">{error.message}</Text>}
     </Item>
-  )
-}
+  );
+};
 
-export default CodeInput
+export default CodeInput;

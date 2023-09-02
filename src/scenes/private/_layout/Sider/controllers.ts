@@ -1,38 +1,37 @@
-import { useNavigate, useLocation } from "react-router-dom"
-import { MenuProps } from "antd"
+import { useNavigate, useLocation } from "react-router-dom";
+import { MenuProps } from "antd";
 
 const menuOptions = [
   {
-    key: '/',
-    label: 'Inicio',
-    icon: 'HomeOutlined'
+    key: "/",
+    label: "Inicio",
+    icon: "HomeOutlined",
   },
   {
-    key: '/leaders',
-    label: 'Líderes',
-    icon: 'UsergroupAddOutlined'
+    key: "/leaders",
+    label: "Líderes",
+    icon: "UsergroupAddOutlined",
   },
   {
-    key: '/voters',
-    label: 'Personas',
-    icon: 'FormOutlined'
-  }
-]
+    key: "/voters",
+    label: "Votantes",
+    icon: "FormOutlined",
+  },
+];
 
 const useSider = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
-
-  const handleMenu: MenuProps['onClick'] = ({ key }) => {
-    navigate(key)
-  }
+  const onOptionClick: MenuProps["onClick"] = ({ key }) => {
+    navigate(key);
+  };
 
   return {
-    handleMenu,
+    onOptionClick,
     menuOptions,
-    pathname
-  }
-}
+    pathname,
+  };
+};
 
-export default useSider
+export default useSider;

@@ -1,49 +1,48 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { LoginPayload } from '../../../services/auth/auth.models'
-import { useAuthSelectors } from '../../../services/auth/auth.selectors'
-import { useAppDispatch } from '../../../store/store'
-import { authActions } from '../../../services/auth/auth.slice'
-import useLoginValidators from './validators'
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { LoginPayload } from "../../../services/auth/auth.models";
+import { useAuthSelectors } from "../../../services/auth/auth.selectors";
+import { useAppDispatch } from "../../../store/store";
+import { authActions } from "../../../services/auth/auth.slice";
+import useLoginValidators from "./validators";
 
 const useLogin = () => {
+  const dispatch = useAppDispatch();
 
-  const dispatch = useAppDispatch()
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
+  const { status, error } = useAuthSelectors();
 
-  const { status, error } = useAuthSelectors()
+  const { login, resetStatus } = authActions;
 
-  const { login, resetStatus } = authActions
-
-  const { loginResolver } = useLoginValidators()
+  const { loginResolver } = useLoginValidators();
 
   useEffect(() => {
-    status.login === 'error' && onCloseErrorAlert()
+    status.login === "error" && onCloseErrorAlert();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
   } = useForm<LoginPayload>({
     resolver: loginResolver,
-    mode: 'all'
-  })
+    mode: "all",
+  });
 
   const onFinish = (values: LoginPayload) => {
-    dispatch(login(values))
-  }
+    dispatch(login(values));
+  };
 
   const onResetPassword = () => {
-    navigate('/password-reset-request')
-  }
+    navigate("/password-reset-request");
+  };
 
   const onCloseErrorAlert = () => {
-    dispatch(resetStatus('login'))
-  }
+    dispatch(resetStatus("login"));
+  };
 
   return {
     status,
@@ -54,8 +53,8 @@ const useLogin = () => {
     onFinish,
     onResetPassword,
     onCloseErrorAlert,
-    handleSubmit
-  }
-}
+    handleSubmit,
+  };
+};
 
-export default useLogin
+export default useLogin;
