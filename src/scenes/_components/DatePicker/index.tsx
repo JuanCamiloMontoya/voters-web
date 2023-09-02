@@ -27,7 +27,7 @@ const DatePicker = (props: DatePickerProps) => {
           <DatePickerAntd
             {...field}
             style={{ width: "100%" }}
-            onChange={(value) => onChange(value || undefined)}
+            onChange={(value) => onChange(value)}
             placeholder={placeholder}
             disabledDate={disabledDate}
             value={value && dayjs(value)}
