@@ -197,14 +197,23 @@ const CreateVoter = () => {
       </Form>
       <Modal
         open={openSuccesModal}
-        title="Registro exitoso!"
+        onCancel={goToVoters}
+        title={
+          <h3>
+            <CheckCircleTwoTone twoToneColor={colors.succesIconColor} />
+            <Divider type="vertical" />
+            Registro exitoso!
+          </h3>
+        }
         footer={
           <>
             <Button onClick={goToVoterDetail}>Ver votante</Button>
             <Divider type="vertical" />
             <Button onClick={goToVoters}>Lista de votantes</Button>
             <Divider type="vertical" />
-            <Button onClick={onNewRecord}>Nuevo registro</Button>
+            <Button onClick={onNewRecord} type="primary">
+              Nuevo registro
+            </Button>
           </>
         }
       >
