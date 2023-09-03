@@ -43,13 +43,13 @@ export interface VoterDetail extends Voter {
 
 export interface VotersState {
   voters: IPage<Voter[]>;
-  voter: VoterDetail | null | undefined;
+  voter: VoterDetail | null;
   error: {
-    getAllVoters: string | null | undefined;
-    createVoter: string | null | undefined;
-    getVoterDetail: string | null | undefined;
-    deleteVoter: string | null | undefined;
-    updateVoter: string | null | undefined;
+    getAllVoters?: string | null;
+    createVoter?: string | null;
+    getVoterDetail?: string | null;
+    deleteVoter?: string | null;
+    updateVoter?: string | null;
   };
   status: {
     getAllVoters: TStatus;

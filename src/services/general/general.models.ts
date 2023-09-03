@@ -33,11 +33,11 @@ export interface GeneralState {
   hobbies: Hobbies[];
   occupations: Occupations[];
   error: {
-    getDivisions: string | null | undefined;
-    getSubdivisions: string | null | undefined;
-    getFullSubdivisions: string | null | undefined;
-    getHobbies: string | null | undefined;
-    getOccupations: string | null | undefined;
+    getDivisions?: string | null;
+    getSubdivisions?: string | null;
+    getFullSubdivisions?: string | null;
+    getHobbies?: string | null;
+    getOccupations?: string | null;
   };
   status: {
     getDivisions: TStatus;

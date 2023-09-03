@@ -58,6 +58,7 @@ const useUpdateVoter = () => {
     return () => {
       dispatch(resetVoter());
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -71,6 +72,7 @@ const useUpdateVoter = () => {
         occupations: voter.occupations.map(({ id }) => id),
         subdivision: voter.subdivision?.id,
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [voter]);
 
   const onFinish = (data: UpdateVoterData, onSuccess: () => void) => {

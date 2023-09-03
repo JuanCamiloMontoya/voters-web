@@ -18,10 +18,10 @@ export interface AuthState {
     code: string | null;
   };
   error: {
-    login: string | null | undefined;
-    passwordResetRequest: string | null | undefined;
-    verifyEmail: string | null | undefined;
-    resetPassword: string | null | undefined;
+    login?: string | null;
+    passwordResetRequest?: string | null;
+    verifyEmail?: string | null;
+    resetPassword?: string | null;
   };
   status: {
     login: TStatus;

@@ -13,7 +13,6 @@ import {
   UpdateVoterPayload,
   UpdateVoterResponse,
 } from "./voters.models";
-import { RootState } from "../../store/reducers";
 import { generalActions } from "../general/general.slice";
 
 export const votersThunks = () => {

@@ -63,6 +63,7 @@ const useCreateVoters = () => {
     votersStatus.createVoter === "error" && onCloseErrorAlert();
     !occupations.length && dispatch(getOccupations({}));
     !hobbies.length && dispatch(getHobbies({}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onFinish = (data: CreateVoterData) => {
