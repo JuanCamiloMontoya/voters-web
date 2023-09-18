@@ -49,7 +49,7 @@ const Login = () => {
         placeholder="Contraseña"
         maxLength={50}
         error={errors.password}
-        isPassword
+        textType="password"
       />
       <div className="center-element">
         <Button

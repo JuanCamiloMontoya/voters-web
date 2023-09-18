@@ -46,7 +46,7 @@ const ResetPassword = () => {
         placeholder="Contraseña"
         maxLength={50}
         error={errors.password}
-        isPassword
+        textType="password"
       />
       <TextInput
         name="passwordConfirm"
@@ -55,7 +55,7 @@ const ResetPassword = () => {
         placeholder="Contraseña"
         maxLength={50}
         error={errors.passwordConfirm}
-        isPassword
+        textType="password"
       />
 
       <div className="center-element">
