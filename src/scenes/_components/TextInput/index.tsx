@@ -5,6 +5,7 @@ import { TextInputProps } from "./models";
 
 const { Item } = Form;
 const { Text } = Typography;
+const { Password, TextArea } = InputAntd;
 
 const TextInput = (props: TextInputProps) => {
   const {
@@ -15,12 +16,18 @@ const TextInput = (props: TextInputProps) => {
     placeholder,
     maxLength = 255,
     required = true,
-    isPassword = false,
     type = "text",
     disabled = false,
+    textType = "text",
+    rows = 1,
   } = props;
 
-  const Input = isPassword ? InputAntd.Password : InputAntd;
+  const Input =
+    textType === "password"
+      ? Password
+      : textType === "textarea"
+      ? TextArea
+      : InputAntd;
 
   const { validateLength } = useTextInput();
 
@@ -39,6 +46,7 @@ const TextInput = (props: TextInputProps) => {
             type={type}
             onKeyDown={(e) => value && validateLength(e, value, maxLength)}
             disabled={disabled}
+            rows={rows}
           />
         )}
       />

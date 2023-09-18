@@ -11,6 +11,7 @@ export interface TextInputProps {
   required?: boolean;
   disabled?: boolean;
   defaultValue?: string | null;
-  isPassword?: boolean;
   type?: HTMLInputTypeAttribute;
+  textType?: "password" | "textarea" | "text";
+  rows?: number;
 }
