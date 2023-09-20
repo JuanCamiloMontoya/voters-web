@@ -6,8 +6,8 @@ export interface TextInputProps {
   control: Control<any>;
   error: FieldError | undefined;
   label: string;
-  placeholder: string;
   maxLength: number;
+  placeholder?: string;
   required?: boolean;
   disabled?: boolean;
   defaultValue?: string | null;

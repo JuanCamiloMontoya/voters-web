@@ -11,6 +11,8 @@ import CreateVoter from "./Voters/Create";
 import usePrivate from "./controllers";
 import VoterDetail from "./Voters/Detail";
 import UpdateVoter from "./Voters/Update";
+import Messaging from "./Messaging";
+import SendMessage from "./Messaging/Send";
 
 const { Content } = Layout;
 
@@ -55,6 +57,19 @@ const Private = () => {
       breadcrumb: [
         { title: "Votantes", route: "/voters" },
         { title: "Actualizar votante", route: "/voters/update/:id" },
+      ],
+    },
+    {
+      path: "/messaging",
+      element: <Messaging />,
+      breadcrumb: [{ title: "Mensajería", route: "/messaging" }],
+    },
+    {
+      path: "/messaging/send",
+      element: <SendMessage />,
+      breadcrumb: [
+        { title: "Mensajería", route: "/messaging" },
+        { title: "Enviar mensaje", route: "/messaging/send" },
       ],
     },
     {

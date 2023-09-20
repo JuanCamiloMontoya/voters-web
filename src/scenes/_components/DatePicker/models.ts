@@ -6,7 +6,7 @@ export interface DatePickerProps {
   control: Control<any>;
   error: FieldError | undefined;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   required?: boolean;
   defaultValue?: Dayjs;
   defaultPickerValue?: Dayjs;

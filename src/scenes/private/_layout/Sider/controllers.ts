@@ -17,6 +17,11 @@ const menuOptions = [
     label: "Votantes",
     icon: "FormOutlined",
   },
+  {
+    key: "/messaging",
+    label: "Mensajería",
+    icon: "MessageOutlined",
+  },
 ];
 
 const useSider = () => {
